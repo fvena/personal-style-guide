@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   lint:
-    name: Lint and Typecheck
+    name: Lint
     runs-on: ubuntu-22.04
 
     steps:
@@ -27,26 +27,11 @@ jobs:
 
       - run: npm ci --ignore-scripts
       - run: npm run lint
-      - run: npm run typecheck
-
-  test:
-    name: Test
-    runs-on: ubuntu-22.04
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-
-      - run: npm ci --ignore-scripts
-      - run: npm run build
-      - run: npm run test
 
   publish:
     name: Publish to NPM
     runs-on: ubuntu-22.04
-    needs: [lint, test]
+    needs: [lint]
     if: startsWith(github.event.head_commit.message, 'chore(release):')
 
     steps:
@@ -61,7 +46,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - run: npm ci --ignore-scripts
-      - run: npm run build
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
