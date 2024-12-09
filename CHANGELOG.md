@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.2.1 (2024-12-09)</small>
+
+- chore: rename project from style-guide to personal-style-guide and update references ([50d5a19](https://github.com/fvena/personal-style-guide/commit/50d5a19))
+
 ## 0.2.0 (2024-12-09)
 
 - refactor: remove TypeScript parser configuration from ESLint base setup ([f96655a](https://github.com/fvena/personal-style-guide/commit/f96655a))
