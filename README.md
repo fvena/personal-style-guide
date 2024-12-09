@@ -67,7 +67,7 @@ npm install --save-dev eslint prettier stylelint typescript
 To install the package, run:
 
 ```sh
-npm install --save-dev style-guide
+npm install --save-dev personal-style-guide
 ```
 
 ## 🛠️ Usage
@@ -78,13 +78,13 @@ This guide simplifies the setup for linting and formatting in your projects. By 
 
 You need to extend one or both of the following configurations.
 
-- `style-guide/eslint/browser` for browser projects.
-- `style-guide/eslint/node` for Node projects.
+- `personal-style-guide/eslint/browser` for browser projects.
+- `personal-style-guide/eslint/node` for Node projects.
 
 Create or update `eslint.config.js` in your project root and extend the configurations you need:
 
 ```js
-import eslintNode from "style-guide/eslint/node";
+import eslintNode from "personal-style-guide/eslint/node";
 
 export default [...eslintNode];
 ```
@@ -94,13 +94,13 @@ export default [...eslintNode];
 To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
 
 ```js
-export { default } from "style-guide/prettier/index.js";
+export { default } from "personal-style-guide/prettier/index.js";
 ```
 
 If you need to extend the configuration, you can do so:
 
 ```js
-import prettierConfig from "style-guide/prettier/index.js";
+import prettierConfig from "personal-style-guide/prettier/index.js";
 
 export default {
   ...prettierConfig,
@@ -114,7 +114,7 @@ Create or update `stylelint.config.js` in your project root:
 
 ```js
 module.exports = {
-  extends: ["style-guide/stylelint"],
+  extends: ["personal-style-guide/stylelint"],
 };
 ```
 
@@ -122,14 +122,14 @@ module.exports = {
 
 This style guide provides multiple TypeScript configs. These configurations are based on the environment you are working on, so you need to extend one of the following configurations:
 
-- `style-guide/typescript/node`.
-- `style-guide/typescript/browser`.
+- `personal-style-guide/typescript/node`.
+- `personal-style-guide/typescript/browser`.
 
 Ensure you have a `tsconfig.json` in your project root. You can extend the provided configuration if necessary:
 
 ```json
 {
-  "extends": "style-guide/typescript/node"
+  "extends": "personal-style-guide/typescript/node"
 }
 ```
 

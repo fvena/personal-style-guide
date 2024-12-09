@@ -1,5 +1,5 @@
 {
-  "name": "style-guide",
+  "name": "personal-style-guide",
   "version": "0.2.0",
   "description": "A shared configuration for ESLint, Prettier, and Stylelint to ensure consistent and clean code across your projects.",
   "keywords": [
@@ -10,13 +10,13 @@
     "Style",
     "Guide"
   ],
-  "homepage": "https://github.com/fvena/style-guide#readme",
+  "homepage": "https://github.com/fvena/personal-style-guide#readme",
   "bugs": {
-    "url": "https://github.com/fvena/style-guide/issues"
+    "url": "https://github.com/fvena/personal-style-guide/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fvena/style-guide.git"
+    "url": "git+https://github.com/fvena/personal-style-guide.git"
   },
   "license": "MIT",
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
