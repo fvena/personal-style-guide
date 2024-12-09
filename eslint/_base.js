@@ -1,6 +1,5 @@
 /* eslint-disable import-x/no-named-as-default-member */
 import pluginJs from "@eslint/js";
-import tsParser from "@typescript-eslint/parser";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import-x";
 import nodePlugin from "eslint-plugin-n";
@@ -47,20 +46,6 @@ export default tseslint.config(
       "@typescript-eslint/no-loop-func": "error",
       "n/no-missing-import": "off",
       "prettier/prettier": "error",
-    },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-    ignores: ["eslint.config.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      parser: tsParser,
-      sourceType: "module",
-    },
-    rules: {
-      "import-x/no-dynamic-require": "warn",
-      "import-x/no-nodejs-modules": "warn",
-      "no-unused-vars": "off",
     },
   },
   {
