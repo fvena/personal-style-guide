@@ -101,6 +101,16 @@ import eslintNode from "style-guide/eslint/node";
 export default [...eslintNode];
 ```
 
+## Prettier
+
+To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
+
+```js
+import prettierConfig from "style-guide/prettier";
+
+export default prettierConfig;
+```
+
 ## 🗺️ Roadmap
 
 When starting a project, we often aim for the Minimum Viable Product (MVP) as quickly as possible, but there are always ideas left for later or parts that need refactoring for better performance.

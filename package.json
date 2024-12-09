@@ -2,29 +2,6 @@
   "name": "style-guide",
   "version": "0.1.0",
   "description": "A shared configuration for ESLint, Prettier, and Stylelint to ensure consistent and clean code across your projects.",
-  "type": "module",
-  "files": [
-    "eslint",
-    "prettier",
-    "stylelint"
-  ],
-  "exports": {
-    "./eslint/*": "./eslint/*.js",
-    "./prettier/*": "./prettier/index.js",
-    "./stylelint/*": "./stylelint/index.js"
-  },
-  "scripts": {
-    "format": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
-    "prepare": "husky",
-    "release": "release-it --only-version",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "lint-staged": {
-    "*": "prettier -w --ignore-unknown",
-    "*.{js,ts}": "eslint --fix"
-  },
   "keywords": [
     "ESLint",
     "Prettier",
@@ -33,21 +10,42 @@
     "Style",
     "Guide"
   ],
-  "license": "MIT",
   "homepage": "https://github.com/fvena/style-guide#readme",
+  "bugs": {
+    "url": "https://github.com/fvena/style-guide/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvena/style-guide.git"
   },
-  "bugs": {
-    "url": "https://github.com/fvena/style-guide/issues"
-  },
+  "license": "MIT",
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
-  "engines": {
-    "node": ">=22.11.0"
+  "type": "module",
+  "exports": {
+    "./eslint/*": "./eslint/*.js",
+    "./prettier/*": "./prettier/index.js",
+    "./stylelint/*": "./stylelint/index.js"
+  },
+  "files": [
+    "eslint",
+    "prettier",
+    "stylelint"
+  ],
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "prepare": "husky",
+    "release": "release-it --only-version",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*": "prettier -w --ignore-unknown",
+    "*.{js,ts}": "eslint --fix"
   },
   "dependencies": {
     "@eslint/js": "^9.16.0",
+    "@prettier/plugin-pug": "^3.2.0",
     "@typescript-eslint/parser": "^8.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.7.0",
@@ -57,6 +55,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "globals": "^15.13.0",
+    "prettier-plugin-packagejson": "^2.5.6",
     "typescript-eslint": "^8.17.0"
   },
   "devDependencies": {
@@ -85,5 +84,8 @@
     "stylelint": {
       "optional": true
     }
+  },
+  "engines": {
+    "node": ">=22.11.0"
   }
 }
