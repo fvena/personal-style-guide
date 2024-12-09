@@ -55,10 +55,10 @@ What problem does this library solve? Why is it better than existing alternative
 
 ### Prerequisites
 
-ESLint, Prettier y Stylelint are a peer dependency, so you need to install at the root of your project:
+ESLint, Prettier, Stylelint, Typescript are a peer dependency, so you need to install at the root of your project:
 
 ```sh
-npm install --save-dev eslint prettier stylelint
+npm install --save-dev eslint prettier stylelint typescript
 ```
 
 ### Installation
@@ -104,6 +104,51 @@ Create or update `stylelint.config.js` in your project root:
 module.exports = {
   extends: ["style-guide/stylelint"],
 };
+```
+
+## TypeScript
+
+This style guide provides multiple TypeScript configs. These configurations are based on the environment you are working on, so you need to extend one of the following configurations:
+
+- `style-guide/typescript/node`.
+- `style-guide/typescript/browser`.
+
+Ensure you have a `tsconfig.json` in your project root. You can extend the provided configuration if necessary:
+
+```json
+{
+  "extends": "style-guide/typescript/node"
+}
+```
+
+## Scripts
+
+Add the following scripts to your `package.json` to lint and format your code:
+
+```json
+{
+  "scripts": {
+    "lint:js": "eslint 'src/**/*.{js,ts,vue}'",
+    "lint:css": "stylelint 'src/**/*.{scss,css}'",
+    "format": "prettier --write 'src/**/*.{js,ts,vue,scss,css}'"
+  }
+}
+```
+
+## Updating
+
+To check for outdated dependencies, run:
+
+```bash
+npx npm-check-updates
+```
+
+This lists all outdated dependencies. It's important to read the release notes for each dependency to understand the changes.
+
+Update dependencies running the interactive mode. It's recommended to update them one by one to avoid breaking changes.:
+
+```bash
+npx npm-check-updates --interactive
 ```
 
 ## 🗺️ Roadmap

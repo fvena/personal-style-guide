@@ -24,12 +24,15 @@
   "exports": {
     "./eslint/*": "./eslint/*.js",
     "./prettier/*": "./prettier/index.js",
-    "./stylelint/*": "./stylelint/index.js"
+    "./stylelint/*": "./stylelint/index.js",
+    "./typescript/node": "./typescript/tsconfig.node.json",
+    "./typescript/browser": "./typescript/tsconfig.browser.json"
   },
   "files": [
     "eslint",
     "prettier",
-    "stylelint"
+    "stylelint",
+    "typescript"
   ],
   "scripts": {
     "format": "prettier --write .",
@@ -70,13 +73,13 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "prettier": "^3.4.2",
-    "release-it": "^17.10.0",
-    "typescript": "^5.7.2"
+    "release-it": "^17.10.0"
   },
   "peerDependencies": {
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
-    "stylelint": "^16.0.0"
+    "stylelint": "^16.0.0",
+    "typescript": "^5.0.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -86,6 +89,9 @@
       "optional": true
     },
     "stylelint": {
+      "optional": true
+    },
+    "typescript": {
       "optional": true
     }
   },
