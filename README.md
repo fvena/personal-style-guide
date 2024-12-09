@@ -86,18 +86,20 @@ npm install --save-dev style-guide
 
 ## 🛠️ Usage
 
-Explain how to use and configure your library so that users can implement it in their projects.
+### ESLint
 
-> If your library has many options or extensive functionality, it’s better to explain the basics here and provide a more comprehensive documentation elsewhere.
+You need to extend one or both of the following configurations.
 
-Refer to the documentation for more examples.
+- `style-guide/eslint/browser` for browser projects.
+- `style-guide/eslint/node` for Node projects.
 
-### Scripts Overview
+Create or update `eslint.config.js` in your project root and extend the configurations you need:
 
-| Script  | Description         |
-| ------- | ------------------- |
-| `build` | Builds the library. |
-| `test`  | Runs the tests.     |
+```js
+import eslintNode from "style-guide/eslint/node";
+
+export default [...eslintNode];
+```
 
 ## 🗺️ Roadmap
 
