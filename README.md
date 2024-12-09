@@ -24,32 +24,33 @@ I usually use https://shields.io/ to generate badges.
 
 <br/>
 
-<!-- TABLE OF CONTENTS -->
-<!-- Adding a Table of Contents (TOC) is recommended. It helps readers navigate your README and find exactly what they’re looking for. -->
-
 <details open="false">
   <summary><strong>Table of Contents</strong></summary>
   <ol>
     <li>
-      <a href="#motivation">Motivation</a>
+      <a href="#-motivation">Motivation</a>
     </li>
     <li>
-      <a href="#features">Features</a>
+      <a href="#-getting-started">Getting Started</a>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
+    <li><a href="#-usage">Usage</a>
+      <ul>
+        <li><a href="#eslint">ESLint</a></li>
+        <li><a href="#prettier">Prettier</a></li>
+        <li><a href="#stylelint">Stylelint</a></li>
+        <li><a href="#typescript">TypeScript</a></li>
+      </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributions">Contributions</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#scripts">Scripts</a></li>
+    <li><a href="#updating">Updating</a></li>
   </ol>
 </details>
 
 ## 💡 Motivation
 
-Write one or two paragraphs describing the purpose of your library and what motivated you to develop it.
+Consistency in code style is key to maintaining scalable and maintainable projects. While many tools like ESLint, Prettier, and Stylelint exist, configuring them repeatedly across projects can be tedious and error-prone. This package centralizes the configuration for these tools, saving time and ensuring a unified development experience across all Didor projects.
 
-What problem does this library solve? Why is it better than existing alternatives?
+This style guide also promotes best practices.
 
 ## 🚀Getting Started
 
@@ -71,6 +72,8 @@ npm install --save-dev style-guide
 
 ## 🛠️ Usage
 
+This guide simplifies the setup for linting and formatting in your projects. By extending the provided configurations, you can quickly adopt a consistent style for JavaScript, TypeScript, CSS, and SCSS files. Below are detailed instructions for each tool.
+
 ### ESLint
 
 You need to extend one or both of the following configurations.
@@ -91,9 +94,18 @@ export default [...eslintNode];
 To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
 
 ```js
-import prettierConfig from "style-guide/prettier";
+export { default } from "style-guide/prettier/index.js";
+```
 
-export default prettierConfig;
+If you need to extend the configuration, you can do so:
+
+```js
+import prettierConfig from "style-guide/prettier/index.js";
+
+export default {
+  ...prettierConfig,
+  ...
+};
 ```
 
 ## Stylelint
@@ -153,35 +165,27 @@ npx npm-check-updates --interactive
 
 ## 🗺️ Roadmap
 
-When starting a project, we often aim for the Minimum Viable Product (MVP) as quickly as possible, but there are always ideas left for later or parts that need refactoring for better performance.
+- [ ] Add configurations for testing frameworks (e.g., Jest, Vitest).
+- [ ] Add configurations for Vue and Nuxt projects.
 
-Having a public roadmap for your project is always a good idea. It lets you pick up where you left off after a break and gives users confidence in an actively maintained library.
+## 🤝 Contributing
 
-Additionally, users who know your development plans can suggest changes, ideas, or collaborations.
+Contributions are welcome! Please follow these steps:
 
-Use checkboxes to show progress on your roadmap.
-
-- [] Feature 1
-- [] Improve performance of X
-- [] Add advanced documentation
-
-## 🤝 Contributions
-
-Explain how users can contribute to your library, typically:
-
-Reporting bugs
-Fixing bugs
-Adding new features
-Sharing on social media
-Becoming an official contributor
-Making a small donation
+1. Fork the repository.
+1. Create a new branch (git checkout -b feature/my-feature).
+1. Make your changes and write tests.
+1. Commit your changes using a [conventional commit message](<(https://gist.github.com/fvena/9e42792ad951b47ad143ba7e4bfedb5a)>).
+1. Push your branch and open a Pull Request.
 
 ## 📜 License
 
-Indicating the type of license for your project helps others know what they can and cannot do with it. You can find templates for all types of licenses here: <https://opensource.org/licenses>. Choose wisely, as this will determine how others can use your library.
+This template is licensed under the MIT License, which allows you to use, modify, and distribute the code freely, as long as the original license is included.
 
-In my case, I am developing open-source code and using the MIT license, which allows users to do almost anything with the code.
+For more details, see the [LICENSE](./LICENSE) file included in this repository.
 
-## 🙌 Footer
+## 🌟 Star Support
 
-This is the closing section of your README. You can be creative here: introduce yourself, thank users for their interest, or ask them to give the project a star.
+Your ⭐️ helps others discover this template and motivates continued development and improvements.
+
+Special thanks to the open-source community for inspiring and supporting this template.
