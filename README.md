@@ -22,17 +22,6 @@ I usually use https://shields.io/ to generate badges.
 
 </div>
 
-<p align="center">
-  <a href="#"><strong>Documentation »</strong></a>
-  <br />
-  <br />
-  <a href="#getting-started">Getting Started</a>
-  ·
-  <a href="https://github.com/<repo>/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/<repo>/issues">Request Feature</a>
-</p>
-
 <br/>
 
 <!-- TABLE OF CONTENTS -->
@@ -49,10 +38,6 @@ I usually use https://shields.io/ to generate badges.
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
-      </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributions">Contributions</a></li>
@@ -109,6 +94,16 @@ To use the shared Prettier config, create or update `.prettierrc.config.js` in y
 import prettierConfig from "style-guide/prettier";
 
 export default prettierConfig;
+```
+
+## Stylelint
+
+Create or update `stylelint.config.js` in your project root:
+
+```js
+module.exports = {
+  extends: ["style-guide/stylelint"],
+};
 ```
 
 ## 🗺️ Roadmap
