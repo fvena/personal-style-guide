@@ -46,6 +46,19 @@ export default tseslint.config(
       "@typescript-eslint/no-loop-func": "error",
       "n/no-missing-import": "off",
       "prettier/prettier": "error",
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          replacements: {
+            dir: {
+              directory: false,
+            },
+            env: {
+              environment: false,
+            },
+          },
+        },
+      ],
     },
   },
   {
