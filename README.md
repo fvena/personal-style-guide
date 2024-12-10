@@ -11,13 +11,8 @@
 <br/>
 
 <div align="center">
-<!--
-There are countless badges you can use for your projects. The most common ones are:
-I usually use https://shields.io/ to generate badges.
--->
-<!-- Replace <library> with your library name on npm -->
 
-[![SemVer](https://img.shields.io/npm/v/<library>)]()
+[![SemVer](https://img.shields.io/npm/v/personal-style-guide)]()
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
 </div>
@@ -31,9 +26,9 @@ I usually use https://shields.io/ to generate badges.
       <a href="#-motivation">Motivation</a>
     </li>
     <li>
-      <a href="#-getting-started">Getting Started</a>
+      <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#-usage">Usage</a>
+    <li><a href="#%EF%B8%8F-usage">Usage</a>
       <ul>
         <li><a href="#eslint">ESLint</a></li>
         <li><a href="#prettier">Prettier</a></li>
@@ -41,8 +36,8 @@ I usually use https://shields.io/ to generate badges.
         <li><a href="#typescript">TypeScript</a></li>
       </ul>
     </li>
-    <li><a href="#scripts">Scripts</a></li>
-    <li><a href="#updating">Updating</a></li>
+    <li><a href="#-scripts">Scripts</a></li>
+    <li><a href="#-updating">Updating</a></li>
   </ol>
 </details>
 
@@ -89,7 +84,7 @@ import eslintNode from "personal-style-guide/eslint/node";
 export default [...eslintNode];
 ```
 
-## Prettier
+### Prettier
 
 To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
 
@@ -108,7 +103,7 @@ export default {
 };
 ```
 
-## Stylelint
+### Stylelint
 
 Create or update `stylelint.config.js` in your project root:
 
@@ -118,7 +113,7 @@ module.exports = {
 };
 ```
 
-## TypeScript
+### TypeScript
 
 This style guide provides multiple TypeScript configs. These configurations are based on the environment you are working on, so you need to extend one of the following configurations:
 
@@ -133,7 +128,7 @@ Ensure you have a `tsconfig.json` in your project root. You can extend the provi
 }
 ```
 
-## Scripts
+## 📑 Scripts
 
 Add the following scripts to your `package.json` to lint and format your code:
 
@@ -147,7 +142,7 @@ Add the following scripts to your `package.json` to lint and format your code:
 }
 ```
 
-## Updating
+## 🔄 Updating
 
 To check for outdated dependencies, run:
 
