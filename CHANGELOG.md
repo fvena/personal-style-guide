@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 (2024-12-10)
+
+- feat(eslint): add unicorn/prevent-abbreviations rule to ESLint configuration ([c083b9c](https://github.com/fvena/personal-style-guide/commit/c083b9c))
+- docs: update README badges and section headings for clarity ([9354200](https://github.com/fvena/personal-style-guide/commit/9354200))
+
 ## <small>0.2.1 (2024-12-09)</small>
 
 - chore: rename project from style-guide to personal-style-guide and update references ([50d5a19](https://github.com/fvena/personal-style-guide/commit/50d5a19))
