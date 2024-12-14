@@ -1,19 +1,26 @@
-<br />
+<br /> <!-- markdownlint-disable-line -->
+
 <p align="right">
   ⭐ &nbsp;&nbsp;<strong>to the project if you like it</strong> ↗️:
 </p>
 
 <p align="center">
   <h2 align="center">Style Guide</h2>
-  <div align="center">This package provides a unified configuration for ESLint, Prettier, Stylelint, and TypeScript, ensuring consistency and quality across all your projects at Didor.</div>
+  <div align="center">
+    This package provides a unified configuration for ESLint, Prettier, Stylelint, and TypeScript, ensuring consistency and quality across all your projects at Didor.
+  </div>
 </p>
 
 <br/>
 
 <div align="center">
 
+<!-- markdownlint-disable MD042 -->
+
 [![SemVer](https://img.shields.io/npm/v/personal-style-guide)]()
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
+
+<!-- markdownlint-enable MD042 -->
 
 </div>
 
@@ -34,6 +41,7 @@
         <li><a href="#prettier">Prettier</a></li>
         <li><a href="#stylelint">Stylelint</a></li>
         <li><a href="#typescript">TypeScript</a></li>
+        <li><a href="#markdown">Markdown</a></li>
       </ul>
     </li>
     <li><a href="#-scripts">Scripts</a></li>
@@ -128,6 +136,18 @@ Ensure you have a `tsconfig.json` in your project root. You can extend the provi
 }
 ```
 
+### Markdown
+
+> ⚠️ **Note**: This configuration is designed for `markdownlint`. Install the Markdownlint extension in your editor (e.g., VS Code) for optimal use.
+
+To lint Markdown files, extend the provided configuration by creating or updating a `.markdownlint.json` file in your project root:
+
+````json
+{
+  "extends": "personal-style-guide/markdown"
+}
+
+
 ## 📑 Scripts
 
 Add the following scripts to your `package.json` to lint and format your code:
@@ -140,7 +160,7 @@ Add the following scripts to your `package.json` to lint and format your code:
     "format": "prettier --write 'src/**/*.{js,ts,vue,scss,css}'"
   }
 }
-```
+````
 
 ## 🔄 Updating
 
