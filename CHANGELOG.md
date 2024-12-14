@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 (2024-12-14)
+
+- feat(markdown): set up Markdownlint configuration ([85a56fc](https://github.com/fvena/personal-style-guide/commit/85a56fc))
+
 ## 0.3.0 (2024-12-10)
 
 - feat(eslint): add unicorn/prevent-abbreviations rule to ESLint configuration ([c083b9c](https://github.com/fvena/personal-style-guide/commit/c083b9c))
