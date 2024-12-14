@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.4.1 (2024-12-14)</small>
+
+- chore(dependencies): update dependencies to latest versions ([13e3616](https://github.com/fvena/personal-style-guide/commit/13e3616))
+
 ## 0.4.0 (2024-12-14)
 
 - feat(markdown): set up Markdownlint configuration ([85a56fc](https://github.com/fvena/personal-style-guide/commit/85a56fc))
