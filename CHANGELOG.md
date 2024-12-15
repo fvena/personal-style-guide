@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.5.1 (2024-12-15)</small>
+
+- fix(eslint): update configuration rules ([f848a67](https://github.com/fvena/personal-style-guide/commit/f848a67))
+
 ## 0.5.0 (2024-12-15)
 
 - feat(eslint): add eslint-plugin-eslint-comments for improved ESLint disable comment rules ([9f4f5b4](https://github.com/fvena/personal-style-guide/commit/9f4f5b4))
