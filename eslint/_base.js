@@ -1,4 +1,4 @@
-/* eslint-disable import-x/no-named-as-default-member */
+import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import pluginJs from "@eslint/js";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import-x";
@@ -13,13 +13,14 @@ import tseslint from "typescript-eslint";
 export default tseslint.config(
   pluginJs.configs.recommended,
   nodePlugin.configs["flat/recommended-module"],
+  eslintCommentsPlugin.recommended,
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   perfectionistPlugin.configs["recommended-natural"],
   unicornPlugin.configs["flat/recommended"],
   pluginSecurity.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.strictTypeChecked, // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
+  ...tseslint.configs.stylisticTypeChecked, // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
   prettierPlugin,
   {
     ignores: ["node_modules/", "**/dist/", "**/cache/"],
@@ -44,6 +45,7 @@ export default tseslint.config(
   },
   {
     rules: {
+      "@eslint-community/eslint-comments/require-description": "error",
       "@typescript-eslint/default-param-last": "error",
       "@typescript-eslint/no-loop-func": "error",
       "n/no-missing-import": "off",
@@ -64,7 +66,7 @@ export default tseslint.config(
     },
   },
   {
-    extends: [tseslint.configs.disableTypeChecked],
+    extends: [tseslint.configs.disableTypeChecked], // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
     files: ["**/*.js"],
   },
 );

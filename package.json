@@ -47,6 +47,7 @@
     "*.{js,ts}": "eslint --fix"
   },
   "dependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@eslint/js": "^9.17.0",
     "@prettier/plugin-pug": "^3.2.0",
     "@typescript-eslint/parser": "^8.18.0",
