@@ -51,13 +51,17 @@ export default tseslint.config(
   },
   {
     rules: {
-      "@eslint-community/eslint-comments/require-description": "error",
+      "@eslint-community/eslint-comments/require-description": [
+        "error",
+        { ignore: ["eslint-enable"] },
+      ],
       "@typescript-eslint/default-param-last": "error",
       "@typescript-eslint/no-loop-func": "error",
       "import/order": [
         "warn",
         {
           groups: [
+            "type", // Type imports
             "builtin", // Node.js built-in modules
             "external", // Packages
             "internal", // Aliased modules
@@ -66,6 +70,7 @@ export default tseslint.config(
             "index", // Relative index
           ],
           "newlines-between": "never",
+          warnOnUnassignedImports: true,
         },
       ],
       "n/no-missing-import": "off",
