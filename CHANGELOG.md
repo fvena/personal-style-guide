@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.5.3 (2024-12-15)</small>
+
+- fix(package): update markdown exports to use directory path ([cb6a19d](https://github.com/fvena/personal-style-guide/commit/cb6a19d))
+
 ## <small>0.5.2 (2024-12-15)</small>
 
 - fix(markdown): update package.json exports to include markdownlint configuration ([16d428f](https://github.com/fvena/personal-style-guide/commit/16d428f))
