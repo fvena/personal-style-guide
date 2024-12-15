@@ -1,13 +1,13 @@
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import pluginJs from "@eslint/js";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
-import importPlugin from "eslint-plugin-import-x";
+import importPlugin from "eslint-plugin-import";
 import nodePlugin from "eslint-plugin-n";
-import perfectionistPlugin from "eslint-plugin-perfectionist";
+import perfectionistPlugin from "eslint-plugin-perfectionist"; // eslint-disable-line import/no-unresolved -- This is a bug in the plugin
 import prettierPlugin from "eslint-plugin-prettier/recommended";
 import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint";
+import tseslint from "typescript-eslint"; // eslint-disable-line import/no-unresolved -- This is a bug in the plugin
 
 /** @type {import('eslint').Linter.Config[]} */
 export default tseslint.config(
@@ -19,8 +19,8 @@ export default tseslint.config(
   perfectionistPlugin.configs["recommended-natural"],
   unicornPlugin.configs["flat/recommended"],
   pluginSecurity.configs.recommended,
-  ...tseslint.configs.strictTypeChecked, // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
-  ...tseslint.configs.stylisticTypeChecked, // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   prettierPlugin,
   {
     ignores: ["node_modules/", "**/dist/", "**/cache/"],
@@ -48,7 +48,22 @@ export default tseslint.config(
       "@eslint-community/eslint-comments/require-description": "error",
       "@typescript-eslint/default-param-last": "error",
       "@typescript-eslint/no-loop-func": "error",
+      "import/order": [
+        "warn",
+        {
+          groups: [
+            "builtin", // Node.js built-in modules
+            "external", // Packages
+            "internal", // Aliased modules
+            "parent", // Relative parent
+            "sibling", // Relative sibling
+            "index", // Relative index
+          ],
+          "newlines-between": "never",
+        },
+      ],
       "n/no-missing-import": "off",
+      "perfectionist/sort-imports": "off",
       "prettier/prettier": "error",
       "unicorn/prevent-abbreviations": [
         "error",
@@ -66,7 +81,7 @@ export default tseslint.config(
     },
   },
   {
-    extends: [tseslint.configs.disableTypeChecked], // eslint-disable-line import-x/no-named-as-default-member -- This is a bug in the plugin
+    extends: [tseslint.configs.disableTypeChecked],
     files: ["**/*.js"],
   },
 );
