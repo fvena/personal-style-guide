@@ -8,6 +8,7 @@ import prettierPlugin from "eslint-plugin-prettier/recommended";
 import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint"; // eslint-disable-line import/no-unresolved -- This is a bug in the plugin
+import tsdocPlugin from "eslint-plugin-tsdoc";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default tseslint.config(
@@ -24,6 +25,11 @@ export default tseslint.config(
   prettierPlugin,
   {
     ignores: ["node_modules/", "**/dist/", "**/cache/"],
+  },
+  {
+    plugins: {
+      tsdoc: tsdocPlugin,
+    },
   },
   {
     languageOptions: {
@@ -83,5 +89,11 @@ export default tseslint.config(
   {
     extends: [tseslint.configs.disableTypeChecked],
     files: ["**/*.js"],
+  },
+  {
+    files: ["**/*.ts"],
+    rules: {
+      "tsdoc/syntax": "error",
+    },
   },
 );
