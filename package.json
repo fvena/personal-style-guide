@@ -26,13 +26,15 @@
     "./prettier/*": "./prettier/index.js",
     "./stylelint/*": "./stylelint/index.js",
     "./typescript/node": "./typescript/tsconfig.node.json",
-    "./typescript/browser": "./typescript/tsconfig.browser.json"
+    "./typescript/browser": "./typescript/tsconfig.browser.json",
+    "./markdown/*": "./markdown/markdownlint.json"
   },
   "files": [
     "eslint",
     "prettier",
     "stylelint",
-    "typescript"
+    "typescript",
+    "markdown"
   ],
   "scripts": {
     "format": "prettier --write .",
