@@ -27,7 +27,7 @@
     "./stylelint/*": "./stylelint/index.js",
     "./typescript/node": "./typescript/tsconfig.node.json",
     "./typescript/browser": "./typescript/tsconfig.browser.json",
-    "./markdown/*": "./markdown/markdownlint.json"
+    "./markdown": "./markdown/markdownlint.json"
   },
   "files": [
     "eslint",
