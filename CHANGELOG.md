@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.5.2 (2024-12-15)</small>
+
+- fix(markdown): update package.json exports to include markdownlint configuration ([16d428f](https://github.com/fvena/personal-style-guide/commit/16d428f))
+
 ## <small>0.5.1 (2024-12-15)</small>
 
 - fix(eslint): update configuration rules ([f848a67](https://github.com/fvena/personal-style-guide/commit/f848a67))
