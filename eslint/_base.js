@@ -5,6 +5,7 @@ import importPlugin from "eslint-plugin-import-x";
 import nodePlugin from "eslint-plugin-n";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
 import prettierPlugin from "eslint-plugin-prettier/recommended";
+import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
@@ -16,6 +17,7 @@ export default tseslint.config(
   importPlugin.flatConfigs.typescript,
   perfectionistPlugin.configs["recommended-natural"],
   unicornPlugin.configs["flat/recommended"],
+  pluginSecurity.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   prettierPlugin,
