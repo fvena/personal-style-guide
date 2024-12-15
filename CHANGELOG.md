@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 (2024-12-15)
+
+- feat(eslint): add eslint-plugin-eslint-comments for improved ESLint disable comment rules ([9f4f5b4](https://github.com/fvena/personal-style-guide/commit/9f4f5b4))
+- feat(eslint): add eslint-plugin-security for enhanced security checks ([ab02637](https://github.com/fvena/personal-style-guide/commit/ab02637))
+- feat(eslint): add eslint-plugin-tsdoc for TypeScript documentation linting ([00b044e](https://github.com/fvena/personal-style-guide/commit/00b044e))
+- fix(eslint): replace eslint-plugin-import-x with eslint-plugin-import and update configurations ([b831b93](https://github.com/fvena/personal-style-guide/commit/b831b93))
+
 ## <small>0.4.1 (2024-12-14)</small>
 
 - chore(dependencies): update dependencies to latest versions ([13e3616](https://github.com/fvena/personal-style-guide/commit/13e3616))
