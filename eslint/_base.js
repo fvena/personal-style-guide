@@ -1,15 +1,16 @@
+import path from "node:path";
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import pluginJs from "@eslint/js";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import";
 import nodePlugin from "eslint-plugin-n";
-import perfectionistPlugin from "eslint-plugin-perfectionist"; // eslint-disable-line import/no-unresolved -- This is a bug in the plugin
-import prettierPlugin from "eslint-plugin-prettier/recommended";
+import perfectionistPlugin from "eslint-plugin-perfectionist";  
 import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint"; // eslint-disable-line import/no-unresolved -- This is a bug in the plugin
+import tseslint from "typescript-eslint";  
 import tsdocPlugin from "eslint-plugin-tsdoc";
 
+/* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
 /** @type {import('eslint').Linter.Config[]} */
 export default tseslint.config(
   pluginJs.configs.recommended,
@@ -22,7 +23,6 @@ export default tseslint.config(
   pluginSecurity.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
-  prettierPlugin,
   {
     ignores: ["node_modules/", "**/dist/", "**/cache/"],
   },
@@ -44,19 +44,55 @@ export default tseslint.config(
       "import/resolver-next": [
         createTypeScriptImportResolver({
           alwaysTryTypes: true,
-          project: "./tsconfig.json",
+          project: path.resolve(import.meta.dirname, "./tsconfig.json"),
         }),
       ],
     },
   },
   {
     rules: {
-      "@eslint-community/eslint-comments/require-description": [
-        "error",
-        { ignore: ["eslint-enable"] },
-      ],
+      /**
+       * Typescript plugin rules
+       */
       "@typescript-eslint/default-param-last": "error",
       "@typescript-eslint/no-loop-func": "error",
+
+      /**
+       * Node plugin rules
+       */
+      "n/no-missing-import": "off",
+
+      /**
+       * Perfectionist plugin rules
+       */
+      "perfectionist/sort-imports": "off",
+
+      /**
+       * Unicorn plugin rules
+       */
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          replacements: {
+            dir: {
+              directory: false,
+            },
+            env: {
+              environment: false,
+            },
+          },
+        },
+      ],
+
+      /**
+       * Import plugin rules
+       */
+      "import/named": "off", // Typescript handles this, disable for performance
+      "import/namespace": "off", // Typescript handles this, disable for performance
+      "import/default": "off", // Typescript handles this, disable for performance
+      "import/no-named-as-default-member": "off", // Typescript handles this, disable for performance
+      "import/no-unresolved": "off", // Typescript handles this, disable for performance
+      "import/extensions": "off", // Typescript handles this, disable for performance
       "import/order": [
         "warn",
         {
@@ -73,21 +109,13 @@ export default tseslint.config(
           warnOnUnassignedImports: true,
         },
       ],
-      "n/no-missing-import": "off",
-      "perfectionist/sort-imports": "off",
-      "prettier/prettier": "error",
-      "unicorn/prevent-abbreviations": [
+
+      /**
+       * ESLint comments plugin rules
+       */
+      "@eslint-community/eslint-comments/require-description": [
         "error",
-        {
-          replacements: {
-            dir: {
-              directory: false,
-            },
-            env: {
-              environment: false,
-            },
-          },
-        },
+        { ignore: ["eslint-enable"] },
       ],
     },
   },
@@ -102,3 +130,4 @@ export default tseslint.config(
     },
   },
 );
+/* eslint-enable perfectionist/sort-objects */

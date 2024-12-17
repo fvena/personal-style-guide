@@ -19,6 +19,7 @@
 
 [![SemVer](https://img.shields.io/npm/v/personal-style-guide)]()
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![Build Status](https://github.com/fvena/personal-style-guide/workflows/CI%2FCD/badge.svg)]()
 
 <!-- markdownlint-enable MD042 -->
 
@@ -35,15 +36,11 @@
     <li>
       <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#%EF%B8%8F-usage">Usage</a>
-      <ul>
-        <li><a href="#eslint">ESLint</a></li>
-        <li><a href="#prettier">Prettier</a></li>
-        <li><a href="#stylelint">Stylelint</a></li>
-        <li><a href="#typescript">TypeScript</a></li>
-        <li><a href="#markdown">Markdown</a></li>
-      </ul>
-    </li>
+    <li><a href="#eslint">ESLint</a></li>
+    <li><a href="#prettier">Prettier</a></li>
+    <li><a href="#stylelint">Stylelint</a></li>
+    <li><a href="#typescript">TypeScript</a></li>
+    <li><a href="#markdown">Markdown</a></li>
     <li><a href="#-scripts">Scripts</a></li>
     <li><a href="#-updating">Updating</a></li>
   </ol>
@@ -73,11 +70,22 @@ To install the package, run:
 npm install --save-dev personal-style-guide
 ```
 
-## 🛠️ Usage
+## ESLint
 
-This guide simplifies the setup for linting and formatting in your projects. By extending the provided configurations, you can quickly adopt a consistent style for JavaScript, TypeScript, CSS, and SCSS files. Below are detailed instructions for each tool.
+### Plugins Integrated
 
-### ESLint
+- **[@eslint/js](https://github.com/eslint/eslint)**: JavaScript linting rules.
+- **[typescript-eslint](https://typescript-eslint.io)**: TypeScript linting rules.
+- **[eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n#readme)**: Node.js specific rules.
+- **[eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)**: Import validation and sorting.
+- **[eslint-plugin-security](https://github.com/eslint-community/eslint-plugin-security#readme)**: Detects security issues.
+- **[eslint-plugin-perfectionist](https://perfectionist.dev)**: Code organization rules.
+- **[eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)**: Advanced JS/TS best practices.
+- **[eslint-plugin-tsdoc](https://www.npmjs.com/package/eslint-plugin-tsdoc)**: TSDoc comment validation.
+- **[eslint-plugin-eslint-comments](https://www.npmjs.com/package/@eslint-community/eslint-plugin-eslint-comments)**: ESLint comment rules.
+- **[eslint-import-resolver-typescript](https://github.com/import-js/eslint-import-resolver-typescript#readme)**: TypeScript import resolver.
+
+### How to Use
 
 You need to extend one or both of the following configurations.
 
@@ -92,7 +100,9 @@ import eslintNode from "personal-style-guide/eslint/node";
 export default [...eslintNode];
 ```
 
-### Prettier
+## Prettier
+
+### How to Use
 
 To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
 
@@ -111,7 +121,28 @@ export default {
 };
 ```
 
-### Stylelint
+### Why We Don't Use Prettier with ESLint or Stylelint
+
+To improve **IDE performance** and avoid redundant processing, we separate the responsibilities of Prettier and linters (ESLint/Stylelint):
+
+- **ESLint and Stylelint**: Focus only on code validation and enforcing rules.
+- **Prettier**: Handles code formatting exclusively.
+
+By not integrating Prettier directly into ESLint or Stylelint:
+
+1. **Faster IDE Performance**: Linters don’t need to process formatting errors, reducing overhead.
+1. **Avoid Duplicated Tasks**: Prevent running the file through both a linter and Prettier simultaneously.
+
+## Stylelint
+
+### Plugins Integrated
+
+- **[stylelint-config-recommended](https://github.com/stylelint/stylelint-config-recommended#readme)**: Recommended stylelint rules.
+- **[stylelint-config-recommended-scss](https://github.com/stylelint-scss/stylelint-config-recommended-scss#readme)**: Recommended SCSS stylelint rules.
+- **[stylelint-config-recommended-vue](https://github.com/ota-meshi/stylelint-config-recommended-vue#readme)**: Recommended Vue stylelint rules.
+- **[stylelint-config-recess-order](https://github.com/stormwarning/stylelint-config-recess-order)**: Recess order stylelint rules.
+
+### How to Use
 
 Create or update `stylelint.config.js` in your project root:
 
@@ -121,7 +152,9 @@ module.exports = {
 };
 ```
 
-### TypeScript
+## TypeScript
+
+### How to Use
 
 This style guide provides multiple TypeScript configs. These configurations are based on the environment you are working on, so you need to extend one of the following configurations:
 
@@ -136,9 +169,11 @@ Ensure you have a `tsconfig.json` in your project root. You can extend the provi
 }
 ```
 
-### Markdown
+## Markdown
 
 > ⚠️ **Note**: This configuration is designed for `markdownlint`. Install the Markdownlint extension in your editor (e.g., VS Code) for optimal use.
+
+### How to Use
 
 To lint Markdown files, extend the provided configuration by creating or updating a `.markdownlint.json` file in your project root:
 
@@ -182,6 +217,8 @@ npx npm-check-updates --interactive
 
 - [ ] Add configurations for testing frameworks (e.g., Jest, Vitest).
 - [ ] Add configurations for Vue and Nuxt projects.
+- [ ] Improve the ESLint configuration to group by file type.
+- [ ] Add [@eslint/json](https://github.com/eslint/json#readme) and [@eslint/markdown](https://github.com/eslint/markdown#readme) configurations to the ESLint setup.
 
 ## 🤝 Contributing
 
