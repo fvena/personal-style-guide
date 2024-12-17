@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.5.4 (2024-12-17)</small>
+
+- refactor: simplify CI/CD workflow name and remove unused eslint-plugin-prettier ([e633d5c](https://github.com/fvena/personal-style-guide/commit/e633d5c))
+
 ## <small>0.5.3 (2024-12-15)</small>
 
 - fix(package): update markdown exports to use directory path ([cb6a19d](https://github.com/fvena/personal-style-guide/commit/cb6a19d))
