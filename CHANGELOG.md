@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>0.5.5 (2025-01-26)</small>
+
+- chore: upgrade package dependencies ([2ba681b](https://github.com/fvena/personal-style-guide/commit/2ba681b))
+- fix(eslint): adjust perfectionist and unicorn plugin rules for better configuration ([33f664e](https://github.com/fvena/personal-style-guide/commit/33f664e))
+
 ## <small>0.5.4 (2024-12-17)</small>
 
 - refactor: simplify CI/CD workflow name and remove unused eslint-plugin-prettier ([e633d5c](https://github.com/fvena/personal-style-guide/commit/e633d5c))
