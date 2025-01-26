@@ -4,10 +4,10 @@ import pluginJs from "@eslint/js";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import";
 import nodePlugin from "eslint-plugin-n";
-import perfectionistPlugin from "eslint-plugin-perfectionist";  
+import perfectionistPlugin from "eslint-plugin-perfectionist";
 import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint";  
+import tseslint from "typescript-eslint";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
@@ -66,10 +66,13 @@ export default tseslint.config(
        * Perfectionist plugin rules
        */
       "perfectionist/sort-imports": "off",
+      "perfectionist/sort-classes": "off",
+      "perfectionist/sort-modules": "off",
 
       /**
        * Unicorn plugin rules
        */
+      "unicorn/no-array-reduce": "off",
       "unicorn/prevent-abbreviations": [
         "error",
         {
