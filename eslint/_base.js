@@ -9,6 +9,7 @@ import pluginSecurity from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 import tsdocPlugin from "eslint-plugin-tsdoc";
+import eslintPluginYml from "eslint-plugin-yml";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
 /** @type {import('eslint').Linter.Config[]} */
@@ -19,7 +20,7 @@ export default tseslint.config(
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   perfectionistPlugin.configs["recommended-natural"],
-  unicornPlugin.configs["flat/recommended"],
+  unicornPlugin.configs["recommended"],
   pluginSecurity.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
@@ -131,6 +132,11 @@ export default tseslint.config(
     rules: {
       "tsdoc/syntax": "error",
     },
+  },
+  {
+    files: ["*.yaml", "*.yml"],
+    ...eslintPluginYml.configs["flat/recommended"],
+    parser: "yaml-eslint-parser",
   },
 );
 /* eslint-enable perfectionist/sort-objects */
