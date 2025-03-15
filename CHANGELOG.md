@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 (2025-03-15)
+
+- feat: add eslint-plugin-yml and yaml-eslint-parser for YAML support ([fcb4187](https://github.com/fvena/personal-style-guide/commit/fcb4187))
+- chore: upgrade package dependencies ([26bbc0b](https://github.com/fvena/personal-style-guide/commit/26bbc0b))
+
 ## <small>0.5.5 (2025-01-26)</small>
 
 - chore: upgrade package dependencies ([2ba681b](https://github.com/fvena/personal-style-guide/commit/2ba681b))
