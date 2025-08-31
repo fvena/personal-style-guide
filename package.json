@@ -28,6 +28,14 @@
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./lib/factory.d.ts",
+      "import": "./lib/factory.js"
+    },
+    "./factory": {
+      "types": "./lib/factory.d.ts",
+      "import": "./lib/factory.js"
+    },
     "./eslint/*": "./eslint/*.js",
     "./markdown": "./markdown/markdownlint.json",
     "./prettier/*": "./prettier/*.js",
@@ -38,6 +46,7 @@
     "./vitest/setup/*": "./vitest/setup/*.js"
   },
   "files": [
+    "lib",
     "eslint",
     "prettier",
     "stylelint",

@@ -1,3 +1,6 @@
-import eslintNode from "./eslint/node.js";
+import { createStyleGuide } from "./lib/factory.js";
 
-export default [...eslintNode];
+export default createStyleGuide({
+  environments: ['node'],
+  autoDetect: false
+});

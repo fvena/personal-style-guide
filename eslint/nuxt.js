@@ -1,3 +1,4 @@
+import nuxtConfig from "@nuxt/eslint-config";
 import base from "./_base.js";
 import testBase from "./_test.js";
 import packageJsonConfig from "./_package-json.js";
@@ -7,7 +8,7 @@ import packageJsonConfig from "./_package-json.js";
  * Extends base configuration with Nuxt-specific rules and integrations.
  *
  * Features:
- * - Nuxt 4+ support with @nuxt/eslint integration
+ * - Nuxt 4+ support with @nuxt/eslint-config integration
  * - Vue.js single file component support
  * - TypeScript support with Nuxt auto-imports
  * - Server-side rendering optimizations
@@ -17,9 +18,7 @@ import packageJsonConfig from "./_package-json.js";
  */
 export default [
   ...base,
-  {
-    extends: ["@nuxt/eslint-config"],
-  },
+  ...nuxtConfig,
   {
     files: ["**/*.vue"],
     rules: {
