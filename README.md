@@ -104,20 +104,32 @@ export default [...eslintNode];
 
 ### How to Use
 
-To use the shared Prettier config, create or update `.prettierrc.config.js` in your project root:
+You can use environment-specific configurations or the default config:
+
+**Environment-specific (recommended for new projects):**
+
+```js
+// For Node.js projects
+export { default } from "personal-style-guide/prettier/node";
+
+// For browser/frontend projects
+export { default } from "personal-style-guide/prettier/browser";
+```
+
+**Default configuration (maintains backward compatibility):**
 
 ```js
 export { default } from "personal-style-guide/prettier/index.js";
 ```
 
-If you need to extend the configuration, you can do so:
+**Custom extensions:**
 
 ```js
-import prettierConfig from "personal-style-guide/prettier/index.js";
+import prettierConfig from "personal-style-guide/prettier/node";
 
 export default {
   ...prettierConfig,
-  ...
+  // your custom overrides
 };
 ```
 
@@ -144,10 +156,26 @@ By not integrating Prettier directly into ESLint or Stylelint:
 
 ### How to Use
 
-Create or update `stylelint.config.js` in your project root:
+You can use environment-specific configurations or the default config:
+
+**Environment-specific (recommended for new projects):**
 
 ```js
-module.exports = {
+// For SCSS projects
+export default {
+  extends: ["personal-style-guide/stylelint/scss"],
+};
+
+// For Vue.js projects
+export default {
+  extends: ["personal-style-guide/stylelint/vue"],
+};
+```
+
+**Default configuration (maintains backward compatibility):**
+
+```js
+export default {
   extends: ["personal-style-guide/stylelint"],
 };
 ```

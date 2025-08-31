@@ -23,8 +23,8 @@
   "type": "module",
   "exports": {
     "./eslint/*": "./eslint/*.js",
-    "./prettier/*": "./prettier/index.js",
-    "./stylelint/*": "./stylelint/index.js",
+    "./prettier/*": "./prettier/*.js",
+    "./stylelint/*": "./stylelint/*.js",
     "./typescript/node": "./typescript/tsconfig.node.json",
     "./typescript/browser": "./typescript/tsconfig.browser.json",
     "./markdown": "./markdown/markdownlint.json"
