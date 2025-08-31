@@ -7,8 +7,11 @@
     "Prettier",
     "Stylelint",
     "Typescript",
+    "Vue 3",
+    "Nuxt 4",
     "Style",
-    "Guide"
+    "Guide",
+    "Accessibility"
   ],
   "homepage": "https://github.com/fvena/personal-style-guide#readme",
   "bugs": {
@@ -75,7 +78,11 @@
     "stylelint-config-recess-order": "^7.2.0",
     "stylelint-config-recommended": "^17.0.0",
     "stylelint-config-recommended-scss": "^16.0.0",
-    "stylelint-config-recommended-vue": "^1.6.1"
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "eslint-plugin-vue": "^9.32.0",
+    "eslint-plugin-vuejs-accessibility": "^2.4.1",
+    "vue-eslint-parser": "^9.5.0",
+    "@nuxt/eslint": "^0.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -91,7 +98,9 @@
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
     "stylelint": "^16.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vue": "^3.0.0",
+    "nuxt": "^3.0.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -104,6 +113,12 @@
       "optional": true
     },
     "typescript": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "nuxt": {
       "optional": true
     }
   },
