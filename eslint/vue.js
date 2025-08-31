@@ -4,6 +4,7 @@ import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import vueParser from "vue-eslint-parser";
 import base from "./_base.js";
 import testBase from "./_test.js";
+import jsonConfig from "./_json.js";
 
 /**
  * Vue.js ESLint configuration with comprehensive accessibility support.
@@ -52,7 +53,7 @@ export default [
       "vue/block-order": [
         "error",
         {
-          order: ["script", "template", "style"],
+          order: ["template", "script", "style"],
         },
       ],
       /**
@@ -64,7 +65,7 @@ export default [
       "vue/component-tags-order": [
         "error",
         {
-          order: ["script", "template", "style"],
+          order: ["template", "script", "style"],
         },
       ],
       "vue/custom-event-name-casing": ["error", "camelCase"],
@@ -288,4 +289,5 @@ export default [
       "vuejs-accessibility/interactive-supports-focus": "warn",
     },
   },
+  ...jsonConfig,
 ];

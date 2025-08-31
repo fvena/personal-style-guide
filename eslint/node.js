@@ -1,6 +1,8 @@
 import globals from "globals";
 import base from "./_base.js";
 import testBase from "./_test.js";
+import jsonConfig from "./_json.js";
+import packageJsonConfig from "./_package-json.js";
 
 export default [
   ...base,
@@ -18,4 +20,6 @@ export default [
       "unicorn/prefer-string-slice": "off",
     },
   },
+  ...jsonConfig,
+  ...packageJsonConfig,
 ];

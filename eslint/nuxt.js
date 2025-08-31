@@ -1,5 +1,6 @@
 import base from "./_base.js";
 import testBase from "./_test.js";
+import packageJsonConfig from "./_package-json.js";
 
 /**
  * ESLint configuration for Nuxt.js applications.
@@ -69,4 +70,5 @@ export default [
       "vuejs-accessibility/interactive-supports-focus": "warn",
     },
   },
+  ...packageJsonConfig,
 ];
