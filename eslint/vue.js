@@ -3,6 +3,7 @@ import pluginVue from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import vueParser from "vue-eslint-parser";
 import base from "./_base.js";
+import testBase from "./_test.js";
 
 /**
  * Vue.js ESLint configuration with comprehensive accessibility support.
@@ -268,6 +269,23 @@ export default [
     files: ["**/*.vue"],
     rules: {
       "vue/script-setup-uses-vars": "error",
+    },
+  },
+  {
+    ...testBase,
+    rules: {
+      ...testBase.rules,
+
+      // Vue-specific test rules
+      "vue/multi-word-component-names": "off", // Test components can have single word names
+      "vue/no-undef-components": "off", // Test components might use testing utilities
+      "vue/require-name-property": "off", // Test components don't need name property
+
+      // Accessibility rules can be more relaxed in test components
+      "vuejs-accessibility/alt-text": "warn",
+      "vuejs-accessibility/click-events-have-key-events": "warn",
+      "vuejs-accessibility/form-control-has-label": "warn",
+      "vuejs-accessibility/interactive-supports-focus": "warn",
     },
   },
 ];

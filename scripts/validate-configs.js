@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-non-literal-fs-filename -- Dynamic file paths are required for validation script */
 /**
  * Configuration validation script for personal-style-guide
  * Validates that all configuration files are syntactically correct and properly structured
@@ -87,3 +88,5 @@ try {
   console.error("💥 Validation script failed:", error.message);
   throw error;
 }
+
+/* eslint-enable security/detect-non-literal-fs-filename */

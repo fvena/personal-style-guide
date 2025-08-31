@@ -1,4 +1,5 @@
 import base from "./_base.js";
+import testBase from "./_test.js";
 
 /**
  * ESLint configuration for Nuxt.js applications.
@@ -45,6 +46,27 @@ export default [
     rules: {
       // Nuxt config specific rules
       "import/no-default-export": "off", // Nuxt config requires default export
+    },
+  },
+  {
+    ...testBase,
+    rules: {
+      ...testBase.rules,
+
+      // Nuxt-specific test rules
+      "import/no-default-export": "off", // Test files might export default for component testing
+
+      // Vue-specific test rules (inherited from Vue config)
+      "vue/multi-word-component-names": "off", // Test components can have single word names
+      "vue/no-undef-components": "off", // Test components might use testing utilities
+      "vue/require-default-prop": "off", // Not required in test components
+      "vue/require-name-property": "off", // Test components don't need name property
+
+      // Accessibility rules can be more relaxed in test components
+      "vuejs-accessibility/alt-text": "warn",
+      "vuejs-accessibility/click-events-have-key-events": "warn",
+      "vuejs-accessibility/form-control-has-label": "warn",
+      "vuejs-accessibility/interactive-supports-focus": "warn",
     },
   },
 ];
