@@ -1,0 +1,10 @@
+{
+  "extends": "./typescript/tsconfig.node.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
+    "moduleResolution": "bundler"
+  },
+  "include": ["**/*.js", "**/*.ts", "scripts/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

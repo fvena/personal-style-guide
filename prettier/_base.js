@@ -7,6 +7,15 @@
  *
  * See: https://github.com/prettier/prettier/blob/main/docs/configuration.md#editorconfig
  */
+
+/**
+ * @typedef {import('prettier').Config} PrettierConfig
+ */
+
+/**
+ * Core formatting defaults that cannot be overridden by EditorConfig
+ * @type {Partial<PrettierConfig>}
+ */
 const overridableDefaults = {
   endOfLine: "lf",
   printWidth: 100,
@@ -14,7 +23,11 @@ const overridableDefaults = {
   useTabs: false,
 };
 
-export default {
+/**
+ * Base Prettier configuration with universal formatting rules
+ * @type {PrettierConfig}
+ */
+const config = {
   ...overridableDefaults,
   arrowParens: "avoid",
   bracketSpacing: true,
@@ -26,3 +39,5 @@ export default {
   singleQuote: true,
   trailingComma: "none",
 };
+
+export default config;

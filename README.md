@@ -70,6 +70,17 @@ To install the package, run:
 npm install --save-dev personal-style-guide
 ```
 
+### 🤔 Configuration Selection Guide
+
+**Choose your configuration based on your project type:**
+
+| Project Type           | ESLint                                             | Prettier           | Stylelint        | TypeScript           |
+| ---------------------- | -------------------------------------------------- | ------------------ | ---------------- | -------------------- |
+| **Node.js API**        | `eslint/node`                                      | `prettier/node`    | N/A              | `typescript/node`    |
+| **React/Vue Frontend** | `eslint/browser`                                   | `prettier/browser` | `stylelint/vue`  | `typescript/browser` |
+| **SCSS-only Styles**   | N/A                                                | N/A                | `stylelint/scss` | N/A                  |
+| **Legacy/Mixed**       | Use `index.js` versions for backward compatibility |                    |                  |
+
 ## ESLint
 
 ### Plugins Integrated
@@ -240,6 +251,32 @@ Update dependencies running the interactive mode. It's recommended to update the
 ```bash
 npx npm-check-updates --interactive
 ```
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Configuration not loading:**
+
+```bash
+# Verify the import path is correct
+node -e "import('personal-style-guide/eslint/node').then(console.log)"
+```
+
+**Plugin missing errors:**
+
+- Ensure peer dependencies are installed: `npm install --save-dev eslint prettier stylelint typescript`
+- For Pug support: `npm install --save-dev @prettier/plugin-pug`
+
+**TypeScript errors in configs:**
+
+- Make sure you're using TypeScript 5.0+ as specified in peerDependencies
+- Verify your tsconfig.json extends the correct environment config
+
+**Conflicting rules:**
+
+- Check if you have other ESLint/Prettier configs that might conflict
+- Use `npx eslint --print-config file.js` to see the final merged configuration
 
 ## 🗺️ Roadmap
 

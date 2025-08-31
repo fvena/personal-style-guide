@@ -11,9 +11,15 @@ import tseslint from "typescript-eslint";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import eslintPluginYml from "eslint-plugin-yml";
 
+/**
+ * Base ESLint configuration for all environments.
+ * Provides comprehensive linting with modern plugins and TypeScript support.
+ *
+ * @type {import('eslint').Linter.Config[]}
+ */
+
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
-/** @type {import('eslint').Linter.Config[]} */
-export default tseslint.config(
+const config = tseslint.config(
   pluginJs.configs.recommended,
   nodePlugin.configs["flat/recommended-module"],
   eslintCommentsPlugin.recommended,
@@ -140,3 +146,5 @@ export default tseslint.config(
   },
 );
 /* eslint-enable perfectionist/sort-objects */
+
+export default config;

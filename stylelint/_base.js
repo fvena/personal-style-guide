@@ -3,11 +3,16 @@
  * Contains core CSS/SCSS linting rules that apply universally.
  */
 
-/** @type {import('stylelint').Config} */
-export default {
+/**
+ * Base Stylelint configuration with essential rules and ordering
+ * @type {import('stylelint').Config}
+ */
+const config = {
   extends: ["stylelint-config-recommended", "stylelint-config-recess-order"],
   rules: {
     "no-descending-specificity": [true, { severity: "warning" }],
     "no-empty-source": [true, { severity: "warning" }],
   },
 };
+
+export default config;
