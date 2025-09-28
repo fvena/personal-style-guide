@@ -2,27 +2,37 @@ import globals from "globals";
 import pluginVue from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import vueParser from "vue-eslint-parser";
-import base from "./_base.js";
-import testBase from "./_test.js";
-import jsonConfig from "./_json.js";
 
 /**
- * Vue.js ESLint configuration with comprehensive accessibility support.
- * Extends base configuration with Vue 3 specific rules and best practices.
+ * Vue.js ESLint configuration.
+ * Pure Vue-specific rules that can be combined with any base environment.
+ *
+ * Usage:
+ * import browserConfig from '@personal-style-guide/eslint/browser'
+ * import vueConfig from '@personal-style-guide/eslint/vue'
+ * export default [
+ *   ...browserConfig,  // or nodeConfig for SSR
+ *   ...vueConfig,
+ *   // Your custom rules here
+ * ]
  *
  * Features:
  * - Vue 3 Composition API and <script setup> support
  * - Full WCAG 2.1 AA accessibility compliance
  * - TypeScript integration for .vue files
  * - Modern Vue.js best practices and patterns
+ * - File-specific rules for different Vue contexts
  *
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
-  ...base,
+  // Vue plugin base configurations
   ...pluginVue.configs["flat/recommended"],
   ...pluginVueA11y.configs["flat/recommended"],
+
+  // Vue files - Base configuration
   {
+    files: ["**/*.vue"],
     languageOptions: {
       globals: { ...globals.browser },
       parser: vueParser,
@@ -33,20 +43,24 @@ export default [
         sourceType: "module",
       },
     },
-  },
-  {
-    files: ["**/*.vue"],
     rules: {
-      "import/no-default-export": "off", // Vue components use default export
-      /**
-       * Disable conflicting rules from base configuration
-       * that don't apply well to Vue templates
-       */
-      "unicorn/filename-case": "off", // Vue components use PascalCase
+      // Allow default export in Vue components
+      "import/no-default-export": "off",
+
+      // Vue components use PascalCase
+      "unicorn/filename-case": "off",
+
+      // Disable conflicting rules from base configuration that don't apply well to Vue templates
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+
       /**
        * Vue.js Template Formatting Rules
        */
       "vue/attribute-hyphenation": ["error", "always"],
+
       /**
        * Vue.js Best Practices and Quality Rules
        */
@@ -56,6 +70,7 @@ export default [
           order: ["template", "script", "style"],
         },
       ],
+
       /**
        * Vue.js Core Rules - Essential for Vue 3
        */
@@ -126,7 +141,6 @@ export default [
       "vue/multi-word-component-names": "error",
       "vue/mustache-interpolation-spacing": ["error", "always"],
       "vue/no-duplicate-attr-inheritance": "error",
-
       "vue/no-empty-component-block": "error",
       "vue/no-multi-spaces": ["error", { ignoreProperties: false }],
       "vue/no-multiple-objects-in-class": "error",
@@ -140,6 +154,7 @@ export default [
       "vue/no-ref-object-destructure": "error",
       "vue/no-required-prop-with-default": "error",
       "vue/no-setup-props-destructure": "error",
+
       /**
        * Vue.js Performance and Modern Patterns
        */
@@ -154,7 +169,6 @@ export default [
           ignorePatterns: ["router-link", "nuxt-link", "client-only"],
         },
       ],
-
       "vue/no-undef-properties": "error",
       "vue/no-unsupported-features": [
         "error",
@@ -198,7 +212,6 @@ export default [
       "vue/require-macro-variable-name": "error",
       "vue/require-name-property": "error",
       "vue/require-prop-types": "error",
-
       "vue/require-typed-ref": "error",
       "vue/script-indent": [
         "error",
@@ -218,14 +231,14 @@ export default [
         },
       ],
       "vue/v-bind-style": ["error", "shorthand"],
-
       "vue/v-on-style": ["error", "shorthand"],
       "vue/v-slot-style": ["error", "shorthand"],
+
+      // Script setup syntax support
+      "vue/script-setup-uses-vars": "error",
+
       /**
        * Accessibility Rules - WCAG 2.1 AA Compliance
-       *
-       * These rules ensure comprehensive accessibility support
-       * following Vue.js accessibility best practices
        */
       "vuejs-accessibility/alt-text": "error",
       "vuejs-accessibility/anchor-has-content": "error",
@@ -250,44 +263,38 @@ export default [
       "vuejs-accessibility/no-distracting-elements": "error",
       "vuejs-accessibility/no-onchange": "error",
       "vuejs-accessibility/no-redundant-roles": "error",
-
       "vuejs-accessibility/role-has-required-aria-props": "error",
       "vuejs-accessibility/tabindex-no-positive": "error",
     },
   },
-  {
-    // Disable type checking for Vue template blocks
-    files: ["*.vue"],
-    rules: {
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-    },
-  },
-  {
-    // Additional rules for script setup syntax
-    files: ["**/*.vue"],
-    rules: {
-      "vue/script-setup-uses-vars": "error",
-    },
-  },
-  {
-    ...testBase,
-    rules: {
-      ...testBase.rules,
 
-      // Vue-specific test rules
-      "vue/multi-word-component-names": "off", // Test components can have single word names
-      "vue/no-undef-components": "off", // Test components might use testing utilities
-      "vue/require-name-property": "off", // Test components don't need name property
+  // Component files - Specific Vue component patterns
+  {
+    files: ["components/**/*.vue", "src/components/**/*.vue"],
+    rules: {
+      // Components should use multi-word names
+      "vue/multi-word-component-names": "error",
 
-      // Accessibility rules can be more relaxed in test components
-      "vuejs-accessibility/alt-text": "warn",
-      "vuejs-accessibility/click-events-have-key-events": "warn",
-      "vuejs-accessibility/form-control-has-label": "warn",
-      "vuejs-accessibility/interactive-supports-focus": "warn",
+      // Components should define name property
+      "vue/require-name-property": "error",
     },
   },
-  ...jsonConfig,
+
+  // Page files - Single-word names allowed
+  {
+    files: ["pages/**/*.vue", "src/pages/**/*.vue", "views/**/*.vue", "src/views/**/*.vue"],
+    rules: {
+      // Pages can have single-word names
+      "vue/multi-word-component-names": "off",
+    },
+  },
+
+  // Layout files - Single-word names allowed
+  {
+    files: ["layouts/**/*.vue", "src/layouts/**/*.vue"],
+    rules: {
+      // Layouts can have single-word names
+      "vue/multi-word-component-names": "off",
+    },
+  },
 ];

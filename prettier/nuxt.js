@@ -1,47 +1,19 @@
-import base from "./_base.js";
+import vue from "./vue.js";
 
 /**
  * Prettier configuration for Nuxt.js applications.
- * Extends base configuration with Nuxt-specific formatting and plugins.
+ * Extends Vue configuration with Nuxt-specific formatting and plugins.
  *
  * Includes:
- * - prettier-plugin-packagejson: Formats package.json files
- * - @prettier/plugin-pug: Formats Pug templates for Vue.js/Nuxt
+ * - All Vue.js configurations and plugins
+ * - Nuxt-specific file patterns and formatting rules
  *
  * @type {import('prettier').Config}
  */
 const config = {
-  ...base,
+  ...vue,
   overrides: [
-    {
-      files: "*.vue",
-      options: {
-        // Ensure proper template formatting
-        htmlWhitespaceSensitivity: "ignore",
-        // Force consistent formatting in Vue SFC
-        printWidth: 100,
-        // Better attribute formatting for Vue components
-        singleAttributePerLine: false,
-        tabWidth: 2,
-        useTabs: false,
-      },
-    },
-    {
-      files: "*.pug",
-      options: {
-        parser: "pug",
-        // Pug-specific overrides when used with Nuxt
-        printWidth: 120,
-      },
-    },
-    {
-      // Package.json files in Nuxt projects
-      files: "package.json",
-      options: {
-        printWidth: 80,
-        tabWidth: 2,
-      },
-    },
+    ...vue.overrides,
     {
       // Nuxt configuration files
       files: [
@@ -80,11 +52,6 @@ const config = {
       },
     },
   ],
-  plugins: ["prettier-plugin-packagejson", "@prettier/plugin-pug"],
-  pugAttributeSeparator: "none",
-  pugFramework: "vue",
-  pugSingleQuote: false,
-  vueIndentScriptAndStyle: true,
 };
 
 export default config;

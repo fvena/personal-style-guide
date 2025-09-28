@@ -1,3 +1,4 @@
 {
-  "extends": "./markdown/markdownlint.json"
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+  "extends": "./markdownlint/base.jsonc"
 }

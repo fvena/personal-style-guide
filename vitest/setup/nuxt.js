@@ -3,7 +3,7 @@
  * Extends Vue setup with Nuxt-specific testing utilities and auto-imports.
  */
 
-import { vi } from "vitest";
+import { afterEach, beforeEach, vi } from "vitest";
 
 // Nuxt specific test utilities
 globalThis.nuxtTestUtils = {
@@ -48,15 +48,15 @@ globalThis.nuxtTestUtils = {
       return {
         deserialize: vi.fn(),
         serialize: vi.fn(),
-        value: cookieStore.get(name) || options.default || null,
+        value: cookieStore.get(name) || options.default || undefined,
       };
     },
     useFetch: (url, options = {}) =>
       globalThis.nuxtTestUtils.mockNuxtComposables.useLazyFetch(url, options),
     useHead: vi.fn(),
     useLazyFetch: (url, options = {}) => ({
-      data: { value: null },
-      error: { value: null },
+      data: { value: undefined },
+      error: { value: undefined },
       execute: vi.fn(),
       pending: { value: false },
       refresh: vi.fn(),
@@ -153,13 +153,13 @@ globalThis.nuxtMocks = {
         state.set(key, typeof init === "function" ? init() : init);
       }
       return {
-        value: state.get(key) || null,
+        value: state.get(key) || undefined,
       };
     });
 
     globalThis.useAsyncData = vi.fn((key, handler, options = {}) => ({
-      data: { value: null },
-      error: { value: null },
+      data: { value: undefined },
+      error: { value: undefined },
       execute: vi.fn(),
       pending: { value: false },
       refresh: vi.fn(),
@@ -239,6 +239,7 @@ beforeEach(() => {
 afterEach(() => {
   // Clean up Nuxt-specific globals
   for (const key of Object.keys(globalThis.nuxtTestUtils.mockNuxtComposables)) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- Cleanup requires dynamic property deletion
     delete global[key];
   }
 

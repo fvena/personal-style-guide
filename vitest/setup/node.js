@@ -3,13 +3,15 @@
  * Extends base setup with Node.js API and server testing utilities.
  */
 
+import { beforeEach, vi } from "vitest";
+
 // Node.js specific global utilities
 globalThis.nodeTestUtils = {
   /**
    * Create HTTP request mock
    */
   createHttpRequest: (options = {}) => ({
-    body: null,
+    body: undefined,
     headers: {},
     method: "GET",
     params: {},

@@ -1,4 +1,4 @@
-import base from "./_base.js";
+import base from "./base.js";
 
 /**
  * Stylelint configuration for Vue.js Single File Components.
@@ -56,15 +56,26 @@ export default {
     /**
      * Animation and Transitions for Vue Components
      */
+    // Maximum animation duration to prevent performance issues
+    // Long animations can cause janky scrolling and poor UX
     "animation-duration-max": "5s",
+
     /**
      * CSS Quality and Best Practices
      */
+    // Use modern color function syntax (rgb() instead of rgba())
     "color-function-notation": "modern",
 
+    // Hex colors in lowercase for consistency (#abc not #ABC)
     "color-hex-case": "lower",
+
+    // Use short hex when possible (#abc instead of #aabbcc)
     "color-hex-length": "short",
+
+    // Avoid named colors for consistency (use #fff not white)
     "color-named": "never",
+
+    // Ensure hex colors are valid
     "color-no-invalid-hex": true,
 
     "custom-property-no-missing-var-function": true,

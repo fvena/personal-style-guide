@@ -52,18 +52,18 @@ async function validateAllConfigs() {
     validateConfig("eslint/_base.js", "ESLint base config"),
     validateConfig("eslint/node.js", "ESLint Node.js config"),
     validateConfig("eslint/browser.js", "ESLint browser config"),
+    validateConfig("eslint/vue.js", "ESLint Vue config"),
+    validateConfig("eslint/nuxt.js", "ESLint Nuxt config"),
 
     // Prettier configurations
-    validateConfig("prettier/_base.js", "Prettier base config"),
-    validateConfig("prettier/node.js", "Prettier Node.js config"),
-    validateConfig("prettier/browser.js", "Prettier browser config"),
-    validateConfig("prettier/index.js", "Prettier default config"),
+    validateConfig("prettier/base.js", "Prettier base config"),
+    validateConfig("prettier/vue.js", "Prettier Vue config"),
+    validateConfig("prettier/nuxt.js", "Prettier Nuxt config"),
 
     // Stylelint configurations
-    validateConfig("stylelint/_base.js", "Stylelint base config"),
-    validateConfig("stylelint/scss.js", "Stylelint SCSS config"),
+    validateConfig("stylelint/base.js", "Stylelint base config"),
     validateConfig("stylelint/vue.js", "Stylelint Vue config"),
-    validateConfig("stylelint/index.js", "Stylelint default config"),
+    validateConfig("stylelint/nuxt.js", "Stylelint Nuxt config"),
   ];
 
   const results = await Promise.all(validations);

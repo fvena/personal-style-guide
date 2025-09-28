@@ -3,6 +3,9 @@
  * This file is loaded before all tests and provides common functionality.
  */
 
+// Import vi from vitest for proper module resolution
+import { afterEach, beforeEach, vi } from "vitest";
+
 // Global test utilities
 globalThis.testUtils = {
   /**
@@ -85,13 +88,13 @@ globalThis.commonMocks = {
   },
 
   /**
-   * Mock localStorage
+   * Mock localStorage (safe for Node.js environment)
    */
   mockLocalStorage: () => {
     const store = new Map();
     globalThis.localStorage = {
       clear: vi.fn(() => store.clear()),
-      getItem: vi.fn((key) => store.get(key) || null),
+      getItem: vi.fn((key) => store.get(key) || undefined),
       key: vi.fn(),
       length: 0,
       removeItem: vi.fn((key) => store.delete(key)),
@@ -100,13 +103,13 @@ globalThis.commonMocks = {
   },
 
   /**
-   * Mock sessionStorage
+   * Mock sessionStorage (safe for Node.js environment)
    */
   mockSessionStorage: () => {
     const store = new Map();
     globalThis.sessionStorage = {
       clear: vi.fn(() => store.clear()),
-      getItem: vi.fn((key) => store.get(key) || null),
+      getItem: vi.fn((key) => store.get(key) || undefined),
       key: vi.fn(),
       length: 0,
       removeItem: vi.fn((key) => store.delete(key)),

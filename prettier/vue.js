@@ -1,4 +1,4 @@
-import base from "./_base.js";
+import base from "./base.js";
 
 /**
  * Prettier configuration for Vue.js applications.
@@ -12,16 +12,25 @@ import base from "./_base.js";
  */
 const config = {
   ...base,
+
+  // File-specific formatting overrides for Vue ecosystem
   overrides: [
     {
+      // Vue Single File Components
       files: "*.vue",
       options: {
-        // Ensure proper template formatting
+        // HTML whitespace handling - ignore for better template formatting
+        // Allows Prettier to format templates more aggressively
         htmlWhitespaceSensitivity: "ignore",
-        // Force consistent formatting in Vue SFC
+
+        // Line width for Vue files - consistent with base config
         printWidth: 100,
-        // Better attribute formatting for Vue components
+
+        // Multiple attributes on same line when possible
+        // Reduces vertical space in templates
         singleAttributePerLine: false,
+
+        // Indentation - consistent 2 spaces
         tabWidth: 2,
         useTabs: false,
       },
@@ -79,10 +88,25 @@ const config = {
       },
     },
   ],
-  plugins: ["prettier-plugin-packagejson", "@prettier/plugin-pug"],
+
+  // Plugins for enhanced Vue ecosystem formatting
+  plugins: [
+    "prettier-plugin-packagejson", // Sorts and formats package.json
+    "@prettier/plugin-pug", // Formats Pug templates
+  ],
+
+  // Pug template options for Vue components
+  // No separator between attributes for cleaner Pug syntax
   pugAttributeSeparator: "none",
+
+  // Pug framework - Vue specific handling
   pugFramework: "vue",
+
+  // Use double quotes in Pug (HTML standard)
   pugSingleQuote: false,
+
+  // Indent <script> and <style> blocks in Vue SFCs
+  // Improves readability by showing they're nested in the component
   vueIndentScriptAndStyle: true,
 };
 

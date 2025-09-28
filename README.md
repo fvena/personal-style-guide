@@ -66,14 +66,15 @@ The easiest way to get started is with the factory function that automatically d
 
 ```javascript
 // eslint.config.js
-import { createStyleGuide } from 'personal-style-guide'
+import { createStyleGuide } from "personal-style-guide";
 
-export default createStyleGuide()
+export default createStyleGuide();
 ```
 
 This automatically detects and configures:
+
 - **Frameworks**: Vue, Nuxt (via dependencies)
-- **Environment**: Node.js vs Browser (via package.json and files)  
+- **Environment**: Node.js vs Browser (via package.json and files)
 - **TypeScript**: Based on tsconfig.json or TypeScript dependencies
 - **Testing**: Vitest (via dependencies and config files)
 
@@ -81,15 +82,15 @@ This automatically detects and configures:
 
 ```javascript
 // eslint.config.js
-import { createStyleGuide } from 'personal-style-guide'
+import { createStyleGuide } from "personal-style-guide";
 
 export default createStyleGuide({
-  environments: ['node', 'vue'],
+  environments: ["node", "vue"],
   typescript: true,
   vitest: true,
   json: true,
-  packageJson: true
-})
+  packageJson: true,
+});
 ```
 
 ### Convenience Functions
@@ -116,11 +117,11 @@ npm install --save-dev eslint prettier stylelint typescript markdownlint
 
 **Choose your configuration approach:**
 
-| Approach | Usage | Best For |
-| -------- | ----- | -------- |
-| **Auto-Detection** | `createStyleGuide()` | New projects, convenience |
-| **Manual Selection** | `createStyleGuide({environments: ['node']})` | Specific requirements |
-| **Individual Configs** | `import nodeConfig from 'personal-style-guide/eslint/node'` | Fine-grained control |
+| Approach               | Usage                                                       | Best For                  |
+| ---------------------- | ----------------------------------------------------------- | ------------------------- |
+| **Auto-Detection**     | `createStyleGuide()`                                        | New projects, convenience |
+| **Manual Selection**   | `createStyleGuide({environments: ['node']})`                | Specific requirements     |
+| **Individual Configs** | `import nodeConfig from 'personal-style-guide/eslint/node'` | Fine-grained control      |
 
 ## ESLint
 
@@ -707,16 +708,77 @@ Nuxt 4 automatically generates a `tsconfig.json` file with optimal settings for 
 
 ## Markdown
 
-> ⚠️ **Note**: This configuration is designed for `markdownlint`. Install the Markdownlint extension in your editor (e.g., VS Code) for optimal use.
+This package provides a comprehensive Markdown linting configuration using [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2).
 
-### How to Use
+### Installation
 
-To lint Markdown files, extend the provided configuration by creating or updating a `.markdownlint.json` file in your project root:
+First, install `markdownlint-cli2` as a development dependency:
+
+```bash
+npm install --save-dev markdownlint-cli2
+```
+
+### Configuration
+
+Create a `.markdownlint.json` file in your project root:
 
 ```json
 {
-  "extends": "personal-style-guide/markdown"
+  "extends": "personal-style-guide/markdown/base"
 }
+```
+
+### Scripts
+
+Add the following scripts to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
+    "lint:md:fix": "markdownlint-cli2 --fix '**/*.md' '#node_modules'"
+  }
+}
+```
+
+### Features
+
+The configuration enforces strict Markdown standards including:
+
+- **Consistent heading styles** (ATX style: `# Heading`)
+- **Consistent list markers** (dashes for unordered lists)
+- **Proper spacing** around headings and lists
+- **Code block formatting** (fenced with language specification)
+- **No trailing spaces** or multiple blank lines
+- **Proper link formatting** (no bare URLs)
+- **Consistent emphasis markers** (`*italic*` and `**bold**`)
+
+### Editor Integration
+
+For VS Code, install the [markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and add to your workspace settings:
+
+```json
+{
+  "markdownlint.config": {
+    "extends": "personal-style-guide/markdown/base"
+  }
+}
+```
+
+### CLI Usage
+
+```bash
+# Lint all markdown files
+npm run lint:md
+
+# Auto-fix issues
+npm run lint:md:fix
+
+# Lint specific files
+npx markdownlint-cli2 "README.md" "docs/**/*.md"
+
+# Use with custom config
+npx markdownlint-cli2 --config .markdownlint.json "**/*.md"
 ```
 
 ## 📑 Scripts
@@ -728,8 +790,10 @@ Add the following scripts to your `package.json` to lint and format your code:
 ```json
 {
   "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:md",
     "lint:js": "eslint 'src/**/*.{js,ts,vue}'",
     "lint:css": "stylelint 'src/**/*.{scss,css,vue}'",
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "format": "prettier --write 'src/**/*.{js,ts,vue,scss,css}'",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
@@ -744,7 +808,9 @@ Add the following scripts to your `package.json` to lint and format your code:
 ```json
 {
   "scripts": {
+    "lint": "npm run lint:js && npm run lint:md",
     "lint:js": "eslint 'src/**/*.{js,ts}'",
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
@@ -758,8 +824,10 @@ Add the following scripts to your `package.json` to lint and format your code:
 ```json
 {
   "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:md",
     "lint:js": "eslint .",
     "lint:css": "stylelint '**/*.{scss,css,vue}'",
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "format": "prettier --write .",
     "test": "vitest",
     "test:coverage": "vitest --coverage",

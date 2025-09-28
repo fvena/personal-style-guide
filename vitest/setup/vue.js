@@ -4,7 +4,7 @@
  */
 
 import { config } from "@vue/test-utils";
-import { vi } from "vitest";
+import { afterEach, beforeEach, vi } from "vitest";
 
 // Configure Vue Test Utils globally
 config.global = {
@@ -55,7 +55,7 @@ globalThis.vueTestUtils = {
      */
     waitForUpdate: async (wrapper) => {
       await wrapper.vm.$nextTick();
-      await vi.waitFor(() => {});
+      await vi.waitFor(() => true);
     },
   },
 
@@ -168,9 +168,9 @@ globalThis.vueMocks = {
       addEventListener: vi.fn(),
       addListener: vi.fn(),
       dispatchEvent: vi.fn(),
-      matches: false,
+      matches: undefined,
       media: query,
-      onchange: null,
+      onchange: undefined,
       removeEventListener: vi.fn(),
       removeListener: vi.fn(),
     }));

@@ -1,0 +1,226 @@
+/**
+ * Base Markdownlint configuration optimized for Prettier compatibility
+ *
+ * Strategy:
+ * 1. Extends markdownlint/style/prettier to disable formatting rules
+ * 2. Enables content/structure rules that don't conflict with Prettier
+ * 3. Adds project-specific customizations for content rules only
+ *
+ * ⚠️  IMPORTANT: Do not modify rules that are disabled by markdownlint/style/prettier
+ *    See: https://github.com/DavidAnson/markdownlint/blob/main/style/prettier.json
+ *    These 26 formatting rules are handled by Prettier and should remain false:
+ *
+ *    MD003 (heading-style), MD004 (ul-style), MD007 (ul-indent),
+ *    MD009 (no-trailing-spaces), MD012 (no-multiple-blanks), MD013 (line-length),
+ *    MD022 (blanks-around-headings), MD030 (list-marker-space),
+ *    MD032 (blanks-around-lists), MD035 (hr-style), MD046 (code-fence-style),
+ *    MD048 (code-fence-style), MD049 (emphasis-style), MD050 (strong-style),
+ *    and 12 more formatting-related rules.
+ *
+ * @see https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+ * @see https://github.com/DavidAnson/markdownlint/blob/main/style/prettier.json
+ */
+{
+  // Disable all formatting rules that conflict with Prettier
+  // This preset disables 26 formatting-related rules automatically
+  "extends": "markdownlint/style/prettier",
+
+  // ===================================================================
+  // CONTENT/STRUCTURE RULES - Default rules that don't conflict with Prettier
+  // These are the subset of markdownlint default rules that focus on content
+  // quality rather than formatting, safe to use alongside Prettier
+  // ===================================================================
+
+  // MD001 - Heading levels should only increment by one level at a time
+  // Ensures proper document structure (H1 → H2 → H3, not H1 → H3)
+  "MD001": true,
+
+  // MD002 - First heading should be a top level heading
+  // Document should start with H1 for proper semantic structure
+  "MD002": true,
+
+  // MD005 - Inconsistent indentation for list items at the same level
+  // Content rule - ensures logical list structure
+  "MD005": true,
+
+  // MD006 - Consider starting bulleted lists at the beginning of the line
+  // Content rule - prevents malformed lists
+  "MD006": true,
+
+  // MD008 - Trailing whitespace in code block
+  // Content rule - prevents invisible whitespace issues in code
+  "MD008": true,
+
+  // MD010 - Hard tabs
+  // Content rule - prevents tab/space mixing issues
+  "MD010": true,
+
+  // MD011 - Reversed link syntax
+  // Content rule - catches [link](text) instead of [text](link)
+  "MD011": true,
+
+  // MD014 - Dollar signs used before commands without showing output
+  // Content rule - improves shell command documentation clarity
+  "MD014": true,
+
+  // MD018 - No space after hash on atx style heading
+  // Content rule - ensures proper heading syntax (#Header vs # Header)
+  "MD018": true,
+
+  // MD019 - Multiple spaces after hash on atx style heading
+  // Content rule - prevents excessive spacing in headings
+  "MD019": true,
+
+  // MD020 - No space inside hashes on closed atx style heading
+  // Content rule - ensures proper closed heading syntax
+  "MD020": true,
+
+  // MD021 - Multiple spaces inside hashes on closed atx style heading
+  // Content rule - prevents excessive spacing in closed headings
+  "MD021": true,
+
+  // MD023 - Headings must start at the beginning of the line
+  // Content rule - prevents indented headings which break parsing
+  "MD023": true,
+
+  // MD026 - Trailing punctuation in heading
+  // Content rule - headings shouldn't end with punctuation
+  "MD026": true,
+
+  // MD027 - Multiple spaces after blockquote symbol
+  // Content rule - ensures proper blockquote formatting
+  "MD027": true,
+
+  // MD028 - Blank line inside blockquote
+  // Content rule - prevents broken blockquotes
+  "MD028": true,
+
+  // MD031 - Fenced code blocks should be surrounded by blank lines
+  // Content rule - ensures code blocks are properly separated
+  "MD031": true,
+
+  // MD034 - Bare URL used
+  // Content rule - encourages proper link formatting
+  "MD034": true,
+
+  // MD037 - Spaces inside emphasis markers
+  // Content rule - prevents broken emphasis (* text * vs *text*)
+  "MD037": true,
+
+  // MD038 - Spaces inside code span elements
+  // Content rule - prevents broken inline code (` code ` vs `code`)
+  "MD038": true,
+
+  // MD039 - Spaces inside link text
+  // Content rule - prevents broken links ([ text ] vs [text])
+  "MD039": true,
+
+  // MD040 - Fenced code blocks should have a language specified
+  // Content rule - improves accessibility and syntax highlighting
+  "MD040": true,
+
+  // MD042 - No empty links
+  // Content rule - prevents broken navigation
+  "MD042": true,
+
+  // MD045 - Images should have alternate text (alt text)
+  // Content rule - improves accessibility
+  "MD045": true,
+
+  // MD047 - Files should end with a single newline character
+  // Content rule - ensures proper file endings
+  "MD047": true,
+
+  // MD051 - Link fragments should be valid
+  // Content rule - prevents broken internal links
+  "MD051": true,
+
+  // MD052 - Reference links and images should use a label that is defined
+  // Content rule - prevents broken reference links
+  "MD052": true,
+
+  // MD053 - Link and image reference definitions should be needed
+  // Content rule - prevents unused reference definitions
+  "MD053": true,
+
+  // ===================================================================
+  // PROJECT-SPECIFIC CUSTOMIZATIONS - Content rules only
+  // These are our own customizations that don't conflict with Prettier
+  // ===================================================================
+
+  // MD024 - Multiple headings with the same content
+  // Only check siblings to allow repeated headings in different sections
+  // Common pattern: multiple "Examples" or "Usage" sections
+  "MD024": {
+    "siblings_only": true,
+  },
+
+  // MD025 - Multiple top-level headings
+  // Only one H1 should exist per document (document title)
+  "MD025": {
+    "level": 1,
+  },
+
+  // MD029 - Ordered list item prefix
+  // Use ordered numbers (1. 2. 3.) instead of all 1s
+  // More intuitive and helps with list reordering
+  "MD029": {
+    "style": "ordered",
+  },
+
+  // MD033 - Inline HTML
+  // Allow specific HTML elements commonly used in documentation
+  // These elements provide functionality not available in pure markdown
+  "MD033": {
+    "allowed_elements": [
+      "br", // Line breaks
+      "details", // Collapsible sections
+      "summary", // Collapsible section headers
+      "img", // Images with custom attributes
+      "a", // Anchors with custom attributes
+      "kbd", // Keyboard keys
+      "sup", // Superscript
+      "sub", // Subscript
+      "small", // Small text for timestamps, etc.
+      "table", // Complex tables
+      "thead", // Table headers
+      "tbody", // Table body
+      "tr", // Table rows
+      "th", // Table headers
+      "td", // Table cells
+      "p", // Paragraphs with custom styling
+      "div", // Containers for layout
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6", // Headers with IDs
+      "ol", // Ordered lists with custom attributes
+      "li", // List items with custom attributes
+      "strong", // Bold with semantic meaning
+      "em", // Italic with semantic meaning
+    ],
+  },
+
+  // MD036 - Emphasis used instead of a heading
+  // DISABLED - Sometimes bold/italic is intentionally used for emphasis
+  // Not all emphasized text should be a heading
+  "MD036": false,
+
+  // MD041 - First line in file should be a top level heading
+  // Ensures documents start with a clear title
+  "MD041": {
+    "level": 1,
+  },
+
+  // MD043 - Required heading structure
+  // DISABLED - Too restrictive for general documentation
+  // Each document may have different structure needs
+  "MD043": false,
+
+  // MD044 - Proper names should have correct capitalization
+  // DISABLED - Too many false positives with technical terms
+  // Manual review is more reliable for proper names
+  "MD044": false,
+}
