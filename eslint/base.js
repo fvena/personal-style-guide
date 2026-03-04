@@ -25,6 +25,8 @@ export const baseJavascript = [
   {
     name: "fvena/base/javascript/rules",
     rules: {
+      "array-callback-return": ["warn", { allowImplicit: true }],
+      eqeqeq: ["error", "smart"],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["error", { ignores: ["import.meta.dirname"] }],
     },
@@ -49,6 +51,22 @@ export const baseTypeScript = tseslint.config(
     rules: {
       "@typescript-eslint/default-param-last": "error",
       "@typescript-eslint/no-loop-func": "error",
+      "@typescript-eslint/prefer-nullish-coalescing": [
+        "error",
+        {
+          ignorePrimitives: {
+            boolean: true,
+            string: true,
+          },
+        },
+      ],
+      "@typescript-eslint/prefer-readonly": "error",
+      "@typescript-eslint/restrict-template-expressions": [
+        "warn",
+        {
+          allowNumber: true,
+        },
+      ],
     },
   },
   {
