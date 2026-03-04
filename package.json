@@ -62,6 +62,7 @@
     "@nuxt/eslint-config": "^1.15.2",
     "@prettier/plugin-pug": "^3.4.2",
     "@typescript-eslint/parser": "^8.56.1",
+    "@vue/eslint-config-typescript": "^14.7.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-config-turbo": "^2.8.13",
     "eslint-plugin-n": "^17.24.0",
@@ -82,7 +83,6 @@
     "stylelint-config-recommended-vue": "^1.6.1",
     "stylelint-order": "^7.0.0",
     "typescript-eslint": "^8.56.1",
-    "vue-eslint-parser": "^10.4.0",
     "yaml-eslint-parser": "^2.0.0"
   },
   "devDependencies": {

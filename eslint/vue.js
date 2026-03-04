@@ -1,30 +1,21 @@
+import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
 import eslintConfigPrettier from "eslint-config-prettier";
 import vuePlugin from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
-import tseslint from "typescript-eslint";
-import vueParser from "vue-eslint-parser";
 import base from "./base.js";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of Vue rules */
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfigWithVueTs(
   ...base,
   // Vue 3 recommended rules as a starting point
-  ...vuePlugin.configs["flat/vue3-recommended"],
-  // Parser for .vue files
-  {
-    name: "fvena/vue/parser",
-    files: ["**/*.vue"],
-    languageOptions: {
-      parser: vueParser,
-      parserOptions: {
-        parser: tseslint.parser,
-        sourceType: "module",
-        ecmaVersion: "latest",
-      },
-    },
-  },
+  ...vuePlugin.configs["flat/recommended"],
+  // Minimal vueTsConfigs entry to trigger Vue parser setup;
+  // base.js already includes strictTypeChecked + stylisticTypeChecked
+  // so we only need the base parser integration, not the full rule sets
+  vueTsConfigs.strictTypeChecked,
+  vueTsConfigs.stylisticTypeChecked,
   // Opinionated rules for the exact stack: Vue 3 + script setup + TS + SCSS
   {
     name: "fvena/vue/rules",
@@ -116,5 +107,5 @@ export default [
   },
   // Prettier must be last — it disables formatting rules from all configs above
   { ...eslintConfigPrettier, name: "fvena/vue/prettier" },
-];
+);
 /* eslint-enable perfectionist/sort-objects */
