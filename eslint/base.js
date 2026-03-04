@@ -1,8 +1,10 @@
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import pluginJs from "@eslint/js";
 import markdown from "@eslint/markdown";
+import eslintConfigPrettier from "eslint-config-prettier";
 import nodePlugin from "eslint-plugin-n";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
+import pluginRegexp from "eslint-plugin-regexp";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import unicornPlugin from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
@@ -116,6 +118,14 @@ export const baseComments = [
 ];
 
 /** @type {import('eslint').Linter.Config[]} */
+export const baseRegexp = [
+  {
+    ...pluginRegexp.configs["flat/recommended"],
+    name: "fvena/base/regexp",
+  },
+];
+
+/** @type {import('eslint').Linter.Config[]} */
 export const baseTsdoc = [
   {
     name: "fvena/base/plugins/tsdoc",
@@ -191,8 +201,11 @@ export default [
   ...baseTypeScript,
   ...basePerfectionist,
   ...baseUnicorn,
+  ...baseRegexp,
   ...baseComments,
   ...baseYaml,
   ...baseMarkdown,
+  // Prettier must be last — it disables formatting rules from all configs above
+  { ...eslintConfigPrettier, name: "fvena/base/prettier" },
 ];
 /* eslint-enable perfectionist/sort-objects */

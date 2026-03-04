@@ -1,3 +1,4 @@
+import eslintConfigPrettier from "eslint-config-prettier";
 import vuePlugin from "eslint-plugin-vue";
 import tseslint from "typescript-eslint";
 import vueParser from "vue-eslint-parser";
@@ -98,5 +99,7 @@ export default [
       "vue/no-v-html": "warn",
     },
   },
+  // Prettier must be last — it disables formatting rules from all configs above
+  { ...eslintConfigPrettier, name: "fvena/vue/prettier" },
 ];
 /* eslint-enable perfectionist/sort-objects */
