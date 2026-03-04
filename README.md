@@ -258,6 +258,20 @@ It applies to test files (`**/__tests__/**`, `**/*.spec.*`, `**/*.test.*`) and i
 | `flat/vue`                          | Testing Library Vue recommended rules                   |
 | `@typescript-eslint/unbound-method` | Turned off to allow destructuring `render` in Vue tests |
 
+### Turborepo (opt-in)
+
+For monorepos using [Turborepo](https://turbo.build). This config is **not included by default** — import it explicitly in the root `eslint.config.js` of your monorepo:
+
+```js
+import eslintNode from "personal-style-guide/eslint/node";
+import eslintTurbo from "personal-style-guide/eslint/turbo";
+
+// eslint.config.js en la raíz del monorepo
+export default [...eslintNode, ...eslintTurbo];
+```
+
+It enforces Turborepo-specific rules from [`eslint-config-turbo`](https://www.npmjs.com/package/eslint-config-turbo), such as detecting environment variable usage that could break caching.
+
 ## Prettier
 
 ### How to Use
