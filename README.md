@@ -219,6 +219,26 @@ Everything from the [Vue 3 config](#vue-3), plus:
 | `@nuxt/eslint-config`            | Nuxt-specific globals, auto-imports, and directory conventions         |
 | `vue/multi-word-component-names` | Relaxed to allow `default` and `error` (common Nuxt page/layout names) |
 
+### Playwright (opt-in)
+
+For projects with Playwright E2E tests. This config is **not included by default** — import it explicitly in projects that use Playwright:
+
+```js
+import eslintNode from "personal-style-guide/eslint/node";
+import eslintPlaywright from "personal-style-guide/eslint/playwright";
+
+export default [...eslintNode, ...eslintPlaywright];
+```
+
+It applies to `**/*.spec.ts`, `**/e2e/**/*.ts`, and `**/tests/**/*.ts` files and includes:
+
+| Rule                         | What it enforces                     |
+| ---------------------------- | ------------------------------------ |
+| `flat/recommended`           | Playwright recommended rules         |
+| `playwright/expect-expect`   | Every test must contain an assertion |
+| `playwright/no-focused-test` | No `.only()` tests slip into CI      |
+| `no-console` off             | Allows console in E2E test files     |
+
 ## Prettier
 
 ### How to Use
