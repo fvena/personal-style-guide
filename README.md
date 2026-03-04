@@ -239,6 +239,25 @@ It applies to `**/*.spec.ts`, `**/e2e/**/*.ts`, and `**/tests/**/*.ts` files and
 | `playwright/no-focused-test` | No `.only()` tests slip into CI      |
 | `no-console` off             | Allows console in E2E test files     |
 
+### Testing Library (opt-in)
+
+For projects with component tests using `@testing-library/vue` or `@testing-library/react`. This config is **not included by default** — import it explicitly in projects that use Testing Library:
+
+```js
+import eslintTestingLibrary from "personal-style-guide/eslint/testing-library";
+import eslintVitest from "personal-style-guide/eslint/vitest";
+import eslintVue from "personal-style-guide/eslint/vue";
+
+export default [...eslintVue, ...eslintVitest, ...eslintTestingLibrary];
+```
+
+It applies to test files (`**/__tests__/**`, `**/*.spec.*`, `**/*.test.*`) and includes:
+
+| Rule                                | What it enforces                                        |
+| ----------------------------------- | ------------------------------------------------------- |
+| `flat/vue`                          | Testing Library Vue recommended rules                   |
+| `@typescript-eslint/unbound-method` | Turned off to allow destructuring `render` in Vue tests |
+
 ## Prettier
 
 ### How to Use
