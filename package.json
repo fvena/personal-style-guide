@@ -1,6 +1,6 @@
 {
-  "name": "personal-style-guide",
-  "version": "0.6.0",
+  "name": "@fvena/style-guide",
+  "version": "0.7.0",
   "description": "Zero-config, opinionated linting and formatting for TypeScript, Vue, and Nuxt projects.",
   "keywords": [
     "eslint",
@@ -18,13 +18,13 @@
     "nuxt",
     "code-quality"
   ],
-  "homepage": "https://github.com/fvena/personal-style-guide#readme",
+  "homepage": "https://github.com/fvena/style-guide#readme",
   "bugs": {
-    "url": "https://github.com/fvena/personal-style-guide/issues"
+    "url": "https://github.com/fvena/style-guide/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fvena/personal-style-guide.git"
+    "url": "git+https://github.com/fvena/style-guide.git"
   },
   "license": "MIT",
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
