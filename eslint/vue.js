@@ -1,6 +1,6 @@
 import vuePlugin from "eslint-plugin-vue";
-import vueParser from "vue-eslint-parser";
 import tseslint from "typescript-eslint";
+import vueParser from "vue-eslint-parser";
 import base from "./base.js";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of Vue rules */

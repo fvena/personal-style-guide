@@ -1,16 +1,12 @@
-import path from "node:path";
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import pluginJs from "@eslint/js";
-import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
-import importPlugin from "eslint-plugin-import";
+import markdown from "@eslint/markdown";
 import nodePlugin from "eslint-plugin-n";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
-import pluginSecurity from "eslint-plugin-security";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import unicornPlugin from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
 import tseslint from "typescript-eslint";
-import markdown from "@eslint/markdown";
 import * as yamlParser from "yaml-eslint-parser";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
@@ -61,48 +57,20 @@ export const baseTypeScript = tseslint.config(
 );
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseImports = [
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  {
-    name: "fvena/base/import-resolver",
-    settings: {
-      "import/resolver-next": [
-        createTypeScriptImportResolver({
-          alwaysTryTypes: true,
-          project: path.resolve(import.meta.dirname, "./tsconfig.json"),
-        }),
-      ],
-    },
-  },
-  {
-    name: "fvena/base/import/rules",
-    rules: {
-      "import/named": "off",
-      "import/namespace": "off",
-      "import/default": "off",
-      "import/no-named-as-default-member": "off",
-      "import/no-unresolved": "off",
-      "import/extensions": "off",
-      "import/order": [
-        "warn",
-        {
-          groups: ["type", "builtin", "external", "internal", "parent", "sibling", "index"],
-          "newlines-between": "never",
-          warnOnUnassignedImports: true,
-        },
-      ],
-    },
-  },
-];
-
-/** @type {import('eslint').Linter.Config[]} */
 export const basePerfectionist = [
   perfectionistPlugin.configs["recommended-natural"],
   {
     name: "fvena/base/perfectionist/rules",
     rules: {
-      "perfectionist/sort-imports": "off",
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          groups: ["type", "builtin", "external", "internal", ["parent", "sibling", "index"]],
+          newlinesBetween: 0,
+          order: "asc",
+          type: "natural",
+        },
+      ],
       "perfectionist/sort-classes": "off",
       "perfectionist/sort-modules": "off",
     },
@@ -132,9 +100,6 @@ export const baseUnicorn = [
     },
   },
 ];
-
-/** @type {import('eslint').Linter.Config[]} */
-export const baseSecurity = [pluginSecurity.configs.recommended];
 
 /** @type {import('eslint').Linter.Config[]} */
 export const baseComments = [
@@ -203,7 +168,6 @@ export const baseMarkdown = tseslint.config(
       "no-undef": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "import/no-unresolved": "off",
       "n/no-missing-import": "off",
       "unicorn/filename-case": "off",
       "unicorn/prefer-module": "off",
@@ -225,12 +189,9 @@ export default [
   ...baseIgnores,
   ...baseJavascript,
   ...baseTypeScript,
-  ...baseImports,
   ...basePerfectionist,
   ...baseUnicorn,
-  ...baseSecurity,
   ...baseComments,
-  ...baseTsdoc,
   ...baseYaml,
   ...baseMarkdown,
 ];

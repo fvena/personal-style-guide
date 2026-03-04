@@ -77,13 +77,10 @@ npm install --save-dev personal-style-guide
 - **[@eslint/js](https://github.com/eslint/eslint)**: JavaScript linting rules.
 - **[typescript-eslint](https://typescript-eslint.io)**: TypeScript linting rules.
 - **[eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n#readme)**: Node.js specific rules.
-- **[eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)**: Import validation and sorting.
-- **[eslint-plugin-security](https://github.com/eslint-community/eslint-plugin-security#readme)**: Detects security issues.
-- **[eslint-plugin-perfectionist](https://perfectionist.dev)**: Code organization rules.
+- **[eslint-plugin-perfectionist](https://perfectionist.dev)**: Code organization rules (including import sorting).
 - **[eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)**: Advanced JS/TS best practices.
 - **[eslint-plugin-tsdoc](https://www.npmjs.com/package/eslint-plugin-tsdoc)**: TSDoc comment validation.
 - **[eslint-plugin-eslint-comments](https://www.npmjs.com/package/@eslint-community/eslint-plugin-eslint-comments)**: ESLint comment rules.
-- **[eslint-import-resolver-typescript](https://github.com/import-js/eslint-import-resolver-typescript#readme)**: TypeScript import resolver.
 - **[@eslint/markdown](https://github.com/eslint/markdown#readme)**: Lints JavaScript and TypeScript code blocks inside Markdown files. This is complementary to `markdownlint` — `markdownlint` validates the document structure, while `@eslint/markdown` validates the code within fenced code blocks.
 
 ### How to Use
@@ -112,42 +109,42 @@ import {
   baseIgnores,
   baseJavascript,
   baseTypeScript,
-  baseImports,
   basePerfectionist,
   baseUnicorn,
-  baseSecurity,
   baseComments,
-  baseTsdoc,
   baseYaml,
   baseMarkdown,
 } from "personal-style-guide/eslint/base";
 
-export default [
-  ...baseIgnores,
-  ...baseJavascript,
-  ...baseTypeScript,
-  ...baseImports,
-  ...basePerfectionist,
-];
+export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePerfectionist];
 ```
 
 Each block is a standalone ESLint flat config array:
 
-| Export              | Description                                     |
-| ------------------- | ----------------------------------------------- |
-| `baseIgnores`       | Global ignore patterns (`node_modules`, `dist`) |
-| `baseJavascript`    | JS recommended rules + Node.js plugin           |
-| `baseTypeScript`    | Strict type-checked TS rules + parser setup     |
-| `baseImports`       | Import plugin + resolver + ordering rules       |
-| `basePerfectionist` | Code organization (sorting interfaces, etc.)    |
-| `baseUnicorn`       | Modern JS best practices                        |
-| `baseSecurity`      | Security vulnerability detection                |
-| `baseComments`      | ESLint directive comment rules                  |
-| `baseTsdoc`         | TSDoc comment validation (`.ts` files only)     |
-| `baseYaml`          | YAML file linting                               |
-| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown files    |
+| Export              | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `baseIgnores`       | Global ignore patterns (`node_modules`, `dist`)       |
+| `baseJavascript`    | JS recommended rules + Node.js plugin                 |
+| `baseTypeScript`    | Strict type-checked TS rules + parser setup           |
+| `basePerfectionist` | Code organization (sorting imports, interfaces, etc.) |
+| `baseUnicorn`       | Modern JS best practices                              |
+| `baseComments`      | ESLint directive comment rules                        |
+| `baseTsdoc`         | TSDoc comment validation (opt-in, `.ts` files only)   |
+| `baseYaml`          | YAML file linting                                     |
+| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown files          |
 
 The default export from `personal-style-guide/eslint/base` includes all blocks combined, equivalent to the full config used by `node` and `browser` presets.
+
+### Opt-in: TSDoc validation
+
+`baseTsdoc` is **not** included in the default export — it's only useful for libraries that publish API documentation. To enable it, import and spread it explicitly:
+
+```js
+import { baseTsdoc } from "personal-style-guide/eslint/base";
+import eslintNode from "personal-style-guide/eslint/node";
+
+export default [...eslintNode, ...baseTsdoc];
+```
 
 ### Vue 3
 
