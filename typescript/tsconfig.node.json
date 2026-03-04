@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   /*
    * This configuration is based on "The TSConfig Cheat Sheet" by Matt Pocock.
    * See: https://www.totaltypescript.com/tsconfig-cheat-sheet
@@ -13,11 +14,13 @@
     "moduleDetection": "force", // This option forces TypeScript to consider all files as modules. This helps to avoid 'cannot redeclare block-scoped variable' errors.
     "isolatedModules": true, // This option prevents a few TS features which are unsafe when treating modules as isolated files.
     "verbatimModuleSyntax": true, // This option forces you to use import type and export type, leading to more predictable behavior and fewer unnecessary imports.
+    "incremental": true, // Saves build state in .tsbuildinfo between compilations for faster rebuilds.
 
     /* Strictness */
     "strict": true, // Enables all strict type checking options. Indispensable.
     "noUncheckedIndexedAccess": true, // Prevents you from accessing an array or object without first checking if it's defined. This is a great way to prevent runtime errors.
     "noImplicitOverride": true, // Prevents you from accidentally overriding a method without the override keyword.
+    "noUncheckedSideEffectImports": true, // Ensures side-effect imports (import "some-polyfill") resolve to valid modules.
 
     /* If NOT transpiling with TypeScript: */
     "module": "preserve", // This option preserves the module structure of your code. This is useful if you're not transpiling with TypeScript.

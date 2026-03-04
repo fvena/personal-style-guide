@@ -1,6 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.node.json",
   "compilerOptions": {
-    "lib": ["es2022", "dom", "dom.iterable"] // Tells TypeScript what built-in types to include. es2022 is the best option for stability. dom and dom.iterable give you types for window, document etc.
+    "lib": ["es2022", "dom", "dom.iterable", "dom.asynciterable"] // Tells TypeScript what built-in types to include. es2022 is the best option for stability. dom, dom.iterable and dom.asynciterable give you types for window, document, async iteration over streams etc.
   }
 }
