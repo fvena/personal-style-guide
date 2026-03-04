@@ -1,14 +1,22 @@
 {
   "name": "personal-style-guide",
   "version": "0.6.0",
-  "description": "A shared configuration for ESLint, Prettier, and Stylelint to ensure consistent and clean code across your projects.",
+  "description": "Zero-config, opinionated linting and formatting for TypeScript, Vue, and Nuxt projects.",
   "keywords": [
-    "ESLint",
-    "Prettier",
-    "Stylelint",
-    "Typescript",
-    "Style",
-    "Guide"
+    "eslint",
+    "eslint-config",
+    "flat-config",
+    "prettier",
+    "stylelint",
+    "typescript",
+    "tsconfig",
+    "style-guide",
+    "shared-config",
+    "linting",
+    "formatting",
+    "vue",
+    "nuxt",
+    "code-quality"
   ],
   "homepage": "https://github.com/fvena/personal-style-guide#readme",
   "bugs": {
@@ -23,14 +31,15 @@
   "type": "module",
   "exports": {
     "./eslint/base": "./eslint/base.js",
+    "./eslint/browser": "./eslint/browser.js",
+    "./eslint/node": "./eslint/node.js",
     "./eslint/vue": "./eslint/vue.js",
     "./eslint/nuxt": "./eslint/nuxt.js",
     "./eslint/playwright": "./eslint/playwright.js",
     "./eslint/testing-library": "./eslint/testing-library.js",
     "./eslint/turbo": "./eslint/turbo.js",
-    "./eslint/*": "./eslint/*.js",
-    "./prettier/*": "./prettier/index.js",
-    "./stylelint/*": "./stylelint/index.js",
+    "./prettier": "./prettier/index.js",
+    "./stylelint": "./stylelint/index.js",
     "./typescript/node": "./typescript/tsconfig.node.json",
     "./typescript/browser": "./typescript/tsconfig.browser.json",
     "./markdown": "./markdown/markdownlint.json"
@@ -86,6 +95,7 @@
     "@commitlint/cli": "^20.4.3",
     "@commitlint/config-conventional": "^20.4.3",
     "@release-it/conventional-changelog": "^10.0.5",
+    "@types/node": "^25.5.0",
     "eslint": "^9.39.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.2",
@@ -100,9 +110,6 @@
     "typescript": "^5.0.0"
   },
   "peerDependenciesMeta": {
-    "eslint": {
-      "optional": true
-    },
     "prettier": {
       "optional": true
     },

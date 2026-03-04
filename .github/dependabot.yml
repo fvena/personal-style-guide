@@ -5,8 +5,28 @@ updates:
     schedule:
       interval: "monthly"
     commit-message:
-      prefix: "npm"
+      prefix: "chore(deps)"
     groups:
-      all:
+      eslint-plugins:
         patterns:
-          - "*"
+          - "@eslint*"
+          - "eslint-plugin-*"
+          - "eslint-config-*"
+          - "typescript-eslint"
+          - "@vue/eslint-config-*"
+          - "@nuxt/eslint-config"
+      prettier-plugins:
+        patterns:
+          - "prettier*"
+      stylelint-plugins:
+        patterns:
+          - "stylelint*"
+      dev-tools:
+        patterns:
+          - "@commitlint*"
+          - "@release-it*"
+          - "husky"
+          - "lint-staged"
+          - "release-it"
+          - "vitest"
+          - "globals"
