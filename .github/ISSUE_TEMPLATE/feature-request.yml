@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest a new config, rule, or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a request, check the [roadmap](../../blob/main/README.md#roadmap) to see if it's already planned.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - ESLint
+        - Prettier
+        - Stylelint
+        - TypeScript
+        - Markdown
+        - CI/CD
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the pain point or gap this addresses.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you implement this? Paste example config or rule changes if you have them.
+    validations:
+      required: false
