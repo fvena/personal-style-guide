@@ -9,7 +9,6 @@ import tsdocPlugin from "eslint-plugin-tsdoc";
 import unicornPlugin from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
 import tseslint from "typescript-eslint";
-import * as yamlParser from "yaml-eslint-parser";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
 
@@ -172,19 +171,11 @@ export const baseTsdoc = [
 ];
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseYaml = tseslint.config(
-  ...eslintPluginYml.configs["flat/recommended"],
-  {
-    name: "fvena/base/yaml",
-    files: ["**/*.yaml", "**/*.yml"],
-    languageOptions: { parser: yamlParser },
-  },
-  {
-    name: "fvena/base/yaml/disable-type-checked",
-    extends: [tseslint.configs.disableTypeChecked],
-    files: ["**/*.yaml", "**/*.yml"],
-  },
-);
+export const baseYaml = tseslint.config(...eslintPluginYml.configs["flat/recommended"], {
+  name: "fvena/base/yaml/disable-type-checked",
+  extends: [tseslint.configs.disableTypeChecked],
+  files: ["**/*.yaml", "**/*.yml"],
+});
 
 /** @type {import('eslint').Linter.Config[]} */
 export const baseMarkdown = tseslint.config(

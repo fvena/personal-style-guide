@@ -11,9 +11,9 @@ export default defineConfigWithVueTs(
   ...base,
   // Vue 3 recommended rules as a starting point
   ...vuePlugin.configs["flat/recommended"],
-  // Minimal vueTsConfigs entry to trigger Vue parser setup;
-  // base.js already includes strictTypeChecked + stylisticTypeChecked
-  // so we only need the base parser integration, not the full rule sets
+  // Apply full TypeScript rule sets for .vue files.
+  // Duplicates base.js strictTypeChecked but ensures Vue SFC <script> blocks
+  // are covered by the same strictness level as .ts files.
   vueTsConfigs.strictTypeChecked,
   vueTsConfigs.stylisticTypeChecked,
   // Opinionated rules for the exact stack: Vue 3 + script setup + TS + SCSS
