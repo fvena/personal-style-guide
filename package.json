@@ -22,6 +22,7 @@
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
   "type": "module",
   "exports": {
+    "./eslint/base": "./eslint/base.js",
     "./eslint/*": "./eslint/*.js",
     "./prettier/*": "./prettier/index.js",
     "./stylelint/*": "./stylelint/index.js",

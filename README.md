@@ -100,6 +100,50 @@ import eslintNode from "personal-style-guide/eslint/node";
 export default [...eslintNode];
 ```
 
+### Composable Configuration
+
+If you only need specific parts of the ESLint config, you can import individual blocks from `personal-style-guide/eslint/base`:
+
+```js
+import {
+  baseIgnores,
+  baseJavascript,
+  baseTypeScript,
+  baseImports,
+  basePerfectionist,
+  baseUnicorn,
+  baseSecurity,
+  baseComments,
+  baseTsdoc,
+  baseYaml,
+} from "personal-style-guide/eslint/base";
+
+export default [
+  ...baseIgnores,
+  ...baseJavascript,
+  ...baseTypeScript,
+  ...baseImports,
+  ...basePerfectionist,
+];
+```
+
+Each block is a standalone ESLint flat config array:
+
+| Export              | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `baseIgnores`       | Global ignore patterns (`node_modules`, `dist`) |
+| `baseJavascript`    | JS recommended rules + Node.js plugin           |
+| `baseTypeScript`    | Strict type-checked TS rules + parser setup     |
+| `baseImports`       | Import plugin + resolver + ordering rules       |
+| `basePerfectionist` | Code organization (sorting interfaces, etc.)    |
+| `baseUnicorn`       | Modern JS best practices                        |
+| `baseSecurity`      | Security vulnerability detection                |
+| `baseComments`      | ESLint directive comment rules                  |
+| `baseTsdoc`         | TSDoc comment validation (`.ts` files only)     |
+| `baseYaml`          | YAML file linting                               |
+
+The default export from `personal-style-guide/eslint/base` includes all blocks combined, equivalent to the full config used by `node` and `browser` presets.
+
 ## Prettier
 
 ### How to Use
