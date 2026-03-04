@@ -1,5 +1,6 @@
 import eslintConfigPrettier from "eslint-config-prettier";
 import vuePlugin from "eslint-plugin-vue";
+import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import tseslint from "typescript-eslint";
 import vueParser from "vue-eslint-parser";
 import base from "./base.js";
@@ -97,6 +98,20 @@ export default [
 
       // Avoid v-html (XSS risk) — warn instead of error for legitimate cases
       "vue/no-v-html": "warn",
+    },
+  },
+  // Vue accessibility rules (WCAG compliance)
+  ...pluginVueA11y.configs["flat/recommended"],
+  {
+    name: "fvena/vue/accessibility",
+    files: ["**/*.vue"],
+    rules: {
+      // Allow autofocus in modals and form dialogs — common UX pattern in financial apps
+      "vuejs-accessibility/no-autofocus": "off",
+
+      // Complex data-table components handle keyboard navigation at the container level,
+      // so per-cell click-event key-event pairing is impractical
+      "vuejs-accessibility/click-events-have-key-events": "off",
     },
   },
   // Prettier must be last — it disables formatting rules from all configs above
