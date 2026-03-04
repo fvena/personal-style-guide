@@ -60,7 +60,6 @@
     "@eslint/js": "^9.39.3",
     "@eslint/markdown": "^7.5.1",
     "@nuxt/eslint-config": "^1.15.2",
-    "@prettier/plugin-pug": "^3.4.2",
     "@typescript-eslint/parser": "^8.56.1",
     "@vue/eslint-config-typescript": "^14.7.0",
     "eslint-config-prettier": "^10.1.8",
