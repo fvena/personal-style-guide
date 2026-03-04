@@ -177,11 +177,11 @@ Ensure you have a `tsconfig.json` in your project root. You can extend the provi
 
 To lint Markdown files, extend the provided configuration by creating or updating a `.markdownlint.json` file in your project root:
 
-````json
+```json
 {
   "extends": "personal-style-guide/markdown"
 }
-
+```
 
 ## 📑 Scripts
 
@@ -195,7 +195,7 @@ Add the following scripts to your `package.json` to lint and format your code:
     "format": "prettier --write 'src/**/*.{js,ts,vue,scss,css}'"
   }
 }
-````
+```
 
 ## 🔄 Updating
 

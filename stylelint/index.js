@@ -7,7 +7,6 @@ export default {
     "stylelint-config-recess-order",
   ],
   rules: {
-    "no-descending-specificity": [true, { severity: "warning" }],
     "no-empty-source": [true, { severity: "warning" }],
     "scss/comment-no-empty": [true, { severity: "warning" }],
     "selector-pseudo-class-no-unknown": [

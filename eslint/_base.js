@@ -6,10 +6,11 @@ import importPlugin from "eslint-plugin-import";
 import nodePlugin from "eslint-plugin-n";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
 import pluginSecurity from "eslint-plugin-security";
-import unicornPlugin from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint";
 import tsdocPlugin from "eslint-plugin-tsdoc";
+import unicornPlugin from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
+import tseslint from "typescript-eslint";
+import * as yamlParser from "yaml-eslint-parser";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
 /** @type {import('eslint').Linter.Config[]} */
@@ -62,6 +63,7 @@ export default tseslint.config(
        * Node plugin rules
        */
       "n/no-missing-import": "off",
+      "n/no-unsupported-features/node-builtins": ["error", { ignores: ["import.meta.dirname"] }],
 
       /**
        * Perfectionist plugin rules
@@ -128,15 +130,19 @@ export default tseslint.config(
     files: ["**/*.js"],
   },
   {
+    extends: [tseslint.configs.disableTypeChecked],
+    files: ["**/*.yaml", "**/*.yml"],
+  },
+  {
     files: ["**/*.ts"],
     rules: {
       "tsdoc/syntax": "error",
     },
   },
+  ...eslintPluginYml.configs["flat/recommended"],
   {
-    files: ["*.yaml", "*.yml"],
-    ...eslintPluginYml.configs["flat/recommended"],
-    parser: "yaml-eslint-parser",
+    files: ["**/*.yaml", "**/*.yml"],
+    languageOptions: { parser: yamlParser },
   },
 );
 /* eslint-enable perfectionist/sort-objects */
