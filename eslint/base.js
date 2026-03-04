@@ -10,6 +10,7 @@ import tsdocPlugin from "eslint-plugin-tsdoc";
 import unicornPlugin from "eslint-plugin-unicorn";
 import eslintPluginYml from "eslint-plugin-yml";
 import tseslint from "typescript-eslint";
+import markdown from "@eslint/markdown";
 import * as yamlParser from "yaml-eslint-parser";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
@@ -181,6 +182,37 @@ export const baseYaml = tseslint.config(
   },
 );
 
+/** @type {import('eslint').Linter.Config[]} */
+export const baseMarkdown = tseslint.config(
+  {
+    name: "fvena/base/markdown/processor",
+    files: ["**/*.md"],
+    plugins: { markdown },
+    processor: "markdown/markdown",
+  },
+  {
+    name: "fvena/base/markdown/disable-type-checked",
+    extends: [tseslint.configs.disableTypeChecked],
+    files: ["**/*.md/*.js", "**/*.md/*.ts"],
+  },
+  {
+    name: "fvena/base/markdown/code-blocks",
+    files: ["**/*.md/*.js", "**/*.md/*.ts"],
+    rules: {
+      "no-console": "off",
+      "no-undef": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "import/no-unresolved": "off",
+      "n/no-missing-import": "off",
+      "unicorn/filename-case": "off",
+      "unicorn/prefer-module": "off",
+      "perfectionist/sort-named-imports": "off",
+      "perfectionist/sort-objects": "off",
+    },
+  },
+);
+
 /*
  * tseslint.config() is kept as the wrapper because it resolves
  * typescript-eslint's `extends` shorthand and typed plugin references.
@@ -200,5 +232,6 @@ export default [
   ...baseComments,
   ...baseTsdoc,
   ...baseYaml,
+  ...baseMarkdown,
 ];
 /* eslint-enable perfectionist/sort-objects */

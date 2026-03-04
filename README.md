@@ -84,6 +84,7 @@ npm install --save-dev personal-style-guide
 - **[eslint-plugin-tsdoc](https://www.npmjs.com/package/eslint-plugin-tsdoc)**: TSDoc comment validation.
 - **[eslint-plugin-eslint-comments](https://www.npmjs.com/package/@eslint-community/eslint-plugin-eslint-comments)**: ESLint comment rules.
 - **[eslint-import-resolver-typescript](https://github.com/import-js/eslint-import-resolver-typescript#readme)**: TypeScript import resolver.
+- **[@eslint/markdown](https://github.com/eslint/markdown#readme)**: Lints JavaScript and TypeScript code blocks inside Markdown files. This is complementary to `markdownlint` — `markdownlint` validates the document structure, while `@eslint/markdown` validates the code within fenced code blocks.
 
 ### How to Use
 
@@ -118,6 +119,7 @@ import {
   baseComments,
   baseTsdoc,
   baseYaml,
+  baseMarkdown,
 } from "personal-style-guide/eslint/base";
 
 export default [
@@ -143,6 +145,7 @@ Each block is a standalone ESLint flat config array:
 | `baseComments`      | ESLint directive comment rules                  |
 | `baseTsdoc`         | TSDoc comment validation (`.ts` files only)     |
 | `baseYaml`          | YAML file linting                               |
+| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown files    |
 
 The default export from `personal-style-guide/eslint/base` includes all blocks combined, equivalent to the full config used by `node` and `browser` presets.
 
@@ -236,7 +239,7 @@ import prettierConfig from "personal-style-guide/prettier/index.js";
 
 export default {
   ...prettierConfig,
-  ...
+  // your overrides here
 };
 ```
 
@@ -337,7 +340,8 @@ npx npm-check-updates --interactive
 - [ ] Add configurations for testing frameworks (e.g., Jest, Vitest).
 - [ ] Add configurations for Vue and Nuxt projects.
 - [ ] Improve the ESLint configuration to group by file type.
-- [ ] Add [@eslint/json](https://github.com/eslint/json#readme) and [@eslint/markdown](https://github.com/eslint/markdown#readme) configurations to the ESLint setup.
+- [ ] Add [@eslint/json](https://github.com/eslint/json#readme) configuration to the ESLint setup.
+- [x] Add [@eslint/markdown](https://github.com/eslint/markdown#readme) configuration to the ESLint setup.
 
 ## 🤝 Contributing
 
