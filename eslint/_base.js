@@ -13,6 +13,13 @@ import tseslint from "typescript-eslint";
 import * as yamlParser from "yaml-eslint-parser";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
+/*
+ * tseslint.config() is kept as the internal wrapper because it resolves
+ * typescript-eslint's `extends` shorthand and typed plugin references.
+ * defineConfig() from "eslint/config" is not used here to avoid double-wrapping
+ * and potential type conflicts. Consumers that import this base config can wrap
+ * it with defineConfig() in their own entry points.
+ */
 /** @type {import('eslint').Linter.Config[]} */
 export default tseslint.config(
   pluginJs.configs.recommended,
@@ -26,14 +33,17 @@ export default tseslint.config(
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
+    name: "fvena/base/ignores",
     ignores: ["node_modules/", "**/dist/", "**/cache/"],
   },
   {
+    name: "fvena/base/plugins/tsdoc",
     plugins: {
       tsdoc: tsdocPlugin,
     },
   },
   {
+    name: "fvena/base/typescript/parser",
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -42,6 +52,7 @@ export default tseslint.config(
     },
   },
   {
+    name: "fvena/base/import-resolver",
     settings: {
       "import/resolver-next": [
         createTypeScriptImportResolver({
@@ -52,6 +63,7 @@ export default tseslint.config(
     },
   },
   {
+    name: "fvena/base/rules",
     rules: {
       /**
        * Typescript plugin rules
@@ -126,14 +138,17 @@ export default tseslint.config(
     },
   },
   {
+    name: "fvena/base/javascript/disable-type-checked",
     extends: [tseslint.configs.disableTypeChecked],
     files: ["**/*.js"],
   },
   {
+    name: "fvena/base/yaml/disable-type-checked",
     extends: [tseslint.configs.disableTypeChecked],
     files: ["**/*.yaml", "**/*.yml"],
   },
   {
+    name: "fvena/base/typescript/tsdoc",
     files: ["**/*.ts"],
     rules: {
       "tsdoc/syntax": "error",
@@ -141,6 +156,7 @@ export default tseslint.config(
   },
   ...eslintPluginYml.configs["flat/recommended"],
   {
+    name: "fvena/base/yaml",
     files: ["**/*.yaml", "**/*.yml"],
     languageOptions: { parser: yamlParser },
   },

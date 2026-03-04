@@ -1,3 +1,4 @@
+import { defineConfig } from "eslint/config";
 import eslintNode from "./eslint/node.js";
 
-export default [...eslintNode];
+export default defineConfig([...eslintNode]);
