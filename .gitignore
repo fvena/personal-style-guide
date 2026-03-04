@@ -12,3 +12,7 @@ node_modules
 temp
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+CLAUDE.md
+.claude
+.planning/

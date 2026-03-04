@@ -3,8 +3,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/fvena/personal-style-guide.git
-cd personal-style-guide
+git clone https://github.com/fvena/kata.git
+cd kata
 nvm use   # requires Node >=22.11.0
 npm ci
 ```
@@ -20,7 +20,7 @@ npm ci
 | `markdown/`   | Markdownlint config.                                                                                                        |
 | `tests/`      | Vitest tests and fixture files to verify configs load and rules work.                                                       |
 
-Consumers import via package exports: `personal-style-guide/eslint/node`, `personal-style-guide/prettier`, etc. Every config file must have a matching entry in the `exports` field of `package.json`.
+Consumers import via package exports: `@franvena/kata/eslint/node`, `@franvena/kata/prettier`, etc. Every config file must have a matching entry in the `exports` field of `package.json`.
 
 ## Adding a new rule
 

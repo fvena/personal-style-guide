@@ -1,21 +1,30 @@
 <div align="center">
-
-# @fvena/style-guide
-
-**Zero-config, opinionated linting and formatting for TypeScript, Vue, and Nuxt projects.**
-
-Unified ESLint, Prettier, Stylelint, and TypeScript configurations — install once, lint everything.
-
-[![npm version](https://img.shields.io/npm/v/personal-style-guide)](https://www.npmjs.com/package/personal-style-guide)
-[![CI](https://github.com/fvena/personal-style-guide/workflows/CI%2FCD/badge.svg)](https://github.com/fvena/personal-style-guide/actions)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![Node >=22.11.0](https://img.shields.io/badge/node-%3E%3D22.11.0-brightgreen)](https://nodejs.org)
-
+  <img src=".github/assets/kata_logo.svg" alt="kata" height="140" />
 </div>
 
----
+<p align="center">
+  <strong>Strict by default. Yours to extend.</strong><br/>
+  A complete code quality toolkit for Vue&nbsp;3 · Nuxt&nbsp;3 · TypeScript · SCSS
+</p>
 
-## Table of Contents
+<p align="center">
+  <a href="https://www.npmjs.com/package/@franvena/kata">
+    <img src="https://img.shields.io/npm/v/@franvena/kata?color=0e7490&label=npm" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@franvena/kata">
+    <img src="https://img.shields.io/npm/dm/@franvena/kata?color=0e7490" alt="npm downloads" />
+  </a>
+  <a href="https://github.com/fvena/kata/actions">
+    <img src="https://github.com/fvena/kata/workflows/CI%2FCD/badge.svg" alt="CI" />
+  </a>
+  <img src="https://img.shields.io/badge/license-MIT-0e7490" alt="License MIT" />
+  <img src="https://img.shields.io/badge/node-%3E%3D22.11.0-0e7490" alt="Node >=22.11.0" />
+</p>
+
+<br/>
+
+<details>
+<summary><strong>Table of Contents</strong></summary>
 
 - [Motivation](#motivation)
 - [Getting Started](#getting-started)
@@ -24,23 +33,21 @@ Unified ESLint, Prettier, Stylelint, and TypeScript configurations — install o
 - [Stylelint](#stylelint)
 - [TypeScript](#typescript)
 - [Markdown](#markdown)
-- [Scripts](#scripts)
+- [Compatibility](#compatibility)
+- [Troubleshooting](#troubleshooting)
+- [Design Philosophy](#design-philosophy)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
+
+</details>
 
 ---
 
 ## Motivation
 
-Configuring ESLint, Prettier, Stylelint, and TypeScript from scratch on every new project is repetitive and error-prone. This package centralizes those configurations so you get a consistent, well-reasoned setup that you can extend — not fight.
+Every new project starts the same way: configuring ESLint, Prettier, Stylelint, and TypeScript from scratch, copy-pasting from the last project, fighting conflicts, and wondering why the same rules keep breaking. This package ends that loop.
 
-**What makes this different:**
-
-- Built for **flat ESLint config** (`eslint.config.js`) from the ground up — no legacy compat layers.
-- **Composable by design**: import the full preset or cherry-pick individual config blocks.
-- Covers the full **Vue 3 + Nuxt 3 + TypeScript + SCSS** stack out of the box.
-- **Prettier and ESLint are kept separate** — no formatting rules in ESLint, no linting in Prettier. Faster IDE, no conflicts.
-- Every disabled rule has an **inline explanation** of why.
+If your stack is **Vue 3 + Nuxt 3 + TypeScript + SCSS**, this is the most complete opinionated setup available as a single package.
 
 ---
 
@@ -48,66 +55,67 @@ Configuring ESLint, Prettier, Stylelint, and TypeScript from scratch on every ne
 
 ### Prerequisites
 
-Install peer dependencies at your project root:
+Install the peer dependencies you need:
 
 ```sh
+# ESLint only
+npm install --save-dev eslint typescript
+
+# ESLint + Prettier
+npm install --save-dev eslint prettier typescript
+
+# Full stack
 npm install --save-dev eslint prettier stylelint typescript
 ```
 
 ### Installation
 
 ```sh
-npm install --save-dev personal-style-guide
+npm install --save-dev @franvena/kata
 ```
-
-That's it. Pick the config for your environment below.
 
 ---
 
 ## ESLint
 
-### Plugins included
-
-| Plugin                                                                                                                 | Purpose                                |
-| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| [`@eslint/js`](https://github.com/eslint/eslint)                                                                       | JavaScript recommended rules           |
-| [`typescript-eslint`](https://typescript-eslint.io)                                                                    | Strict TypeScript rules + parser       |
-| [`eslint-plugin-n`](https://github.com/eslint-community/eslint-plugin-n)                                               | Node.js-specific rules                 |
-| [`eslint-plugin-perfectionist`](https://perfectionist.dev)                                                             | Import and code organization sorting   |
-| [`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn)                                       | Modern JS/TS best practices            |
-| [`eslint-plugin-regexp`](https://github.com/ota-meshi/eslint-plugin-regexp)                                            | Regex correctness and readability      |
-| [`eslint-plugin-tsdoc`](https://www.npmjs.com/package/eslint-plugin-tsdoc)                                             | TSDoc comment validation (opt-in)      |
-| [`@eslint-community/eslint-plugin-eslint-comments`](https://github.com/eslint-community/eslint-plugin-eslint-comments) | ESLint disable comment rules           |
-| [`eslint-plugin-yml`](https://github.com/ota-meshi/eslint-plugin-yml)                                                  | YAML file linting                      |
-| [`@eslint/markdown`](https://github.com/eslint/markdown)                                                               | Lint JS/TS code blocks inside Markdown |
-
 ### Presets
 
-Choose the preset that matches your environment:
-
 ```js
-// eslint.config.js
+// eslint.config.js — pick one
 
-// Node.js projects
-import eslintNode from "personal-style-guide/eslint/node";
+import eslintNode from "@franvena/kata/eslint/node";
 export default [...eslintNode];
 
-// Browser projects
-import eslintBrowser from "personal-style-guide/eslint/browser";
+import eslintBrowser from "@franvena/kata/eslint/browser";
 export default [...eslintBrowser];
 
-// Vue 3 projects
-import eslintVue from "personal-style-guide/eslint/vue";
+import eslintVue from "@franvena/kata/eslint/vue";
 export default [...eslintVue];
 
-// Nuxt 3 projects
-import eslintNuxt from "personal-style-guide/eslint/nuxt";
+import eslintNuxt from "@franvena/kata/eslint/nuxt";
 export default [...eslintNuxt];
+```
+
+### Extending and overriding rules
+
+```js
+import eslintVue from "@franvena/kata/eslint/vue";
+
+export default [
+  ...eslintVue,
+  {
+    rules: {
+      "unicorn/no-array-for-each": "off",
+      // Relax SCSS enforcement during migration
+      "vue/block-lang": ["error", { script: { lang: "ts" }, style: { lang: ["scss", "css"] } }],
+    },
+  },
+];
 ```
 
 ### Composable config blocks
 
-If you only need specific parts, import individual blocks from `personal-style-guide/eslint/base`:
+Import only what you need from `@franvena/kata/eslint/base`:
 
 ```js
 import {
@@ -120,227 +128,243 @@ import {
   baseRegexp,
   baseYaml,
   baseMarkdown,
-} from "personal-style-guide/eslint/base";
+} from "@franvena/kata/eslint/base";
 
 export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePerfectionist];
 ```
 
-Available blocks:
+| Block               | Description                              |
+| ------------------- | ---------------------------------------- |
+| `baseIgnores`       | Global ignore patterns                   |
+| `baseJavascript`    | JS recommended + Node.js plugin          |
+| `baseTypeScript`    | Strict type-checked TS rules + parser    |
+| `basePerfectionist` | Import and code organization sorting     |
+| `baseUnicorn`       | Modern JS best practices                 |
+| `baseRegexp`        | Regex correctness rules                  |
+| `baseComments`      | ESLint directive comment rules           |
+| `baseTsdoc`         | TSDoc validation — **opt-in**, see below |
+| `baseYaml`          | YAML linting                             |
+| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown   |
 
-| Export              | Description                                     |
-| ------------------- | ----------------------------------------------- |
-| `baseIgnores`       | Global ignore patterns (`node_modules`, `dist`) |
-| `baseJavascript`    | JS recommended rules + Node.js plugin           |
-| `baseTypeScript`    | Strict type-checked TS rules + parser           |
-| `basePerfectionist` | Import and code organization sorting            |
-| `baseUnicorn`       | Modern JS best practices                        |
-| `baseRegexp`        | Regex correctness rules                         |
-| `baseComments`      | ESLint directive comment rules                  |
-| `baseTsdoc`         | TSDoc validation — **opt-in only**, see below   |
-| `baseYaml`          | YAML file linting                               |
-| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown          |
+### Plugins included
+
+| Plugin                                                                                                                 | Purpose                              |
+| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| [`@eslint/js`](https://github.com/eslint/eslint)                                                                       | JavaScript recommended rules         |
+| [`typescript-eslint`](https://typescript-eslint.io)                                                                    | Strict TypeScript rules + parser     |
+| [`eslint-plugin-n`](https://github.com/eslint-community/eslint-plugin-n)                                               | Node.js-specific rules               |
+| [`eslint-plugin-perfectionist`](https://perfectionist.dev)                                                             | Import and code organization sorting |
+| [`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn)                                       | Modern JS/TS best practices          |
+| [`eslint-plugin-regexp`](https://github.com/ota-meshi/eslint-plugin-regexp)                                            | Regex correctness                    |
+| [`eslint-plugin-tsdoc`](https://www.npmjs.com/package/eslint-plugin-tsdoc)                                             | TSDoc validation (opt-in)            |
+| [`@eslint-community/eslint-plugin-eslint-comments`](https://github.com/eslint-community/eslint-plugin-eslint-comments) | ESLint directive comment rules       |
+| [`eslint-plugin-yml`](https://github.com/ota-meshi/eslint-plugin-yml)                                                  | YAML linting                         |
+| [`@eslint/markdown`](https://github.com/eslint/markdown)                                                               | Lint code blocks inside Markdown     |
 
 ### Opt-in: TSDoc validation
 
-`baseTsdoc` is not included by default — it's only useful for libraries that publish API documentation. Enable it explicitly:
+Only useful for libraries that publish API documentation:
 
 ```js
-import { baseTsdoc } from "personal-style-guide/eslint/base";
-import eslintNode from "personal-style-guide/eslint/node";
+import { baseTsdoc } from "@franvena/kata/eslint/base";
+import eslintNode from "@franvena/kata/eslint/node";
 
 export default [...eslintNode, ...baseTsdoc];
 ```
 
 ### Vue 3
 
-For Vue 3 projects using Composition API + `<script setup>` + TypeScript + SCSS:
-
 ```js
-import eslintVue from "personal-style-guide/eslint/vue";
-
+import eslintVue from "@franvena/kata/eslint/vue";
 export default [...eslintVue];
 ```
 
-Adds on top of the base config:
+Enforces on top of the base config:
 
-- **`eslint-plugin-vue`** `flat/vue3-recommended` as the rule foundation
-- **`vue-eslint-parser`** for `.vue` files with TypeScript inner parser
-- Enforces `<script setup>` (no Options API)
+- `<script setup>` only — no Options API
 - Block order: `<script>` → `<template>` → `<style>`
+- `lang="ts"` on `<script>`, `lang="scss"` on `<style>`
 - Type-based `defineProps<{}>()` and `defineEmits<{}>()`
 - Scoped or module styles only — no global `<style>`
 - Shorthand directives (`:prop`, `@event`)
-- **`eslint-plugin-vuejs-accessibility`** for WCAG compliance
+- Reactive props destructuring (Vue 3.5+)
+- WCAG accessibility via `eslint-plugin-vuejs-accessibility`
 
 ### Nuxt 3
 
-Extends the [Vue 3 config](#vue-3) and adds Nuxt-specific rules from [`@nuxt/eslint-config`](https://eslint.nuxt.com).
-
-#### Standalone usage
+#### Standalone
 
 ```js
-import eslintNuxt from "personal-style-guide/eslint/nuxt";
-
+import eslintNuxt from "@franvena/kata/eslint/nuxt";
 export default [...eslintNuxt];
 ```
 
 #### With `@nuxt/eslint` module
 
-If you use the [`@nuxt/eslint`](https://eslint.nuxt.com/packages/module) Nuxt module, disable its standalone config to avoid duplicate rules:
-
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: ["@nuxt/eslint"],
-  eslint: {
-    config: {
-      standalone: false,
-    },
-  },
+  eslint: { config: { standalone: false } },
 });
 ```
 
 ```js
 // eslint.config.js
-import eslintNuxt from "personal-style-guide/eslint/nuxt";
+import eslintNuxt from "@franvena/kata/eslint/nuxt";
 import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt([...eslintNuxt]);
 ```
 
-This lets the Nuxt module inject project-aware settings (auto-imported composables, component paths) while your config handles all linting rules.
-
-### Opt-in: Playwright
-
-For projects with Playwright E2E tests:
+### Opt-in configs
 
 ```js
-import eslintNode from "personal-style-guide/eslint/node";
-import eslintPlaywright from "personal-style-guide/eslint/playwright";
-
-export default [...eslintNode, ...eslintPlaywright];
-```
-
-Applies to `**/*.spec.ts`, `**/e2e/**/*.ts`, `**/tests/**/*.ts`.
-
-| Rule                         | What it enforces                        |
-| ---------------------------- | --------------------------------------- |
-| `flat/recommended`           | Playwright recommended rules            |
-| `playwright/expect-expect`   | Every test must contain an assertion    |
-| `playwright/no-focused-test` | No `.only()` tests slip into CI         |
-| `no-console` off             | Allows console output in E2E test files |
-
-### Opt-in: Testing Library
-
-For component tests using `@testing-library/vue`:
-
-```js
-import eslintTestingLibrary from "personal-style-guide/eslint/testing-library";
-import eslintVue from "personal-style-guide/eslint/vue";
-
-export default [...eslintVue, ...eslintTestingLibrary];
-```
-
-### Opt-in: Turborepo
-
-For monorepos using [Turborepo](https://turbo.build):
-
-```js
-import eslintNode from "personal-style-guide/eslint/node";
-import eslintTurbo from "personal-style-guide/eslint/turbo";
-
-export default [...eslintNode, ...eslintTurbo];
+// Playwright — *.spec.ts, e2e/**, tests/** · Testing Library (Vue) · Turborepo
+import eslintPlaywright from "@franvena/kata/eslint/playwright";
+import eslintTestingLibrary from "@franvena/kata/eslint/testing-library";
+import eslintTurbo from "@franvena/kata/eslint/turbo";
 ```
 
 ---
 
 ## Prettier
 
-Create or update `.prettierrc.config.js` in your project root:
-
 ```js
-export { default } from "personal-style-guide/prettier";
+// .prettierrc.config.js
+export { default } from "@franvena/kata/prettier";
 ```
 
-To extend:
-
 ```js
-import prettierConfig from "personal-style-guide/prettier";
-
-export default {
-  ...prettierConfig,
-  // your overrides here
-};
+// extend
+import prettierConfig from "@franvena/kata/prettier";
+export default { ...prettierConfig };
 ```
 
-### Why Prettier is separate from ESLint
-
-Keeping Prettier and ESLint separate means:
-
-- **Faster IDE**: linters don't process formatting errors.
-- **No conflicts**: `eslint-config-prettier` disables all ESLint formatting rules, so there's a single source of truth for formatting.
-- **Clearer errors**: lint errors are code quality issues, not style nits.
+**Why Prettier is not an ESLint plugin**: ESLint owns code quality, Prettier owns formatting — they don't overlap. `eslint-config-prettier` disables all formatting rules so there are zero conflicts and no duplicate work in the IDE.
 
 ---
 
 ## Stylelint
 
-Create or update `stylelint.config.js` in your project root:
-
 ```js
+// stylelint.config.js
 export default {
-  extends: ["personal-style-guide/stylelint"],
+  extends: ["@franvena/kata/stylelint"],
 };
 ```
 
-Includes:
-
-- `stylelint-config-recommended` — base CSS rules
-- `stylelint-config-recommended-scss` — SCSS support
-- `stylelint-config-recommended-vue/scss` — Vue SFC style block support
-- `stylelint-config-recess-order` — consistent property ordering
+Includes `stylelint-config-recommended`, `stylelint-config-recommended-scss`, `stylelint-config-recommended-vue/scss`, and `stylelint-config-recess-order`.
 
 ---
 
 ## TypeScript
 
-Extend one of the provided base configs:
-
 ```json
-{
-  "extends": "personal-style-guide/typescript/node"
-}
+{ "extends": "@franvena/kata/typescript/node" }
 ```
 
-Or for browser/DOM projects:
-
 ```json
-{
-  "extends": "personal-style-guide/typescript/browser"
-}
+{ "extends": "@franvena/kata/typescript/browser" }
 ```
 
-Both configs are based on [Matt Pocock's TSConfig Cheat Sheet](https://www.totaltypescript.com/tsconfig-cheat-sheet) with strict mode, `noUncheckedIndexedAccess`, and modern module settings.
+Strict mode, `noUncheckedIndexedAccess`, modern module settings. Based on [Matt Pocock's TSConfig Cheat Sheet](https://www.totaltypescript.com/tsconfig-cheat-sheet).
 
 ---
 
 ## Markdown
 
-> **Note:** Designed for [`markdownlint`](https://github.com/DavidAnson/markdownlint). Install the VS Code extension for the best experience.
+```json
+{ "extends": "@franvena/kata/markdown" }
+```
 
-Create or update `.markdownlint.json`:
+> Requires the [markdownlint VS Code extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint).
+
+---
+
+## Compatibility
+
+| Tool       | Supported versions |
+| ---------- | ------------------ |
+| Node.js    | >=22.11.0          |
+| ESLint     | ^9.0.0             |
+| TypeScript | ^5.0.0             |
+| Vue        | ^3.4.0             |
+| Nuxt       | ^3.10.0            |
+| Prettier   | ^3.0.0             |
+| Stylelint  | ^17.0.0            |
+
+---
+
+## Troubleshooting
+
+### `projectService` errors: cannot find tsconfig
+
+**Symptom**: `Error: No tsconfig.json found for file X`.
+
+**Fix — root config files** (`eslint.config.js`, `vite.config.ts`): add a `tsconfig.node.json` that covers them:
 
 ```json
 {
-  "extends": "personal-style-guide/markdown"
+  "extends": "@franvena/kata/typescript/node",
+  "include": ["*.config.ts", "*.config.js"]
 }
+```
+
+**Fix — monorepo**: each package needs its own `tsconfig.json` with an `include` that covers all linted files.
+
+---
+
+### `vue/block-lang` errors on an existing project
+
+**Symptom**: Every `.vue` file errors with `Expected "scss" as the lang of the "style" block.`
+
+**Fix**: Relax while migrating, then tighten once complete:
+
+```js
+export default [...eslintVue, { rules: { "vue/block-lang": "warn" } }];
 ```
 
 ---
 
-## Scripts
+### Conflicts with `@nuxt/eslint` module
 
-Add these to your `package.json`:
+**Fix**: Set `standalone: false` in `nuxt.config.ts`. See [Nuxt 3 with `@nuxt/eslint` module](#with-nuxt-eslint-module).
+
+---
+
+### Accessibility false positives
+
+**Fix**: Disable the rule if it has no configuration options that fit your case:
+
+```js
+export default [
+  ...eslintVue,
+  { rules: { "vuejs-accessibility/click-events-have-key-events": "off" } },
+];
+```
+
+---
+
+## Design Philosophy
+
+These are the deliberate decisions behind this config — not just what the rules do, but why.
+
+**`strictTypeChecked` over `recommended`** — The most rigorous TypeScript-ESLint preset. Requires type information for every rule, which means slower linting but catches unsafe assignments, unhandled promise rejections, and incorrect nullish coalescing that type-unaware rules miss entirely. The performance cost is acceptable; the safety gain is not optional.
+
+**`projectService` over `project: [...]`** — Auto-discovers `tsconfig.json` files relative to each linted file. Handles monorepos, nested packages, and workspace setups without manual path arrays. Tradeoff: `tsconfigRootDir` points to the package root, not the consumer's project — intentional, documented in source.
+
+**Prettier is not an ESLint plugin** — ESLint runs on every keystroke; formatting errors add noise. `eslint-config-prettier` disables all formatting rules from every plugin so there are zero conflicts. Single responsibility: ESLint owns correctness, Prettier owns style.
+
+**Vue SFCs enforce TypeScript and SCSS** — `vue/block-lang` requires `lang="ts"` and `lang="scss"`. Mixed-language SFCs create inconsistency that accumulates into maintenance debt. The default is strict; override explicitly if you need flexibility.
+
+**Scoped or module styles only** — `vue/enforce-style-attribute` with `["scoped", "module"]`. Global `<style>` blocks are the most common source of CSS leakage in Vue apps. If you need global styles, use a standalone `.scss` file.
+
+**Composable blocks as the public API** — Named exports (`baseIgnores`, `baseTypeScript`, etc.) instead of a single opaque object. Each preset is composed from these blocks — no hidden configuration. Consumers can audit the full rule set by reading the import chain, and build custom presets without forking.
+
+---
+
+## Scripts
 
 ```json
 {
@@ -356,23 +380,20 @@ Add these to your `package.json`:
 
 ## Roadmap
 
-- [x] ESLint flat config for Node, Browser, Vue, Nuxt
+- [x] ESLint flat config — Node, Browser, Vue, Nuxt
 - [x] Prettier shared config
-- [x] Stylelint config with SCSS + Vue support
+- [x] Stylelint with SCSS + Vue support
 - [x] TypeScript base configs (Node + Browser)
 - [x] Markdownlint config
-- [x] YAML linting via `eslint-plugin-yml`
-- [x] Playwright opt-in config
-- [x] Testing Library opt-in config
-- [x] Turborepo opt-in config
+- [x] YAML linting
+- [x] Playwright, Testing Library, Turborepo opt-in configs
 - [ ] Vitest opt-in config
-- [ ] `@eslint/json` config for JSON file linting
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions, conventions, and the release process.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup, conventions, and release process.
 
 ---
 

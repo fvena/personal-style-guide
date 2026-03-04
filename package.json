@@ -1,7 +1,7 @@
 {
-  "name": "personal-style-guide",
+  "name": "@franvena/kata",
   "version": "0.6.0",
-  "description": "Zero-config, opinionated linting and formatting for TypeScript, Vue, and Nuxt projects.",
+  "description": "Opinionated ESLint, Prettier, Stylelint and TypeScript configs for Vue 3 + Nuxt 3 + TypeScript + SCSS. Strict by default. Composable by design.",
   "keywords": [
     "eslint",
     "eslint-config",
@@ -16,15 +16,16 @@
     "formatting",
     "vue",
     "nuxt",
-    "code-quality"
+    "code-quality",
+    "kata"
   ],
-  "homepage": "https://github.com/fvena/personal-style-guide#readme",
+  "homepage": "https://github.com/fvena/kata#readme",
   "bugs": {
-    "url": "https://github.com/fvena/personal-style-guide/issues"
+    "url": "https://github.com/fvena/kata/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fvena/personal-style-guide.git"
+    "url": "git+https://github.com/fvena/kata.git"
   },
   "license": "MIT",
   "author": "Francisco Vena <fvena32@gmail.com> (https://www.fvena.com)",
