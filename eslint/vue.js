@@ -89,6 +89,33 @@ export default defineConfigWithVueTs(
 
       // Avoid v-html (XSS risk) — warn instead of error for legitimate cases
       "vue/no-v-html": "warn",
+
+      // Enforce lang="ts" on <script> and lang="scss" on <style>
+      "vue/block-lang": [
+        "error",
+        {
+          script: { lang: "ts" },
+          style: { lang: "scss" },
+        },
+      ],
+
+      // Enforce consistent variable names for compiler macros (Vue conventions)
+      "vue/require-macro-variable-name": [
+        "error",
+        {
+          defineProps: "props",
+          defineEmits: "emit",
+          defineSlots: "slots",
+          useSlots: "slots",
+          useAttrs: "attrs",
+        },
+      ],
+
+      // Props with defaults should not be required — the default would never be used
+      "vue/no-required-prop-with-default": "error",
+
+      // Enforce reactive props destructuring (Vue 3.5+)
+      "vue/define-props-destructuring": "error",
     },
   },
   // Vue accessibility rules (WCAG compliance)
@@ -97,11 +124,14 @@ export default defineConfigWithVueTs(
     name: "fvena/vue/accessibility",
     files: ["**/*.vue"],
     rules: {
-      // Allow autofocus in modals and form dialogs — common UX pattern in financial apps
+      // Allow autofocus — ARIA dialog best practices recommend focusing the first interactive
+      // element. The rule has no role-based exceptions (only ignoreNonDOM), so "off" is the
+      // only practical option for apps with modals and form dialogs.
       "vuejs-accessibility/no-autofocus": "off",
 
-      // Complex data-table components handle keyboard navigation at the container level,
-      // so per-cell click-event key-event pairing is impractical
+      // The rule has zero configuration options — no role/element exceptions. Disabling it
+      // avoids false positives on interactive components (tables, custom widgets) that handle
+      // keyboard navigation at the container level.
       "vuejs-accessibility/click-events-have-key-events": "off",
     },
   },

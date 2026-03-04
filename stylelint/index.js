@@ -7,7 +7,11 @@ export default {
     "stylelint-config-recess-order",
   ],
   rules: {
+    // Modern CSS: enforce percentage notation for alpha values (e.g. oklch(50% 0.2 250 / 80%))
+    "alpha-value-notation": "percentage",
     "at-rule-no-deprecated": [true, { ignoreAtRules: ["apply"] }],
+    // Modern CSS: enforce rgb(0 0 0) over rgb(0, 0, 0), oklch() over legacy notations
+    "color-function-notation": "modern",
     "declaration-block-no-duplicate-properties": [
       true,
       {

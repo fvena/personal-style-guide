@@ -29,6 +29,14 @@ export const baseJavascript = [
       eqeqeq: ["error", "smart"],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["error", { ignores: ["import.meta.dirname"] }],
+
+      // Bug-prevention rules from eslint:all — not in recommended but high-value, low false-positive
+      "no-await-in-loop": "error",
+      "no-constructor-return": "error",
+      "no-promise-executor-return": ["error", { allowVoid: true }],
+      "no-self-compare": "error",
+      "no-template-curly-in-string": "error",
+      "no-unmodified-loop-condition": "error",
     },
   },
 ];
@@ -60,6 +68,7 @@ export const baseTypeScript = tseslint.config(
           },
         },
       ],
+      "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/prefer-readonly": "error",
       "@typescript-eslint/restrict-template-expressions": [
         "warn",
@@ -104,6 +113,8 @@ export const baseUnicorn = [
     name: "fvena/base/unicorn/rules",
     rules: {
       "unicorn/no-array-reduce": "off",
+      // Conflicts with guard-clause patterns; too opinionated for a shared config
+      "unicorn/no-negated-condition": "off",
       "unicorn/prevent-abbreviations": [
         "error",
         {
