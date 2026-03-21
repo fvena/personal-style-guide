@@ -1,15 +1,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { ESLint } from "eslint";
 import { describe, expect, it } from "vitest";
+import { createESLint } from "./helpers.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-
-function createESLint(config) {
-  return new ESLint({
-    overrideConfigFile: path.resolve(root, "..", "eslint", config),
-  });
-}
 
 describe("eslint/vue config", () => {
   it("loads without errors", async () => {

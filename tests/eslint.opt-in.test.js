@@ -1,24 +1,5 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { ESLint } from "eslint";
 import { describe, expect, it } from "vitest";
-
-const root = path.dirname(fileURLToPath(import.meta.url));
-
-function createESLint(config) {
-  return new ESLint({
-    overrideConfigFile: path.resolve(root, "..", "eslint", config),
-  });
-}
-
-async function lintFixture(eslint, fixture) {
-  const results = await eslint.lintFiles([path.join(root, "fixtures", fixture)]);
-  return results.flatMap((r) => r.messages);
-}
-
-function findRule(messages, ruleId) {
-  return messages.filter((m) => m.ruleId === ruleId);
-}
+import { createESLint, findRule, lintFixture } from "./helpers.js";
 
 describe("eslint/playwright config", () => {
   it("loads without errors", async () => {

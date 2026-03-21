@@ -1,27 +1,5 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { ESLint } from "eslint";
 import { describe, expect, it } from "vitest";
-
-const root = path.dirname(fileURLToPath(import.meta.url));
-
-function createESLint(config) {
-  return new ESLint({
-    overrideConfigFile: path.resolve(root, "..", "eslint", config),
-  });
-}
-
-/**
- * Lints a real fixture file and returns the flat list of ESLint messages.
- */
-async function lintFixture(eslint, fixture) {
-  const results = await eslint.lintFiles([path.join(root, "fixtures", fixture)]);
-  return results.flatMap((r) => r.messages);
-}
-
-function findRule(messages, ruleId) {
-  return messages.filter((m) => m.ruleId === ruleId);
-}
+import { createESLint, findRule, lintFixture } from "./helpers.js";
 
 // ---------------------------------------------------------------------------
 // TypeScript rules — node config
@@ -109,8 +87,8 @@ describe("Vue rule behavior — vue config", () => {
 
   it("valid SFC: no errors on a well-formed component", async () => {
     const eslint = createESLint("vue.js");
-    const results = await eslint.lintFiles([path.join(root, "fixtures/valid-component.vue")]);
-    const errors = results.flatMap((r) => r.messages.filter((m) => m.severity === 2));
+    const messages = await lintFixture(eslint, "valid-component.vue");
+    const errors = messages.filter((m) => m.severity === 2);
     expect(errors).toHaveLength(0);
   });
 });

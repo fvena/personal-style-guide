@@ -19,13 +19,9 @@ export default defineConfig([
     files: testFiles,
     name: "fvena/vitest/overrides",
     rules: {
-      // Allow console statements for test debugging
       "no-console": "off",
-      // Every test must contain at least one assertion
       "vitest/expect-expect": "error",
-      // Flag skipped tests as warnings without blocking CI
       "vitest/no-disabled-tests": "warn",
-      // Prevent .only from reaching CI
       "vitest/no-focused-tests": "error",
     },
   },
