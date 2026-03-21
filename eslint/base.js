@@ -56,8 +56,12 @@ export const baseTypeScript = tseslint.config(
   {
     name: "fvena/base/typescript/rules",
     rules: {
+      // Prevent subtle bugs where default params shadow required ones in overloads
       "@typescript-eslint/default-param-last": "error",
+      // Closures over loop variables cause stale-reference bugs — force explicit scoping
       "@typescript-eslint/no-loop-func": "error",
+      // Encourage ?? over || for nullish checks, but allow || for booleans/strings
+      // where falsy-coalescing is the intended behavior
       "@typescript-eslint/prefer-nullish-coalescing": [
         "error",
         {
@@ -67,8 +71,12 @@ export const baseTypeScript = tseslint.config(
           },
         },
       ],
+      // Side-effectful type imports bypass tree-shaking — enforce type-only imports
       "@typescript-eslint/no-import-type-side-effects": "error",
+      // Immutability by default — flag fields that are never reassigned
       "@typescript-eslint/prefer-readonly": "error",
+      // Prevent accidental [object Object] in template strings — allow numbers since
+      // they stringify predictably
       "@typescript-eslint/restrict-template-expressions": [
         "warn",
         {

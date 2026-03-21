@@ -8,7 +8,7 @@ export default defineConfig([
     name: "fvena/testing-library/vue",
     rules: {
       ...testingLibrary.configs["flat/vue"].rules,
-      // Permite destructuring de `render` en tests de componentes Vue
+      // Allows destructuring of `render` in Vue component tests
       "@typescript-eslint/unbound-method": "off",
     },
   },

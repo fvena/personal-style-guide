@@ -18,3 +18,8 @@ export async function lintFixture(eslint, fixture) {
 export function findRule(messages, ruleId) {
   return messages.filter((m) => m.ruleId === ruleId);
 }
+
+export async function lintCode(eslint, code, filePath) {
+  const results = await eslint.lintText(code, { filePath });
+  return results.flatMap((r) => r.messages);
+}
