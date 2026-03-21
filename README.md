@@ -45,7 +45,7 @@
 
 ## Motivation
 
-Every new project starts the same way: configuring ESLint, Prettier, Stylelint, and TypeScript from scratch, copy-pasting from the last project, fighting conflicts, and wondering why the same rules keep breaking. This package ends that loop.
+Getting ESLint, Prettier, Stylelint, and TypeScript to work correctly together in a Vue 3 + Nuxt 3 project is a full day's work — and it breaks again on the next major plugin update. The integration points are non-trivial: `typescript-eslint`'s `strictTypeChecked` must cover `.vue` files without conflicting with `vue-eslint-parser`, Stylelint needs separate config for SCSS-in-Vue scoped styles, and Prettier must be kept completely out of ESLint's rule set to avoid conflicts. `@franvena/kata` absorbs that integration work and keeps it up to date. Install once, configure in minutes, get strict linting across your full stack.
 
 If your stack is **Vue 3 + Nuxt 3 + TypeScript + SCSS**, this is the most complete opinionated setup available as a single package.
 
@@ -217,14 +217,60 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 export default withNuxt([...eslintNuxt])
 ```
 
-### Opt-in configs
+### Opt-in: Playwright
+
+Install the required peer dependency:
+
+```sh
+npm install --save-dev eslint-plugin-playwright
+```
+
+Then configure:
 
 ```js
-// Playwright — *.spec.ts, e2e/**, tests/** · Testing Library (Vue) · Vitest · Turborepo
 import eslintPlaywright from '@franvena/kata/eslint/playwright'
-import eslintTestingLibrary from '@franvena/kata/eslint/testing-library'
-import eslintTurbo from '@franvena/kata/eslint/turbo'
+```
+
+### Opt-in: Vitest
+
+Install the required peer dependency:
+
+```sh
+npm install --save-dev eslint-plugin-vitest
+```
+
+Then configure:
+
+```js
 import eslintVitest from '@franvena/kata/eslint/vitest'
+```
+
+### Opt-in: Testing Library
+
+Install the required peer dependency:
+
+```sh
+npm install --save-dev eslint-plugin-testing-library
+```
+
+Then configure:
+
+```js
+import eslintTestingLibrary from '@franvena/kata/eslint/testing-library'
+```
+
+### Opt-in: Turborepo
+
+Install the required peer dependency:
+
+```sh
+npm install --save-dev eslint-config-turbo
+```
+
+Then configure:
+
+```js
+import eslintTurbo from '@franvena/kata/eslint/turbo'
 ```
 
 ---
@@ -388,16 +434,27 @@ These are the deliberate decisions behind this config — not just what the rule
 
 ---
 
-## Roadmap
+## What's next
 
-- [x] ESLint flat config — Node, Browser, Vue, Nuxt
-- [x] Prettier shared config
-- [x] Stylelint with SCSS + Vue support
-- [x] TypeScript base configs (Node + Browser)
-- [x] Markdownlint config
-- [x] YAML linting
-- [x] Playwright, Testing Library, Turborepo opt-in configs
-- [x] Vitest opt-in config
+- Evaluating modern alternatives (Biome, oxlint) as they mature for the Vue/Nuxt ecosystem — see [ADR-001](./docs/decisions/001-flat-config.md) for context
+- CSS-in-JS support (`@vanilla-extract`, `panda-css`) if there's demand from the community
+
+## Out of scope
+
+- **React/JSX** — different ecosystem, out of focus
+- **JSON linting** — deferred until `@eslint/json` is compatible with files-scoped base config blocks
+
+---
+
+## Versioning
+
+This project follows [Semantic Versioning](https://semver.org/). As a linting config, rule changes follow this contract:
+
+- **New rules that produce warnings** → minor version bump
+- **New rules that produce errors, or existing rules becoming stricter** → major version bump
+- **Bug fixes to existing rules** → patch version bump
+
+Upgrade with confidence — breaking lint changes are always major versions.
 
 ---
 
