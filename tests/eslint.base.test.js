@@ -1,5 +1,3 @@
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { ESLint } from 'eslint'
 import { describe, expect, it } from 'vitest'
 import {
@@ -14,8 +12,6 @@ import {
   baseUnicorn,
   baseYaml
 } from '../eslint/base.js'
-
-const root = path.dirname(fileURLToPath(import.meta.url))
 
 describe('eslint/base composable blocks', () => {
   it('each block exports a non-empty array', () => {
@@ -50,24 +46,33 @@ describe('eslint/base composable blocks', () => {
     expect(baseMarkdown.length).toBeGreaterThan(0)
   })
 
-  it('composed config loads without errors', async () => {
+  it('baseTypeScript rules are active when composed with baseJavascript', async () => {
     const eslint = new ESLint({
-      overrideConfig: [
-        ...baseIgnores,
-        ...baseJavascript,
-        ...basePerfectionist,
-        ...baseUnicorn,
-        ...baseComments
-      ],
+      overrideConfig: [...baseIgnores, ...baseJavascript, ...baseTypeScript],
       overrideConfigFile: true
     })
-    await expect(eslint.calculateConfigForFile('test.js')).resolves.toBeDefined()
+    const config = await eslint.calculateConfigForFile('virtual.ts')
+    const rules = Object.keys(config.rules ?? {})
+    expect(rules.some(r => r.startsWith('@typescript-eslint/'))).toBe(true)
+    expect(rules.some(r => r.startsWith('n/'))).toBe(true)
   })
 
-  it('baseTypeScript loads without errors for .ts files', async () => {
+  it('basePerfectionist rules are absent when not composed', async () => {
     const eslint = new ESLint({
-      overrideConfigFile: path.resolve(root, '..', 'eslint', 'node.js')
+      overrideConfig: [...baseIgnores, ...baseJavascript],
+      overrideConfigFile: true
     })
-    await expect(eslint.calculateConfigForFile('test.ts')).resolves.toBeDefined()
+    const config = await eslint.calculateConfigForFile('virtual.ts')
+    const rules = Object.keys(config.rules ?? {})
+    expect(rules.some(r => r.startsWith('perfectionist/'))).toBe(false)
+  })
+
+  it('baseUnicorn disables no-null by default', async () => {
+    const eslint = new ESLint({
+      overrideConfig: [...baseIgnores, ...baseJavascript, ...baseUnicorn],
+      overrideConfigFile: true
+    })
+    const config = await eslint.calculateConfigForFile('virtual.ts')
+    expect(config.rules?.['unicorn/no-null']).toEqual(['off'])
   })
 })
