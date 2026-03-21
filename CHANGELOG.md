@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.0.0](https://github-personal/fvena/kata/compare/v0.6.0...v1.0.0) (2026-03-21)
+
+### ⚠ BREAKING CHANGES
+
+- package has been renamed from @fvena/style-guide to @fvena/kata.
+  Update your imports and package.json dependency accordingly.
+
+Migration: npm uninstall @fvena/style-guide && npm install --save-dev @fvena/kata
+
+### Features
+
+- **eslint:** add eslint-plugin-regexp for improved regex linting ([f0fea42](https://github-personal/fvena/kata/commit/f0fea4238f6352b3f4edbf8d2811bcf2201bf95a))
+- **eslint:** add eslint-plugin-vuejs-accessibility for improved Vue accessibility linting ([d4f21cb](https://github-personal/fvena/kata/commit/d4f21cb87cc7c1d5bdf761232e66a6fe13e6d47b))
+- **eslint:** add Playwright support with eslint-plugin-playwright and configuration ([319f1ec](https://github-personal/fvena/kata/commit/319f1ecc96ba2ea67b42580739014a1360ae52cb))
+- **eslint:** add support for Markdown linting with @eslint/markdown ([c57e742](https://github-personal/fvena/kata/commit/c57e74257f0e04761a6bd0e4d6f2d3d502f4608e))
+- **eslint:** add support for Testing Library with eslint-plugin-testing-library and configuration ([a043a01](https://github-personal/fvena/kata/commit/a043a01f09a8fd68165e0b5ddb61499a40c9650c))
+- **eslint:** add Turborepo support with eslint-config-turbo and configuration ([252c20c](https://github-personal/fvena/kata/commit/252c20c61e8bf7167eba7ff4ab4b299fae9c0c36))
+- **eslint:** add Vue 3 and Nuxt 3 configurations with dedicated ESLint rules ([2949fdb](https://github-personal/fvena/kata/commit/2949fdbaeed1dc90bd714ca0937144ba81f3c03e))
+- **eslint:** enhance ESLint and Stylelint configurations for improved code quality and consistency ([a708aba](https://github-personal/fvena/kata/commit/a708abab6edeca333d618895dab302530aaef682))
+- **eslint:** enhance ESLint rules for JavaScript and TypeScript with additional configurations ([c0c89ad](https://github-personal/fvena/kata/commit/c0c89ad1c00b3520364af10c1a28d0f3aa490324))
+- **eslint:** integrate @vue/eslint-config-typescript for improved TypeScript support in Vue project ([a1b551d](https://github-personal/fvena/kata/commit/a1b551da8c077ecd4cbf0cce5d6b590be68f3b8e))
+- **tests:** integrate Vitest for testing ESLint configurations ([6ce5f37](https://github-personal/fvena/kata/commit/6ce5f37286eb9a879e5fcd012d8051fc12f76199))
+
+### Miscellaneous Chores
+
+- rename package to @fvena/kata ([8201973](https://github-personal/fvena/kata/commit/82019730e9b709224c9cf06679f8c871da3e1352))
+
 ## 0.6.0 (2025-03-15)
 
 - feat: add eslint-plugin-yml and yaml-eslint-parser for YAML support ([fcb4187](https://github.com/fvena/personal-style-guide/commit/fcb4187))
