@@ -350,17 +350,26 @@ export default [
 
 These are the deliberate decisions behind this config — not just what the rules do, but why.
 
+**Flat config over legacy `.eslintrc`** — ESLint 9's flat config is the only supported format. Native JavaScript composition via array spread, no implicit merging, no hidden config resolution. Every rule is traceable.
+→ [Full decision: ADR-001](./docs/decisions/001-flat-config.md)
+
 **`strictTypeChecked` over `recommended`** — The most rigorous TypeScript-ESLint preset. Requires type information for every rule, which means slower linting but catches unsafe assignments, unhandled promise rejections, and incorrect nullish coalescing that type-unaware rules miss entirely. The performance cost is acceptable; the safety gain is not optional.
+→ [Full decision: ADR-002](./docs/decisions/002-strict-type-checked.md)
 
 **`projectService` over `project: [...]`** — Auto-discovers `tsconfig.json` files relative to each linted file. Handles monorepos, nested packages, and workspace setups without manual path arrays. Tradeoff: `tsconfigRootDir` points to the package root, not the consumer's project — intentional, documented in source.
+→ [Full decision: ADR-003](./docs/decisions/003-project-service.md)
 
 **Prettier is not an ESLint plugin** — ESLint runs on every keystroke; formatting errors add noise. `eslint-config-prettier` disables all formatting rules from every plugin so there are zero conflicts. Single responsibility: ESLint owns correctness, Prettier owns style.
+→ [Full decision: ADR-004](./docs/decisions/004-prettier-separation.md)
 
 **Vue SFCs enforce TypeScript and SCSS** — `vue/block-lang` requires `lang="ts"` and `lang="scss"`. Mixed-language SFCs create inconsistency that accumulates into maintenance debt. The default is strict; override explicitly if you need flexibility.
+→ [Full decision: ADR-005](./docs/decisions/005-vue-scss-enforcement.md)
 
 **Scoped or module styles only** — `vue/enforce-style-attribute` with `["scoped", "module"]`. Global `<style>` blocks are the most common source of CSS leakage in Vue apps. If you need global styles, use a standalone `.scss` file.
+→ [Full decision: ADR-006](./docs/decisions/006-scoped-styles-only.md)
 
 **Composable blocks as the public API** — Named exports (`baseIgnores`, `baseTypeScript`, etc.) instead of a single opaque object. Each preset is composed from these blocks — no hidden configuration. Consumers can audit the full rule set by reading the import chain, and build custom presets without forking.
+→ [Full decision: ADR-007](./docs/decisions/007-composable-blocks-api.md)
 
 ---
 
@@ -387,7 +396,7 @@ These are the deliberate decisions behind this config — not just what the rule
 - [x] Markdownlint config
 - [x] YAML linting
 - [x] Playwright, Testing Library, Turborepo opt-in configs
-- [ ] Vitest opt-in config
+- [x] Vitest opt-in config
 
 ---
 
