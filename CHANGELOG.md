@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github-personal/fvena/kata/compare/v1.0.0...v1.1.0) (2026-03-21)
+
+### Features
+
+- **eslint:** add vitest opt-in config ([ad5344f](https://github-personal/fvena/kata/commit/ad5344fc0545dff73fa847ac81dfbbc3adaeb04d))
+
 ## [1.0.0](https://github-personal/fvena/kata/compare/v0.6.0...v1.0.0) (2026-03-21)
 
 ### ⚠ BREAKING CHANGES
