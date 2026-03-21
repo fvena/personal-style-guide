@@ -12,16 +12,16 @@ Most shared ESLint configs export a single default object. Consumers either acce
 Export named blocks (`baseIgnores`, `baseJavascript`, `baseTypeScript`, `basePerfectionist`, `baseUnicorn`, `baseRegexp`, `baseComments`, `baseYaml`, `baseMarkdown`) as the public API from `eslint/base.js`. Each preset (node, browser, vue) composes these blocks into its default export. Consumers can import individual blocks to build custom presets without forking:
 
 ```js
-import { baseTypeScript, basePerfectionist } from "@fvena/kata/eslint/base";
+import { baseTypeScript, basePerfectionist } from '@franvena/kata/eslint/base'
 ```
 
 Opt-in configs follow the same composable principle. Vitest (`eslint/vitest.js`) and Playwright (`eslint/playwright.js`) are independent blocks scoped to specific file patterns (e.g., `**/*.test.ts`, `**/*.spec.ts`). They are not bundled into the base or framework presets -- consumers add them explicitly when their project uses those tools:
 
 ```js
-import eslintNode from "@fvena/kata/eslint/node";
-import eslintVitest from "@fvena/kata/eslint/vitest";
+import eslintNode from '@franvena/kata/eslint/node'
+import eslintVitest from '@franvena/kata/eslint/vitest'
 
-export default defineConfig([...eslintNode, ...eslintVitest]);
+export default defineConfig([...eslintNode, ...eslintVitest])
 ```
 
 Each opt-in config is self-contained with its own plugin, rules, and file patterns.

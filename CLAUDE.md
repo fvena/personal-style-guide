@@ -39,7 +39,13 @@ tests/                  ← Vitest behavioral tests + fixtures
 docs/decisions/         ← Architecture Decision Records (ADRs)
 ```
 
-Consumers import via package exports: `@franvena/kata/eslint/node`, `@franvena/kata/prettier`, etc. The export map in `package.json` is critical — any new config file must have a corresponding export entry.
+Consumers import via package exports: `@franvena/kata/eslint/node`, `@franvena/kata/prettier`, etc. The export map in `package.json` is critical — any new config file must have a corresponding export entry. Adding a new top-level directory also requires updating the `files` field.
+
+## Dependency Classification
+
+- **`dependencies`** — ESLint/Stylelint/Prettier plugins and shared configs. Consumers need these at runtime when the config is loaded.
+- **`devDependencies`** — Dev tooling for this repo only (commitlint, husky, release-it, vitest).
+- **`peerDependencies`** — The tools themselves (`eslint`, `prettier`, `stylelint`, `typescript`). All are `optional: true` except `eslint`, which is required. This lets consumers install only the tools they use.
 
 ## Key Design Decisions
 

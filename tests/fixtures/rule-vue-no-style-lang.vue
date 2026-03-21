@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const msg = "hello";
+  const msg = 'hello'
 </script>
 <template>
   <div>{{ msg }}</div>

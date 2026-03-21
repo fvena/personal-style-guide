@@ -1,4 +1,4 @@
 function bad(x: any): any {
-  return x;
+  return x
 }
-export { bad };
+export { bad }

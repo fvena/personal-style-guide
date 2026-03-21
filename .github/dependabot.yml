@@ -1,39 +1,39 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     commit-message:
-      prefix: "chore(deps)"
+      prefix: 'chore(deps)'
     groups:
       eslint-plugins:
         patterns:
-          - "@eslint*"
-          - "eslint-plugin-*"
-          - "eslint-config-*"
-          - "typescript-eslint"
-          - "@vue/eslint-config-*"
-          - "@nuxt/eslint-config"
+          - '@eslint*'
+          - 'eslint-plugin-*'
+          - 'eslint-config-*'
+          - 'typescript-eslint'
+          - '@vue/eslint-config-*'
+          - '@nuxt/eslint-config'
       prettier-plugins:
         patterns:
-          - "prettier*"
+          - 'prettier*'
       stylelint-plugins:
         patterns:
-          - "stylelint*"
+          - 'stylelint*'
       dev-tools:
         patterns:
-          - "@commitlint*"
-          - "@release-it*"
-          - "husky"
-          - "lint-staged"
-          - "release-it"
-          - "vitest"
-          - "globals"
+          - '@commitlint*'
+          - '@release-it*'
+          - 'husky'
+          - 'lint-staged'
+          - 'release-it'
+          - 'vitest'
+          - 'globals'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     commit-message:
-      prefix: "chore(deps)"
+      prefix: 'chore(deps)'

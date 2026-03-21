@@ -1,2 +1,2 @@
-const value = parseInt("42");
-export { value };
+const value = parseInt('42')
+export { value }

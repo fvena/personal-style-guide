@@ -1,18 +1,18 @@
 <script setup lang="ts">
-interface ComponentProperties {
-  count?: number;
-  label: string;
-}
+  interface ComponentProperties {
+    count?: number
+    label: string
+  }
 
-const { count = 0, label } = defineProps<ComponentProperties>();
+  const { count = 0, label } = defineProps<ComponentProperties>()
 
-const emit = defineEmits<{
-  increment: [value: number];
-}>();
+  const emit = defineEmits<{
+    increment: [value: number]
+  }>()
 
-function handleClick(): void {
-  emit("increment", Number(count) + 1);
-}
+  function handleClick(): void {
+    emit('increment', Number(count) + 1)
+  }
 </script>
 
 <template>
@@ -23,9 +23,9 @@ function handleClick(): void {
 </template>
 
 <style scoped lang="scss">
-.counter {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
+  .counter {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
 </style>

@@ -5,7 +5,7 @@
 ```bash
 git clone https://github.com/fvena/kata.git
 cd kata
-nvm use   # requires Node >=22.11.0
+nvm use   # reads .nvmrc → Node 22.11.0
 npm ci
 ```
 
@@ -55,6 +55,12 @@ chore: update package dependencies
 ```
 
 Scopes match directory names: `eslint`, `prettier`, `stylelint`, `typescript`, `markdown`.
+
+## Pull request expectations
+
+- **Tests required for new rules.** Every rule addition or change should include a test that lints real code and asserts on the expected diagnostic.
+- **ADR required for architectural decisions.** If your change introduces a new design pattern, adds a new plugin, or changes how configs compose, document it as an ADR in `docs/decisions/`.
+- **No new dependencies without discussion.** Open an issue first to discuss the tradeoff before adding a new plugin or dependency.
 
 ## Release process
 

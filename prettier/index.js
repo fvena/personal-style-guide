@@ -5,23 +5,23 @@
  * See: https://github.com/prettier/prettier/blob/main/docs/configuration.md#editorconfig
  */
 const overridableDefaults = {
-  endOfLine: "lf",
+  endOfLine: 'lf',
   printWidth: 100,
   tabWidth: 2,
-  useTabs: false,
-};
+  useTabs: false
+}
 
 export default {
   ...overridableDefaults,
-  arrowParens: "avoid",
+  arrowParens: 'avoid',
   bracketSpacing: true,
-  htmlWhitespaceSensitivity: "strict",
+  htmlWhitespaceSensitivity: 'strict',
   jsxSingleQuote: true,
-  plugins: ["prettier-plugin-packagejson"],
-  proseWrap: "preserve",
-  quoteProps: "as-needed",
+  plugins: ['prettier-plugin-packagejson'],
+  proseWrap: 'preserve',
+  quoteProps: 'as-needed',
   semi: false,
   singleQuote: true,
-  trailingComma: "none",
-  vueIndentScriptAndStyle: true,
-};
+  trailingComma: 'none',
+  vueIndentScriptAndStyle: true
+}

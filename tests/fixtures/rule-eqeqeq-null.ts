@@ -1,5 +1,5 @@
-const a = 1;
+const a = 1
 if (a == null) {
   /* ok, smart mode allows == null */
 }
-export { a };
+export { a }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const msg = "hello";
+  const msg = 'hello'
 </script>
 <template>
   <div>{{ msg }}</div>
 </template>
 <style lang="scss">
-.foo {
-  color: red;
-}
+  .foo {
+    color: red;
+  }
 </style>

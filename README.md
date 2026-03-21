@@ -99,18 +99,18 @@ export default [...eslintNuxt];
 ### Extending and overriding rules
 
 ```js
-import eslintVue from "@franvena/kata/eslint/vue";
+import eslintVue from '@franvena/kata/eslint/vue'
 
 export default [
   ...eslintVue,
   {
     rules: {
-      "unicorn/no-array-for-each": "off",
+      'unicorn/no-array-for-each': 'off',
       // Relax SCSS enforcement during migration
-      "vue/block-lang": ["error", { script: { lang: "ts" }, style: { lang: ["scss", "css"] } }],
-    },
-  },
-];
+      'vue/block-lang': ['error', { script: { lang: 'ts' }, style: { lang: ['scss', 'css'] } }]
+    }
+  }
+]
 ```
 
 ### Composable config blocks
@@ -127,10 +127,10 @@ import {
   baseComments,
   baseRegexp,
   baseYaml,
-  baseMarkdown,
-} from "@franvena/kata/eslint/base";
+  baseMarkdown
+} from '@franvena/kata/eslint/base'
 
-export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePerfectionist];
+export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePerfectionist]
 ```
 
 | Block               | Description                              |
@@ -166,17 +166,17 @@ export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePer
 Only useful for libraries that publish API documentation:
 
 ```js
-import { baseTsdoc } from "@franvena/kata/eslint/base";
-import eslintNode from "@franvena/kata/eslint/node";
+import { baseTsdoc } from '@franvena/kata/eslint/base'
+import eslintNode from '@franvena/kata/eslint/node'
 
-export default [...eslintNode, ...baseTsdoc];
+export default [...eslintNode, ...baseTsdoc]
 ```
 
 ### Vue 3
 
 ```js
-import eslintVue from "@franvena/kata/eslint/vue";
-export default [...eslintVue];
+import eslintVue from '@franvena/kata/eslint/vue'
+export default [...eslintVue]
 ```
 
 Enforces on top of the base config:
@@ -195,8 +195,8 @@ Enforces on top of the base config:
 #### Standalone
 
 ```js
-import eslintNuxt from "@franvena/kata/eslint/nuxt";
-export default [...eslintNuxt];
+import eslintNuxt from '@franvena/kata/eslint/nuxt'
+export default [...eslintNuxt]
 ```
 
 #### With `@nuxt/eslint` module
@@ -204,26 +204,27 @@ export default [...eslintNuxt];
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint"],
-  eslint: { config: { standalone: false } },
-});
+  modules: ['@nuxt/eslint'],
+  eslint: { config: { standalone: false } }
+})
 ```
 
 ```js
 // eslint.config.js
-import eslintNuxt from "@franvena/kata/eslint/nuxt";
-import withNuxt from "./.nuxt/eslint.config.mjs";
+import eslintNuxt from '@franvena/kata/eslint/nuxt'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt([...eslintNuxt]);
+export default withNuxt([...eslintNuxt])
 ```
 
 ### Opt-in configs
 
 ```js
-// Playwright — *.spec.ts, e2e/**, tests/** · Testing Library (Vue) · Turborepo
-import eslintPlaywright from "@franvena/kata/eslint/playwright";
-import eslintTestingLibrary from "@franvena/kata/eslint/testing-library";
-import eslintTurbo from "@franvena/kata/eslint/turbo";
+// Playwright — *.spec.ts, e2e/**, tests/** · Testing Library (Vue) · Vitest · Turborepo
+import eslintPlaywright from '@franvena/kata/eslint/playwright'
+import eslintTestingLibrary from '@franvena/kata/eslint/testing-library'
+import eslintTurbo from '@franvena/kata/eslint/turbo'
+import eslintVitest from '@franvena/kata/eslint/vitest'
 ```
 
 ---
@@ -231,14 +232,14 @@ import eslintTurbo from "@franvena/kata/eslint/turbo";
 ## Prettier
 
 ```js
-// .prettierrc.config.js
-export { default } from "@franvena/kata/prettier";
+// prettier.config.js
+export { default } from '@franvena/kata/prettier'
 ```
 
 ```js
 // extend
-import prettierConfig from "@franvena/kata/prettier";
-export default { ...prettierConfig };
+import prettierConfig from '@franvena/kata/prettier'
+export default { ...prettierConfig }
 ```
 
 **Why Prettier is not an ESLint plugin**: ESLint owns code quality, Prettier owns formatting — they don't overlap. `eslint-config-prettier` disables all formatting rules so there are zero conflicts and no duplicate work in the IDE.
@@ -250,8 +251,8 @@ export default { ...prettierConfig };
 ```js
 // stylelint.config.js
 export default {
-  extends: ["@franvena/kata/stylelint"],
-};
+  extends: ['@franvena/kata/stylelint']
+}
 ```
 
 Includes `stylelint-config-recommended`, `stylelint-config-recommended-scss`, `stylelint-config-recommended-vue/scss`, and `stylelint-config-recess-order`.
@@ -322,7 +323,7 @@ Strict mode, `noUncheckedIndexedAccess`, modern module settings. Based on [Matt 
 **Fix**: Relax while migrating, then tighten once complete:
 
 ```js
-export default [...eslintVue, { rules: { "vue/block-lang": "warn" } }];
+export default [...eslintVue, { rules: { 'vue/block-lang': 'warn' } }]
 ```
 
 ---
@@ -340,8 +341,8 @@ export default [...eslintVue, { rules: { "vue/block-lang": "warn" } }];
 ```js
 export default [
   ...eslintVue,
-  { rules: { "vuejs-accessibility/click-events-have-key-events": "off" } },
-];
+  { rules: { 'vuejs-accessibility/click-events-have-key-events': 'off' } }
+]
 ```
 
 ---

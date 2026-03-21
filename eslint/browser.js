@@ -1,14 +1,14 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
-import base from "./base.js";
+import { defineConfig } from 'eslint/config'
+import globals from 'globals'
+import base from './base.js'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([
   ...base,
   {
     languageOptions: {
-      globals: { ...globals.browser },
+      globals: { ...globals.browser }
     },
-    name: "fvena/browser/globals",
-  },
-]);
+    name: 'fvena/browser/globals'
+  }
+])

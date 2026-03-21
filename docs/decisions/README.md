@@ -9,3 +9,4 @@
 | [005](./005-vue-scss-enforcement.md)  | Enforce TypeScript and SCSS in Vue SFCs     | Accepted |
 | [006](./006-scoped-styles-only.md)    | Require scoped or module styles in Vue SFCs | Accepted |
 | [007](./007-composable-blocks-api.md) | Expose composable blocks as the public API  | Accepted |
+| [008](./008-node-22-minimum.md)       | Require Node >=22.11.0                      | Accepted |

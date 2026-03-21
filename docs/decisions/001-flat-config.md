@@ -14,10 +14,10 @@ Use the flat config format exclusively. The base config exports arrays of config
 The project's own `eslint.config.js` demonstrates this pattern:
 
 ```js
-import { defineConfig } from "eslint/config";
-import eslintNode from "./eslint/node.js";
+import { defineConfig } from 'eslint/config'
+import eslintNode from './eslint/node.js'
 
-export default defineConfig([{ ignores: ["tests/fixtures/"] }, ...eslintNode]);
+export default defineConfig([{ ignores: ['tests/fixtures/'] }, ...eslintNode])
 ```
 
 ## Alternatives Considered

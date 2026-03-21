@@ -27,5 +27,5 @@ ESLint owns correctness. Prettier owns style. There is no overlap.
 
 - Zero conflicts between ESLint and Prettier -- no "fix loop" where one tool undoes the other's changes.
 - IDE performance is better because ESLint only reports correctness issues, not formatting.
-- Consumers must configure Prettier separately (the package exports a shared Prettier config at `@fvena/kata/prettier` to make this trivial).
+- Consumers must configure Prettier separately (the package exports a shared Prettier config at `@franvena/kata/prettier` to make this trivial).
 - `eslint-config-prettier` must always be the last config in the array to ensure it disables rules from all preceding plugins.

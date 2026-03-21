@@ -1,3 +1,3 @@
-const x = 1;
-const r = x === x;
-export { r };
+const x = 1
+const r = x === x
+export { r }
