@@ -61,10 +61,10 @@ describe("Vue rule behavior — vue config", () => {
     expect(findRule(messages, "vue/block-lang").length).toBeGreaterThan(0);
   });
 
-  it('vue/block-lang: flags <style> without lang="scss"', async () => {
+  it('vue/block-lang: does not flag <style> without lang="scss" by default', async () => {
     const eslint = createESLint("vue.js");
     const messages = await lintFixture(eslint, "rule-vue-no-style-lang.vue");
-    expect(findRule(messages, "vue/block-lang").length).toBeGreaterThan(0);
+    expect(findRule(messages, "vue/block-lang").length).toBe(0);
   });
 
   it("vue/enforce-style-attribute: flags <style> without scoped or module", async () => {

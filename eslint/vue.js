@@ -6,6 +6,29 @@ import base from "./base.js";
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of Vue rules */
 
+/**
+ * Opt-in: enforce lang="scss" on <style> blocks.
+ * Spread after the default export to enable SCSS enforcement:
+ *   import vueConfig, { vueScss } from '@franvena/kata/eslint/vue'
+ *   export default [...vueConfig, ...vueScss]
+ */
+/** @type {import('eslint').Linter.Config[]} */
+export const vueScss = [
+  {
+    name: "fvena/vue/scss",
+    files: ["**/*.vue"],
+    rules: {
+      "vue/block-lang": [
+        "error",
+        {
+          script: { lang: "ts" },
+          style: { lang: "scss" },
+        },
+      ],
+    },
+  },
+];
+
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfigWithVueTs(
   ...base,
@@ -90,12 +113,11 @@ export default defineConfigWithVueTs(
       // Avoid v-html (XSS risk) — warn instead of error for legitimate cases
       "vue/no-v-html": "warn",
 
-      // Enforce lang="ts" on <script> and lang="scss" on <style>
+      // Enforce lang="ts" on <script>
       "vue/block-lang": [
         "error",
         {
           script: { lang: "ts" },
-          style: { lang: "scss" },
         },
       ],
 

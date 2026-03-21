@@ -114,16 +114,24 @@ export const baseUnicorn = [
       "unicorn/no-array-reduce": "off",
       // Conflicts with guard-clause patterns; too opinionated for a shared config
       "unicorn/no-negated-condition": "off",
+      // null is too pervasive in DOM APIs, Vue refs, and third-party libraries
+      "unicorn/no-null": "off",
       "unicorn/prevent-abbreviations": [
         "error",
         {
           replacements: {
-            dir: {
-              directory: false,
-            },
-            env: {
-              environment: false,
-            },
+            args: { arguments: false },
+            attrs: { attributes: false },
+            btn: { button: false },
+            dir: { directory: false },
+            el: { element: false },
+            env: { environment: false },
+            fn: { function: false },
+            param: { parameter: false },
+            params: { parameters: false },
+            prop: { property: false },
+            props: { properties: false },
+            ref: { reference: false },
           },
         },
       ],

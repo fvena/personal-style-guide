@@ -21,7 +21,6 @@ export default {
         ],
       },
     ],
-    // eslint-disable-next-line unicorn/no-null -- Stylelint requires null to disable a rule
     "no-descending-specificity": null,
     "no-empty-source": [true, { severity: "warning" }],
     "scss/comment-no-empty": [true, { severity: "warning" }],
