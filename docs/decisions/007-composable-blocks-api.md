@@ -1,7 +1,7 @@
 # ADR-007: Expose composable blocks as the public API
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2025-06-01
 
 ## Context
 

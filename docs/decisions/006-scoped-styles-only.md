@@ -1,7 +1,7 @@
 # ADR-006: Require scoped or module styles in Vue SFCs
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2025-03-01
 
 ## Context
 

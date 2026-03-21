@@ -1,7 +1,7 @@
 # ADR-001: Use ESLint flat config format
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2024-12-01
 
 ## Context
 

@@ -1,7 +1,7 @@
 # ADR-003: Use `projectService` over `project: [...]`
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2025-01-10
 
 ## Context
 

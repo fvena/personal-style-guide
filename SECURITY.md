@@ -2,26 +2,27 @@
 
 ## Supported Versions
 
-| Version | Supported |
-| ------- | --------- |
-| 1.x     | ✅        |
-| < 1.0   | ❌        |
+Only the latest minor version of `@franvena/kata` receives security updates.
+
+| Version      | Supported |
+| ------------ | --------- |
+| 1.x (latest) | ✅        |
+| < 1.0        | ❌        |
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in `@franvena/kata` or any of its bundled plugin configurations, please report it privately.
+If you discover a security vulnerability in this project or in any of the bundled ESLint plugins, please report it privately.
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Report via GitHub's private vulnerability reporting:
-[Report a vulnerability](https://github.com/fvena/kata/security/advisories/new)
+To report a vulnerability:
 
-You can expect:
+1. Go to the [Security tab](../../security/advisories/new) of this repository
+2. Click "Report a vulnerability"
+3. Provide a description of the issue and steps to reproduce
 
-- Acknowledgment within 48 hours
-- A fix or mitigation plan within 14 days for confirmed vulnerabilities
-- Credit in the release notes if you'd like
+You can expect a response within 7 days. If the vulnerability is confirmed, a patch will be released as soon as possible and you will be credited in the release notes.
 
 ## Scope
 
-This package bundles ESLint plugins as dependencies. If a vulnerability is in a bundled plugin (e.g., `eslint-plugin-vue`, `typescript-eslint`), please report it to the upstream plugin maintainers. We will update the dependency as soon as a fix is available.
+This package is a collection of linting configurations. Security vulnerabilities in bundled ESLint plugins should be reported to their respective maintainers. This policy covers the configuration code in this repository only.

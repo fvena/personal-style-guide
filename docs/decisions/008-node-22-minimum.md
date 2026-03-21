@@ -1,7 +1,7 @@
 # ADR-008: Require Node >=22.11.0
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2025-09-01
 
 ## Context
 

@@ -1,7 +1,7 @@
 # ADR-002: Use `strictTypeChecked` over `recommended`
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2024-12-15
 
 ## Context
 

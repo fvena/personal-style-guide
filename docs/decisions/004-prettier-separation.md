@@ -1,7 +1,7 @@
 # ADR-004: Keep Prettier separate from ESLint
 
 **Status:** Accepted
-**Date:** 2026-03-21
+**Date:** 2024-12-01
 
 ## Context
 
