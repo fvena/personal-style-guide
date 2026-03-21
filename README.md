@@ -11,9 +11,6 @@
   <a href="https://www.npmjs.com/package/@franvena/kata">
     <img src="https://img.shields.io/npm/v/@franvena/kata?color=0e7490&label=npm" alt="npm version" />
   </a>
-  <a href="https://www.npmjs.com/package/@franvena/kata">
-    <img src="https://img.shields.io/npm/dm/@franvena/kata?color=0e7490" alt="npm downloads" />
-  </a>
   <a href="https://github.com/fvena/kata/actions">
     <img src="https://github.com/fvena/kata/workflows/CI%2FCD/badge.svg" alt="CI" />
   </a>
@@ -436,7 +433,7 @@ These are the deliberate decisions behind this config — not just what the rule
 
 ## What's next
 
-- Evaluating modern alternatives (Biome, oxlint) as they mature for the Vue/Nuxt ecosystem — see [ADR-001](./docs/decisions/001-flat-config.md) for context
+- **Biome** doesn't support Vue SFCs yet — we're watching it closely. If full SFC support lands, we'll evaluate it as a replacement for ESLint + Prettier. See [ADR-001](./docs/decisions/001-flat-config.md) for the full context.
 - CSS-in-JS support (`@vanilla-extract`, `panda-css`) if there's demand from the community
 
 ## Out of scope
@@ -455,6 +452,13 @@ This project follows [Semantic Versioning](https://semver.org/). As a linting co
 - **Bug fixes to existing rules** → patch version bump
 
 Upgrade with confidence — breaking lint changes are always major versions.
+
+---
+
+## Also by @fvena
+
+- [**kovo**](https://github.com/fvena/kovo) — Git submodule management for multi-repo workflows
+- [**kenso**](https://github.com/fvena/kenso) — Knowledge base CLI for LLM coding agents
 
 ---
 
