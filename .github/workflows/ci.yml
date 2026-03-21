@@ -68,6 +68,7 @@ jobs:
 
   publish:
     name: Publish to NPM
+    environment: npm
     runs-on: ubuntu-22.04
     needs: [lint, typecheck, test]
     if: |
