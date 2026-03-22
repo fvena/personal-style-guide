@@ -44,6 +44,7 @@
 - [Compatibility](#compatibility)
 - [Troubleshooting](#troubleshooting)
 - [Design Philosophy](#design-philosophy)
+- [Examples](#examples)
 - [Versioning](#versioning)
 - [What's next](#whats-next)
 - [Contributing](#contributing)
@@ -604,6 +605,23 @@ These are the deliberate decisions behind this config — not just what the rule
   }
 }
 ```
+
+---
+
+## Examples
+
+Working examples for every supported stack, each tested in CI:
+
+| Project                                                        | Stack                          | Preset                     |
+| -------------------------------------------------------------- | ------------------------------ | -------------------------- |
+| [node-typescript](./examples/node-typescript/)                 | Node.js + TypeScript           | `eslint/node`              |
+| [node-typescript-browser](./examples/node-typescript-browser/) | Node.js + TypeScript (browser) | `eslint/browser`           |
+| [node-javascript](./examples/node-javascript/)                 | Node.js + JavaScript           | `eslint/base` (composable) |
+| [vue-typescript](./examples/vue-typescript/)                   | Vue 3 + TypeScript + SCSS      | `eslint/vue`               |
+| [nuxt-typescript](./examples/nuxt-typescript/)                 | Nuxt 3 + TypeScript + SCSS     | `eslint/nuxt`              |
+| [monorepo](./examples/monorepo/)                               | API (Node) + Web (Vue)         | Mixed presets              |
+
+Each example includes `valid.*` files (should pass lint) and `invalid.*` files (should produce errors). They use `"@franvena/kata": "file:../../"` to link against the local version.
 
 ---
 
