@@ -1,12 +1,12 @@
 export function generateEslint(config) {
-  const { language, projectType, testingTools = [] } = config
+  const { hasOxlint = false, language, projectType, testingTools = [] } = config
 
   return language === 'javascript'
-    ? generateJavascriptEslint(testingTools)
-    : generateTypescriptEslint(projectType, testingTools)
+    ? generateJavascriptEslint(testingTools, hasOxlint)
+    : generateTypescriptEslint(projectType, testingTools, hasOxlint)
 }
 
-function generateTypescriptEslint(projectType, testingTools) {
+function generateTypescriptEslint(projectType, testingTools, hasOxlint) {
   const presetMap = {
     browser: { import: 'eslintBrowser', path: '@franvena/kata/eslint/browser' },
     node: { import: 'eslintNode', path: '@franvena/kata/eslint/node' },
@@ -17,6 +17,11 @@ function generateTypescriptEslint(projectType, testingTools) {
   const preset = presetMap[projectType]
   const imports = [{ name: preset.import, path: preset.path }]
   const spreads = [preset.import]
+
+  if (hasOxlint) {
+    imports.push({ name: '{ baseOxlint }', path: '@franvena/kata/eslint/base' })
+    spreads.push('baseOxlint')
+  }
 
   for (const tool of sortTestingTools(testingTools)) {
     const toolImport = testingToolImport(tool)
@@ -35,8 +40,17 @@ function generateTypescriptEslint(projectType, testingTools) {
   }
 }
 
-function generateJavascriptEslint(testingTools) {
-  const baseImport = `{\n  baseComments,\n  baseIgnores,\n  baseJavascript,\n  basePerfectionist,\n  baseRegexp,\n  baseUnicorn\n}`
+function generateJavascriptEslint(testingTools, hasOxlint) {
+  const baseExports = [
+    'baseComments',
+    'baseIgnores',
+    'baseJavascript',
+    ...(hasOxlint ? ['baseOxlint'] : []),
+    'basePerfectionist',
+    'baseRegexp',
+    'baseUnicorn'
+  ]
+  const baseImport = `{\n  ${baseExports.join(',\n  ')}\n}`
   const spreads = [
     'baseIgnores',
     'baseJavascript',
@@ -44,6 +58,7 @@ function generateJavascriptEslint(testingTools) {
     'baseUnicorn',
     'baseRegexp',
     'baseComments',
+    ...(hasOxlint ? ['baseOxlint'] : []),
     'eslintConfigPrettier'
   ]
 

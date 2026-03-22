@@ -56,6 +56,18 @@ describe('generateScripts', () => {
     expect(result['lint:css']).not.toContain('vue')
   })
 
+  it('prefixes lint scripts with oxlint when selected', () => {
+    const result = generateScripts({
+      hasHusky: false,
+      language: 'typescript',
+      projectType: 'node',
+      tools: ['eslint', 'oxlint']
+    })
+
+    expect(result.lint).toBe('oxlint && eslint .')
+    expect(result['lint:fix']).toBe('oxlint && eslint . --fix')
+  })
+
   it('only includes scripts for selected tools', () => {
     const result = generateScripts({
       hasHusky: false,

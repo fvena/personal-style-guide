@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js'
 import markdown from '@eslint/markdown'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import nodePlugin from 'eslint-plugin-n'
+import oxlint from 'eslint-plugin-oxlint'
 import perfectionistPlugin from 'eslint-plugin-perfectionist'
 import pluginRegexp from 'eslint-plugin-regexp'
 import tsdocPlugin from 'eslint-plugin-tsdoc'
@@ -224,6 +225,9 @@ export const baseMarkdown = defineConfig([
     }
   }
 ])
+
+/** @type {import('eslint').Linter.Config[]} */
+export const baseOxlint = oxlint.configs['flat/recommended']
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([

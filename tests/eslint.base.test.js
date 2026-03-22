@@ -5,6 +5,7 @@ import {
   baseIgnores,
   baseJavascript,
   baseMarkdown,
+  baseOxlint,
   basePerfectionist,
   baseRegexp,
   baseTsdoc,
@@ -121,6 +122,18 @@ describe('eslint/base composable blocks — composition behavior', () => {
     const yamlParserName =
       yamlConfig.languageOptions?.parser?.name ?? yamlConfig.languageOptions?.parser?.meta?.name
     expect(yamlParserName).not.toBe(jsParserName)
+  })
+
+  it('baseOxlint composes without conflict and disables covered rules', async () => {
+    const eslint = new ESLint({
+      overrideConfig: [...baseIgnores, ...baseJavascript, ...baseOxlint],
+      overrideConfigFile: true
+    })
+    const config = await eslint.calculateConfigForFile('src/index.js')
+    // baseOxlint should disable rules that oxlint covers (e.g. constructor-super)
+    const rule = config.rules?.['constructor-super']
+    expect(rule).toBeDefined()
+    expect(rule[0]).toBe(0)
   })
 
   it('baseMarkdown scopes rules to markdown files only', async () => {

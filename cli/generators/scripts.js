@@ -4,8 +4,9 @@ export function generateScripts(config) {
   const isVue = projectType === 'vue' || projectType === 'nuxt'
 
   if (tools.includes('eslint')) {
-    scripts.lint = 'eslint .'
-    scripts['lint:fix'] = 'eslint . --fix'
+    const oxlintPrefix = tools.includes('oxlint') ? 'oxlint && ' : ''
+    scripts.lint = `${oxlintPrefix}eslint .`
+    scripts['lint:fix'] = `${oxlintPrefix}eslint . --fix`
   }
 
   if (tools.includes('prettier')) {

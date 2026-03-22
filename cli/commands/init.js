@@ -60,6 +60,7 @@ export async function init() {
     {
       Quality: [
         { fixed: true, label: 'ESLint', value: 'eslint' },
+        { label: 'Oxlint (fast pre-check)', value: 'oxlint' },
         { label: 'Prettier', value: 'prettier' },
         { label: 'Stylelint', value: 'stylelint' },
         { label: 'Markdownlint', value: 'markdownlint' },
@@ -238,7 +239,8 @@ function buildFileList(config) {
   const hasPrePush = enforcement.includes('pre-push')
   const hasCommitlint = tools.includes('commitlint')
 
-  const files = [generateEslint({ language, projectType, testingTools })]
+  const hasOxlint = tools.includes('oxlint')
+  const files = [generateEslint({ hasOxlint, language, projectType, testingTools })]
 
   if (tools.includes('prettier')) files.push(generatePrettier())
   if (tools.includes('stylelint')) files.push(generateStylelint())
@@ -280,6 +282,7 @@ function buildPackageList(config) {
     packages.push('@commitlint/cli', '@commitlint/config-conventional')
   }
 
+  if (tools.includes('oxlint')) packages.push('oxlint')
   if (tools.includes('vitest')) packages.push('@vitest/eslint-plugin')
   if (tools.includes('playwright')) packages.push('eslint-plugin-playwright')
   if (tools.includes('testing-library')) packages.push('eslint-plugin-testing-library')
