@@ -1,0 +1,23 @@
+{
+  "name": "kata-example-monorepo-web",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "vue": "*"
+  },
+  "devDependencies": {
+    "@franvena/kata": "file:../../../../",
+    "eslint": "*",
+    "prettier": "*",
+    "stylelint": "*",
+    "typescript": "*"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:css": "stylelint 'src/**/*.{scss,css,vue}'",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
+  }
+}

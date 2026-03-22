@@ -1,0 +1,5 @@
+// @expect-error: declaration-block-no-duplicate-properties
+.button {
+  color: red;
+  colr: blue;
+}

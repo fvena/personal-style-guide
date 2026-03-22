@@ -1,0 +1,4 @@
+{
+  "extends": "@franvena/kata/typescript/browser",
+  "include": ["src/**/*.ts", "*.config.ts"]
+}

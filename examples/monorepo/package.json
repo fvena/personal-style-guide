@@ -1,0 +1,5 @@
+{
+  "name": "kata-example-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"]
+}

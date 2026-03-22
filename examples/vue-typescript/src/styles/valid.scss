@@ -1,0 +1,11 @@
+$primary: #0e7490;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: $primary;
+  background-color: transparent;
+  border: 1px solid $primary;
+  border-radius: 4px;
+}

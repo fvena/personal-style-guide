@@ -1,0 +1,17 @@
+{
+  "name": "kata-example-node-javascript",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@franvena/kata": "file:../../",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "prettier": "*"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  }
+}
