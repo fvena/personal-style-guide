@@ -67,6 +67,70 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm test
 
+  examples:
+    name: Examples (${{ matrix.example }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - node-typescript
+          - node-typescript-browser
+          - node-javascript
+          - vue-typescript
+          - nuxt-typescript
+          - monorepo
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install kata dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Install example dependencies
+        if: matrix.example != 'monorepo'
+        working-directory: examples/${{ matrix.example }}
+        run: npm install
+
+      - name: Install monorepo dependencies
+        if: matrix.example == 'monorepo'
+        working-directory: examples/monorepo
+        run: npm install --workspaces
+
+      - name: Lint valid files (should pass)
+        if: matrix.example != 'monorepo'
+        working-directory: examples/${{ matrix.example }}
+        run: npx eslint src/ --ignore-pattern '**/*invalid*'
+
+      - name: Lint valid files (monorepo)
+        if: matrix.example == 'monorepo'
+        working-directory: examples/monorepo
+        run: |
+          cd packages/api && npx eslint src/ --ignore-pattern '**/*invalid*'
+          cd ../../packages/web && npx eslint src/ --ignore-pattern '**/*invalid*'
+
+      - name: Typecheck
+        if: matrix.example != 'node-javascript' && matrix.example != 'monorepo'
+        working-directory: examples/${{ matrix.example }}
+        run: npx tsc --noEmit
+
+      - name: Verify invalid files produce errors
+        if: matrix.example != 'monorepo'
+        working-directory: examples/${{ matrix.example }}
+        run: |
+          if ! npx eslint src/ --no-error-on-unmatched-pattern 2>&1 | grep -q "error"; then
+            echo "Expected errors in invalid files but found none"
+            exit 1
+          fi
+          echo "Invalid files correctly produce errors"
+
   publish:
     name: Publish to NPM
     environment: npm
