@@ -3,8 +3,8 @@
 </div>
 
 <p align="center">
-  <strong>Strict by default. Yours to extend.</strong><br/>
-  A complete code quality toolkit for Vue&nbsp;3 · Nuxt&nbsp;3 · TypeScript · SCSS
+  <strong>Code quality, enforced.</strong><br/>
+  Same standard for every developer, every AI agent, every commit.
 </p>
 
 <p align="center">
@@ -19,6 +19,9 @@
   <a href="https://www.npmjs.com/package/@franvena/kata">
     <img src="https://img.shields.io/badge/provenance-verified-0e7490" alt="npm provenance" />
   </a>
+  <a href="https://www.npmjs.com/package/@franvena/kata">
+    <img src="https://img.shields.io/npm/dm/@franvena/kata?color=0e7490&label=downloads" alt="npm downloads" />
+  </a>
 </p>
 
 <br/>
@@ -26,28 +29,82 @@
 <details>
 <summary><strong>Table of Contents</strong></summary>
 
-- [Motivation](#motivation)
+- [Quick start](#quick-start)
+- [Is kata for you?](#is-kata-for-you)
+- [What kata catches](#what-kata-catches)
 - [Getting Started](#getting-started)
 - [ESLint](#eslint)
 - [Prettier](#prettier)
 - [Stylelint](#stylelint)
 - [TypeScript](#typescript)
 - [Markdown](#markdown)
+- [Customizing kata](#customizing-kata)
+- [Comparison with alternatives](#comparison-with-alternatives)
 - [Compatibility](#compatibility)
 - [Troubleshooting](#troubleshooting)
 - [Design Philosophy](#design-philosophy)
-- [Roadmap](#roadmap)
+- [Versioning](#versioning)
+- [What's next](#whats-next)
 - [Contributing](#contributing)
 
 </details>
 
 ---
 
-## Motivation
+Kata is a complete code quality toolkit for Node.js and TypeScript projects. One install gives you ESLint with type-aware rules, Prettier, Stylelint, TypeScript base configs, and Markdownlint — configured to work together without conflicts.
 
-Getting ESLint, Prettier, Stylelint, and TypeScript to work correctly together in a Vue 3 + Nuxt 3 project is a full day's work — and it breaks again on the next major plugin update. The integration points are non-trivial: `typescript-eslint`'s `strictTypeChecked` must cover `.vue` files without conflicting with `vue-eslint-parser`, Stylelint needs separate config for SCSS-in-Vue scoped styles, and Prettier must be kept completely out of ESLint's rule set to avoid conflicts. `@franvena/kata` absorbs that integration work and keeps it up to date. Install once, configure in minutes, get strict linting across your full stack.
+These tools catch bugs that compile and ship to production: floating promises that silently lose data, unsafe `any` propagation that defeats the type system, CSS properties the browser ignores without warning, Vue ref comparisons without `.value` that produce conditions that are always false. Style is 5% of what they do. The other 95% is finding bugs.
 
-If your stack is **Vue 3 + Nuxt 3 + TypeScript + SCSS**, this is the most complete opinionated setup available as a single package.
+If your stack includes Vue 3 or Nuxt 3, kata is the most complete opinionated setup available as a single package. If you use Node.js without a framework, the base presets cover TypeScript, JavaScript, YAML, and Markdown with the same depth.
+
+---
+
+## Quick start
+
+```sh
+npm install --save-dev @franvena/kata eslint typescript
+```
+
+```js
+// eslint.config.js
+import eslintNode from '@franvena/kata/eslint/node'
+export default [...eslintNode]
+```
+
+That's it. Run `npx eslint .` to see what kata finds in your code.
+
+Need Prettier, Stylelint, or Vue/Nuxt presets? See the [full setup](#getting-started) below.
+
+---
+
+## Is kata for you?
+
+Kata is built for developers and teams who:
+
+- Maintain one or more Node.js/TypeScript repositories and want a single quality standard across all of them.
+- Are starting a new project and want strict linting from day one instead of bolting it on later.
+- Are migrating to ESLint v10 flat config and need a modern, maintained config that works out of the box.
+- Work with Vue 3 or Nuxt 3 and need ESLint, Stylelint, and TypeScript configured to handle `.vue` SFCs correctly.
+- Use AI coding tools (Copilot, Cursor, Claude) and want the same rules applied to AI-generated code as to human-written code.
+- Want type-aware ESLint rules (`no-floating-promises`, `no-unsafe-*`) without spending hours on `typescript-eslint` configuration.
+
+If you only need ESLint and prefer a factory function API, [@antfu/eslint-config](https://github.com/antfu/eslint-config) is an excellent choice. Kata covers more ground — Prettier, Stylelint, Markdownlint, TypeScript configs — for teams that want a complete solution.
+
+---
+
+## What kata catches
+
+Kata is not about tabs vs. spaces. It catches bugs that compile, pass TypeScript, and reach production.
+
+**TypeScript & JavaScript.** Floating promises that silently lose data. Unsafe `any` propagation that defeats the type system. Type assertions (`as User`) that silence the compiler until the API changes. Conditions that are always true or always false. Loops that await inside instead of using `Promise.all`.
+
+**CSS & SCSS.** Properties the browser silently ignores (`colr: red`). Media queries with typos (`max-widht`). Shorthand properties that overwrite longhands you set three lines above. Duplicate properties with conflicting values.
+
+**Vue templates.** Props mutated directly instead of emitting events. Refs compared without `.value`, producing conditions that are always false. Missing key attributes on `v-for`. Deprecated slot syntax. Accessibility violations (missing alt text, click handlers without keyboard equivalents).
+
+**Markdown.** Inconsistent heading levels. Broken link references. Bare URLs without link syntax.
+
+500+ rules across five tools. Every file type in your project covered.
 
 ---
 
@@ -96,23 +153,6 @@ import eslintNuxt from "@franvena/kata/eslint/nuxt";
 export default [...eslintNuxt];
 ```
 
-### Extending and overriding rules
-
-```js
-import eslintVue from '@franvena/kata/eslint/vue'
-
-export default [
-  ...eslintVue,
-  {
-    rules: {
-      'unicorn/no-array-for-each': 'off',
-      // Relax SCSS enforcement during migration
-      'vue/block-lang': ['error', { script: { lang: 'ts' }, style: { lang: ['scss', 'css'] } }]
-    }
-  }
-]
-```
-
 ### Composable config blocks
 
 Import only what you need from `@franvena/kata/eslint/base`:
@@ -137,7 +177,7 @@ export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePer
 | ------------------- | ---------------------------------------- |
 | `baseIgnores`       | Global ignore patterns                   |
 | `baseJavascript`    | JS recommended + Node.js plugin          |
-| `baseTypeScript`    | Strict type-checked TS rules + parser    |
+| `baseTypeScript`    | Type-aware TS rules + parser             |
 | `basePerfectionist` | Import and code organization sorting     |
 | `baseUnicorn`       | Modern JS best practices                 |
 | `baseRegexp`        | Regex correctness rules                  |
@@ -151,7 +191,7 @@ export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePer
 | Plugin                                                                                                                 | Purpose                              |
 | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | [`@eslint/js`](https://github.com/eslint/eslint)                                                                       | JavaScript recommended rules         |
-| [`typescript-eslint`](https://typescript-eslint.io)                                                                    | Strict TypeScript rules + parser     |
+| [`typescript-eslint`](https://typescript-eslint.io)                                                                    | Type-aware TypeScript rules + parser |
 | [`eslint-plugin-n`](https://github.com/eslint-community/eslint-plugin-n)                                               | Node.js-specific rules               |
 | [`eslint-plugin-perfectionist`](https://perfectionist.dev)                                                             | Import and code organization sorting |
 | [`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn)                                       | Modern JS/TS best practices          |
@@ -329,6 +369,121 @@ Strict mode, `noUncheckedIndexedAccess`, modern module settings. Based on [Matt 
 
 ---
 
+## Customizing kata
+
+Kata is opinionated by default and flexible when you need it. Every rule can be overridden, every block can be replaced, and every tool is optional.
+
+### Override a rule
+
+```js
+// eslint.config.js
+import eslintNode from '@franvena/kata/eslint/node'
+
+export default [
+  ...eslintNode,
+  {
+    rules: {
+      // Disable a rule entirely
+      'unicorn/no-array-for-each': 'off',
+      // Change severity from error to warning
+      '@typescript-eslint/no-explicit-any': 'warn'
+    }
+  }
+]
+```
+
+### Compose only the blocks you need
+
+Every preset is built from composable blocks. Import them individually to build a custom config:
+
+```js
+import {
+  baseIgnores,
+  baseJavascript,
+  baseTypeScript,
+  baseUnicorn
+} from '@franvena/kata/eslint/base'
+
+export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...baseUnicorn]
+```
+
+See the full list of available blocks in the [ESLint section](#composable-config-blocks).
+
+### Use strict TypeScript checking
+
+The default TypeScript preset uses `recommendedTypeChecked` — the rules with the highest signal-to-noise ratio. For teams comfortable with stricter checking, switch to `strictTypeChecked`:
+
+```js
+import eslintNode from '@franvena/kata/eslint/node'
+import tseslint from 'typescript-eslint'
+
+export default [...eslintNode, ...tseslint.configs.strictTypeChecked]
+```
+
+`strictTypeChecked` adds rules like `no-unnecessary-condition`, `no-confusing-void-expression`, and stricter `restrict-template-expressions`. It catches more edge cases but may produce false positives in idiomatic code. It is also [not semver-stable in typescript-eslint](https://typescript-eslint.io/users/configs#strict-type-checked) — rules can change in minor versions.
+
+### Relax Vue SFC enforcement during migration
+
+If you're adopting kata on an existing Vue project, some rules may flag every component. Relax them temporarily:
+
+```js
+import eslintVue from '@franvena/kata/eslint/vue'
+
+export default [
+  ...eslintVue,
+  {
+    rules: {
+      // Allow plain CSS while migrating to SCSS
+      'vue/block-lang': 'warn',
+      // Allow global styles temporarily
+      'vue/enforce-style-attribute': 'warn'
+    }
+  }
+]
+```
+
+### Different presets per package in a monorepo
+
+Each package in a monorepo can use a different kata preset. Each needs its own `eslint.config.js` and `tsconfig.json`:
+
+```
+packages/
+  api/
+    eslint.config.js    → imports @franvena/kata/eslint/node
+    tsconfig.json       → extends @franvena/kata/typescript/node
+  web/
+    eslint.config.js    → imports @franvena/kata/eslint/vue
+    tsconfig.json       → extends @franvena/kata/typescript/browser
+```
+
+Run ESLint from the root with the `--config` flag or from each package directory.
+
+---
+
+## Comparison with alternatives
+
+|                             | kata       | @antfu/eslint-config | XO          | Biome              | Manual setup  |
+| --------------------------- | ---------- | -------------------- | ----------- | ------------------ | ------------- |
+| ESLint flat config          | Yes        | Yes                  | Yes         | N/A                | Yes           |
+| TypeScript type-aware rules | Yes        | Yes                  | Yes         | Partial            | Yes           |
+| Prettier                    | Integrated | No (uses Stylistic)  | Optional    | Built-in formatter | Manual        |
+| Stylelint (CSS/SCSS/Vue)    | Integrated | No                   | No          | No                 | Manual        |
+| Markdownlint                | Integrated | No                   | No          | No                 | Manual        |
+| TypeScript base configs     | Integrated | No                   | No          | No                 | Manual        |
+| Vue 3 / Nuxt 3 presets      | Yes        | Yes                  | No          | Experimental       | Manual        |
+| Composable config blocks    | Yes        | Factory function     | CLI wrapper | Config file        | N/A           |
+| Single package install      | Yes        | Yes                  | Yes         | Yes                | 5-12 packages |
+
+**[@antfu/eslint-config](https://github.com/antfu/eslint-config)** is excellent if you only need ESLint and prefer ESLint Stylistic over Prettier. It auto-detects Vue and TypeScript, and Anthony Fu (Vue/Nuxt core team) maintains it actively. Choose antfu if ESLint is all you need. Choose kata if you also need Prettier, Stylelint, Markdownlint, and TypeScript base configs in one package.
+
+**[XO](https://github.com/xojs/xo)** wraps ESLint in a CLI with strong defaults. It does not cover CSS, Markdown, or Vue-specific rules. Good for Node.js-only projects that want zero config.
+
+**[Biome](https://biomejs.dev)** is 25x faster and unifies linting and formatting in a single tool. However, Vue SFC support is experimental, SCSS is not supported, Markdown linting has no active development, and type-aware rules (the ones that catch the most bugs) are not available. For Vue/Nuxt projects with TypeScript and SCSS, the coverage gap is significant. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md) for the full evaluation.
+
+**Manual setup** gives you full control. But integrating ESLint, Prettier, Stylelint, TypeScript, and Markdownlint without conflicts takes hours — and you repeat that work in every repository. Kata absorbs the integration and keeps it updated.
+
+---
+
 ## Compatibility
 
 | Tool       | Supported versions |
@@ -400,7 +555,7 @@ These are the deliberate decisions behind this config — not just what the rule
 **Flat config over legacy `.eslintrc`** — ESLint 9's flat config is the only supported format. Native JavaScript composition via array spread, no implicit merging, no hidden config resolution. Every rule is traceable.
 → [Full decision: ADR-001](./docs/decisions/001-flat-config.md)
 
-**`strictTypeChecked` over `recommended`** — The most rigorous TypeScript-ESLint preset. Requires type information for every rule, which means slower linting but catches unsafe assignments, unhandled promise rejections, and incorrect nullish coalescing that type-unaware rules miss entirely. The performance cost is acceptable; the safety gain is not optional.
+**`recommendedTypeChecked` as the default** — The TypeScript-ESLint preset with the highest signal-to-noise ratio. Catches floating promises, unsafe `any` propagation, and misused promises — the rules that prevent the most real bugs. `strictTypeChecked` is available as an opt-in for teams that want additional strictness (see [Customizing kata](#use-strict-typescript-checking)). The default was changed from `strictTypeChecked` because it is [not semver-stable](https://typescript-eslint.io/users/configs#strict-type-checked) in typescript-eslint — rule changes can occur in minor versions, which would break user builds without kata publishing a new version.
 → [Full decision: ADR-002](./docs/decisions/002-strict-type-checked.md)
 
 **`projectService` over `project: [...]`** — Auto-discovers `tsconfig.json` files relative to each linted file. Handles monorepos, nested packages, and workspace setups without manual path arrays. Tradeoff: `tsconfigRootDir` points to the package root, not the consumer's project — intentional, documented in source.
@@ -434,18 +589,6 @@ These are the deliberate decisions behind this config — not just what the rule
 
 ---
 
-## What's next
-
-- **Biome** doesn't support Vue SFCs yet — we're watching it closely. If full SFC support lands, we'll evaluate it as a replacement for ESLint + Prettier. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md) for the full context.
-- CSS-in-JS support (`@vanilla-extract`, `panda-css`) if there's demand from the community
-
-## Out of scope
-
-- **React/JSX** — different ecosystem, out of focus
-- **JSON linting** — deferred until `@eslint/json` is compatible with files-scoped base config blocks
-
----
-
 ## Versioning
 
 This project follows [Semantic Versioning](https://semver.org/). As a linting config, rule changes follow this contract:
@@ -464,10 +607,11 @@ Every major version includes a migration guide documenting what changed, why, an
 
 ---
 
-## Also by @fvena
+## What's next
 
-- [**kovo**](https://github.com/fvena/kovo) — Git submodule management for multi-repo workflows
-- [**kenso**](https://github.com/fvena/kenso) — Knowledge base CLI for LLM coding agents
+- **CLI `kata init`** — One command to set up configs, pre-commit hooks, commitlint, and CI workflows. Auto-detects your stack. Choose your level: standards only, local enforcement, or full CI protection.
+- **Migration guides** — Step-by-step guides for teams coming from eslint-config-airbnb, eslint-config-standard, @antfu/eslint-config, or a manual setup.
+- **Biome/Oxlint watch** — Biome doesn't support Vue SFCs, SCSS, or Markdown at production quality yet. When it does, kata will evaluate integration. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md).
 
 ---
 
