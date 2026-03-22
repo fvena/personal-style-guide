@@ -1,5 +1,29 @@
 # Changelog
 
+## [Unreleased]
+
+### ⚠ BREAKING CHANGES
+
+- **eslint:** ESLint peer dependency narrowed from `^9.0.0 || ^10.0.0` to `^10.0.0`. kata v2 is ESLint 10 only.
+- **typescript:** TypeScript peer dependency tightened from `^5.0.0` to `^5.7.0` (required for `isolatedDeclarations` and Node.js native TS support).
+- **stylelint:** Replaced `stylelint-config-recommended-vue` (incompatible with Stylelint 17) with `postcss-html` custom syntax. Upgraded from `stylelint-config-recommended` + `stylelint-config-recommended-scss` to `stylelint-config-standard-scss`. Users with Stylelint overrides that depended on `stylelint-config-recommended-vue` will need to update their config. See [ADR-011](./docs/decisions/011-stylelint-standard-and-vue.md).
+
+### Bug Fixes
+
+- **eslint:** bump `@eslint/js` from `^9.39.3` to `^10.0.1` — was not resolving to v10
+- **eslint:** clean ESLint peer dep to `^10.0.0` — kata is ESLint 10 only
+
+### Features
+
+- **eslint:** add `baseOxlint` composable block for Oxlint integration (opt-in, not in default export). See [ADR-012](./docs/decisions/012-oxlint-precheck.md).
+- **cli:** add Oxlint as opt-in tool in `kata init` — generates `oxlint &&` prefixed lint scripts and includes `baseOxlint` in eslint config when selected.
+
+### Chores
+
+- Add knip, publint, and attw for package quality checks
+- Add Node 24 to CI test matrix
+- Add package-quality CI job (publint + knip)
+
 ## [2.0.0](https://github-personal/fvena/kata/compare/v1.2.0...v2.0.0) (2026-03-22)
 
 ### ⚠ BREAKING CHANGES

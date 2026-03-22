@@ -183,18 +183,19 @@ import {
 export default [...baseIgnores, ...baseJavascript, ...baseTypeScript, ...basePerfectionist]
 ```
 
-| Block               | Description                              |
-| ------------------- | ---------------------------------------- |
-| `baseIgnores`       | Global ignore patterns                   |
-| `baseJavascript`    | JS recommended + Node.js plugin          |
-| `baseTypeScript`    | Type-aware TS rules + parser             |
-| `basePerfectionist` | Import and code organization sorting     |
-| `baseUnicorn`       | Modern JS best practices                 |
-| `baseRegexp`        | Regex correctness rules                  |
-| `baseComments`      | ESLint directive comment rules           |
-| `baseTsdoc`         | TSDoc validation — **opt-in**, see below |
-| `baseYaml`          | YAML linting                             |
-| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown   |
+| Block               | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `baseIgnores`       | Global ignore patterns                        |
+| `baseJavascript`    | JS recommended + Node.js plugin               |
+| `baseTypeScript`    | Type-aware TS rules + parser                  |
+| `basePerfectionist` | Import and code organization sorting          |
+| `baseUnicorn`       | Modern JS best practices                      |
+| `baseRegexp`        | Regex correctness rules                       |
+| `baseComments`      | ESLint directive comment rules                |
+| `baseTsdoc`         | TSDoc validation — **opt-in**, see below      |
+| `baseOxlint`        | Oxlint rule disabling — **opt-in**, see below |
+| `baseYaml`          | YAML linting                                  |
+| `baseMarkdown`      | Lint JS/TS code blocks inside Markdown        |
 
 ### Plugins included
 
@@ -221,6 +222,38 @@ import eslintNode from '@franvena/kata/eslint/node'
 
 export default [...eslintNode, ...baseTsdoc]
 ```
+
+### Opt-in: Oxlint performance layer
+
+[Oxlint](https://oxc.rs/docs/guide/usage/linter) runs 650+ ESLint rules in Rust at native speed. When paired with `eslint-plugin-oxlint`, duplicate rules are disabled in ESLint so they run only once — in Oxlint.
+
+Install oxlint:
+
+```sh
+npm install --save-dev oxlint
+```
+
+Add `baseOxlint` to your config and prefix your lint scripts:
+
+```js
+import { baseOxlint } from '@franvena/kata/eslint/base'
+import eslintNode from '@franvena/kata/eslint/node'
+
+export default [...eslintNode, ...baseOxlint]
+```
+
+```json
+{
+  "scripts": {
+    "lint": "oxlint && eslint .",
+    "lint:fix": "oxlint --fix && eslint . --fix"
+  }
+}
+```
+
+`baseOxlint` is not included in any preset by default to prevent silent coverage loss for users who don't have oxlint installed. The `kata init` CLI configures this automatically when you select Oxlint.
+
+> [Full decision: ADR-012](./docs/decisions/012-oxlint-precheck.md)
 
 ### Vue 3
 
@@ -351,7 +384,7 @@ export default {
 }
 ```
 
-Includes `stylelint-config-recommended`, `stylelint-config-recommended-scss`, `stylelint-config-recommended-vue/scss`, and `stylelint-config-recess-order`.
+Includes `stylelint-config-standard-scss` and `stylelint-config-recess-order`. Vue SFCs are supported via `postcss-html` custom syntax (configured automatically).
 
 ---
 
@@ -513,15 +546,15 @@ ESLint v10 removed the legacy `.eslintrc` format. If your current config uses `.
 
 ## Compatibility
 
-| Tool       | Supported versions  |
-| ---------- | ------------------- |
-| Node.js    | >=22.13.0           |
-| ESLint     | ^9.0.0 \|\| ^10.0.0 |
-| TypeScript | ^5.0.0              |
-| Vue        | ^3.4.0              |
-| Nuxt       | ^3.10.0             |
-| Prettier   | ^3.0.0              |
-| Stylelint  | ^17.0.0             |
+| Tool       | Supported versions |
+| ---------- | ------------------ |
+| Node.js    | >=22.13.0          |
+| ESLint     | ^10.0.0            |
+| TypeScript | ^5.7.0             |
+| Vue        | ^3.4.0             |
+| Nuxt       | ^3.10.0            |
+| Prettier   | ^3.0.0             |
+| Stylelint  | ^17.0.0            |
 
 ---
 
@@ -609,6 +642,12 @@ These are the deliberate decisions behind this config — not just what the rule
 **ESLint v10 feature adoption** — Evaluated defineConfig (already adopted), multithreading, bulk suppressions, and official CSS/HTML plugins. Stylelint remains necessary for SCSS and Vue scoped styles.
 → [Full decision: ADR-010](./docs/decisions/010-eslint-v10-features.md)
 
+**Stylelint standard configs and Vue via postcss-html** — Replaced `stylelint-config-recommended-vue` (incompatible with Stylelint 17) with `postcss-html` custom syntax. Upgraded to `stylelint-config-standard-scss` for stricter CSS conventions.
+→ [Full decision: ADR-011](./docs/decisions/011-stylelint-standard-and-vue.md)
+
+**Oxlint as opt-in performance layer** — Oxlint runs 650+ ESLint rules in Rust. Exposed as `baseOxlint` composable block (not in default export) to prevent silent coverage loss. CLI handles opt-in configuration.
+→ [Full decision: ADR-012](./docs/decisions/012-oxlint-precheck.md)
+
 ---
 
 ## Scripts
@@ -667,7 +706,8 @@ Every major version includes a migration guide documenting what changed, why, an
 
 ## What's next
 
-- **Biome/Oxlint watch** — Biome doesn't support Vue SFCs, SCSS, or Markdown at production quality yet. When it does, kata will evaluate integration. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md).
+- **eslint-plugin-import-x** — Waiting for v5 with ESLint 10 support. Target rules: `no-cycle`, `no-self-import`, `no-extraneous-dependencies`, `no-duplicates`.
+- **Biome watch** — Biome doesn't support Vue SFCs, SCSS, or Markdown at production quality yet. When it does, kata will evaluate migration. The export map architecture allows transparent tooling changes. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md).
 - **ESLint multithreaded linting** — ESLint v10 supports `--concurrency=auto` for 1.3x-3x speedups. kata configs are compatible. See [ADR-010](./docs/decisions/010-eslint-v10-features.md).
 
 ---
