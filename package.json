@@ -1,6 +1,6 @@
 {
   "name": "@franvena/kata",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Opinionated ESLint, Prettier, Stylelint & TypeScript configs for Vue 3 + Nuxt 3 + SCSS. Strict by default. Composable by design.",
   "keywords": [
     "a11y",

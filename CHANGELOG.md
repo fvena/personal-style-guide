@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github-personal/fvena/kata/compare/v1.1.0...v1.2.0) (2026-03-22)
+
+### Features
+
+- **eslint:** enhance Vue and Stylelint configurations ([0e2b7e1](https://github-personal/fvena/kata/commit/0e2b7e10476a72d95fa7abf1fc98137162d365f9))
+- **eslint:** update dependencies and enhance ESLint configurations ([d8a2b81](https://github-personal/fvena/kata/commit/d8a2b814c758ede5d63f02d3cd9dcd391cf0df0b))
+
 ## [1.1.0](https://github-personal/fvena/kata/compare/v1.0.0...v1.1.0) (2026-03-21)
 
 ### Features
