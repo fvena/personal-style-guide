@@ -8,14 +8,13 @@ import pluginRegexp from 'eslint-plugin-regexp'
 import tsdocPlugin from 'eslint-plugin-tsdoc'
 import unicornPlugin from 'eslint-plugin-unicorn'
 import eslintPluginYml from 'eslint-plugin-yml'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 
 /* eslint-disable perfectionist/sort-objects -- Disabling sorting to maintain logical grouping of plugin hooks */
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseIgnores = [
-  { name: 'fvena/base/ignores', ignores: ['node_modules/', '**/dist/', '**/cache/'] }
-]
+export const baseIgnores = [globalIgnores(['node_modules/', '**/dist/', '**/cache/'])]
 
 /** @type {import('eslint').Linter.Config[]} */
 export const baseJavascript = [
@@ -41,7 +40,7 @@ export const baseJavascript = [
 ]
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseTypeScript = tseslint.config(
+export const baseTypeScript = defineConfig([
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
@@ -90,7 +89,7 @@ export const baseTypeScript = tseslint.config(
     extends: [tseslint.configs.disableTypeChecked],
     files: ['**/*.js']
   }
-)
+])
 
 /** @type {import('eslint').Linter.Config[]} */
 export const basePerfectionist = [
@@ -187,14 +186,17 @@ export const baseTsdoc = [
 ]
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseYaml = tseslint.config(...eslintPluginYml.configs['flat/recommended'], {
-  name: 'fvena/base/yaml/disable-type-checked',
-  extends: [tseslint.configs.disableTypeChecked],
-  files: ['**/*.yaml', '**/*.yml']
-})
+export const baseYaml = defineConfig([
+  ...eslintPluginYml.configs['flat/recommended'],
+  {
+    name: 'fvena/base/yaml/disable-type-checked',
+    extends: [tseslint.configs.disableTypeChecked],
+    files: ['**/*.yaml', '**/*.yml']
+  }
+])
 
 /** @type {import('eslint').Linter.Config[]} */
-export const baseMarkdown = tseslint.config(
+export const baseMarkdown = defineConfig([
   {
     name: 'fvena/base/markdown/processor',
     files: ['**/*.md'],
@@ -221,17 +223,10 @@ export const baseMarkdown = tseslint.config(
       'perfectionist/sort-objects': 'off'
     }
   }
-)
+])
 
-/*
- * tseslint.config() is kept as the wrapper because it resolves
- * typescript-eslint's `extends` shorthand and typed plugin references.
- * defineConfig() from "eslint/config" is not used here to avoid double-wrapping
- * and potential type conflicts. Consumers that import this base config can wrap
- * it with defineConfig() in their own entry points.
- */
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   ...baseIgnores,
   ...baseJavascript,
   ...baseTypeScript,
@@ -243,5 +238,5 @@ export default [
   ...baseMarkdown,
   // Prettier must be last — it disables formatting rules from all configs above
   { ...eslintConfigPrettier, name: 'fvena/base/prettier' }
-]
+])
 /* eslint-enable perfectionist/sort-objects */

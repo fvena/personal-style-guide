@@ -1,4 +1,5 @@
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import { defineConfig } from 'eslint/config'
 import vueConfig from './vue.js'
 
 // createConfigForNuxt returns a FlatConfigComposer (thenable) — top-level await resolves it
@@ -11,7 +12,7 @@ const nuxtBase = await createConfigForNuxt({
 })
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   ...vueConfig,
   ...nuxtBase,
   // Nuxt-specific overrides
@@ -27,4 +28,4 @@ export default [
       ]
     }
   }
-]
+])
