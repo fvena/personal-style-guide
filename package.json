@@ -1,6 +1,6 @@
 {
   "name": "@franvena/kata",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Code quality toolkit for Node.js and TypeScript. ESLint, Prettier, Stylelint, Markdownlint, and TypeScript configs — configured, enforced, maintained.",
   "keywords": [
     "a11y",

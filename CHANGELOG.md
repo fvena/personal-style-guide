@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.0.0](https://github-personal/fvena/kata/compare/v1.2.0...v2.0.0) (2026-03-22)
+
+### ⚠ BREAKING CHANGES
+
+- Added interactive CLI (kata init) that generates configs,
+  pre-commit hooks, commitlint, and CI workflows. Requires Node.js >=22.13.0.
+  ESLint peer dependency expanded to ^9.0.0 || ^10.0.0.
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+
+- **eslint:** The default TypeScript-ESLint preset changes from
+  strictTypeChecked to recommendedTypeChecked. This reduces the number
+  of active rules but improves semver stability and adoption friction.
+  Users who want the stricter preset can opt in — see README section
+  "Customizing kata" for instructions.
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+
+### Features
+
+- **cli:** add file generators for all config types ([a2ec3d9](https://github-personal/fvena/kata/commit/a2ec3d9bcffbea84ed086da1601894fb960524c4))
+- **cli:** add native prompt components and utilities ([e4b84a1](https://github-personal/fvena/kata/commit/e4b84a14b6013d442708a4b235eb6fba89450189))
+- **cli:** implement kata init interactive flow ([0a08283](https://github-personal/fvena/kata/commit/0a0828397424cdcd94bcb9201e2a37cd6e5e72f4))
+- **eslint:** change TypeScript default to recommendedTypeChecked ([6abc667](https://github-personal/fvena/kata/commit/6abc667545b0d1c091352a27d74491bb7b39a09e))
+- upgraded ESLint to version 10.0.0, migrate to new configuration format ([91bdd7b](https://github-personal/fvena/kata/commit/91bdd7b7006164d1e85c20ab633fd24d4d235121))
+
+### Performance Improvements
+
+- add lint benchmark script per preset ([f7c6f0a](https://github-personal/fvena/kata/commit/f7c6f0aabb551d1f51ee9068c4545bd4104a6020))
+
+### Documentation
+
+- update README and CONTRIBUTING for post-1.0 changes ([e3dec77](https://github-personal/fvena/kata/commit/e3dec773b64f48447c9500b62f2785e907f430fe))
+
 ## [1.2.0](https://github-personal/fvena/kata/compare/v1.1.0...v1.2.0) (2026-03-22)
 
 ### Features
