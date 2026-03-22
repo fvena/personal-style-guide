@@ -51,12 +51,16 @@
     "./typescript/browser": "./typescript/tsconfig.browser.json",
     "./markdown": "./markdown/markdownlint.json"
   },
+  "bin": {
+    "kata": "./cli/index.js"
+  },
   "files": [
     "eslint",
     "prettier",
     "stylelint",
     "typescript",
-    "markdown"
+    "markdown",
+    "cli"
   ],
   "scripts": {
     "format": "prettier --write .",
