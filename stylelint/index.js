@@ -1,10 +1,11 @@
 /** @type {import('stylelint').Config} */
 export default {
-  extends: [
-    'stylelint-config-recommended',
-    'stylelint-config-recommended-scss',
-    'stylelint-config-recommended-vue/scss',
-    'stylelint-config-recess-order'
+  extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order'],
+  overrides: [
+    {
+      customSyntax: 'postcss-html',
+      files: ['**/*.vue']
+    }
   ],
   rules: {
     // Modern CSS: enforce percentage notation for alpha values (e.g. oklch(50% 0.2 250 / 80%))

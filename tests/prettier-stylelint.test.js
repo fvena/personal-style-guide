@@ -40,9 +40,19 @@ describe('stylelint config', () => {
     const { default: config } = await import('../stylelint/index.js')
 
     expect(Array.isArray(config.extends)).toBe(true)
-    expect(config.extends).toContain('stylelint-config-recommended')
-    expect(config.extends).toContain('stylelint-config-recommended-scss')
+    expect(config.extends).toContain('stylelint-config-standard-scss')
     expect(config.extends).toContain('stylelint-config-recess-order')
+  })
+
+  it('uses postcss-html for Vue files', async () => {
+    const { default: config } = await import('../stylelint/index.js')
+
+    expect(Array.isArray(config.overrides)).toBe(true)
+
+    const vueOverride = config.overrides.find(o => o.files.includes('**/*.vue'))
+
+    expect(vueOverride).toBeDefined()
+    expect(vueOverride.customSyntax).toBe('postcss-html')
   })
 
   it('has rules defined', async () => {

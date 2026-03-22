@@ -3,10 +3,9 @@
   "entry": ["eslint/*.js"],
   "project": ["eslint/**/*.js", "prettier/**/*.js", "stylelint/**/*.js", "cli/**/*.js"],
   "ignoreDependencies": [
+    "postcss-html",
     "stylelint-config-recess-order",
-    "stylelint-config-recommended",
-    "stylelint-config-recommended-scss",
-    "stylelint-config-recommended-vue"
+    "stylelint-config-standard-scss"
   ],
   "ignoreBinaries": ["tsc"],
   "exclude": ["optionalPeerDependencies"]
