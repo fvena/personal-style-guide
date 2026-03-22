@@ -69,6 +69,7 @@
     "cli"
   ],
   "scripts": {
+    "benchmark": "bash scripts/benchmark.sh",
     "format": "prettier --write .",
     "lint": "eslint .",
     "prepare": "husky",
@@ -78,8 +79,8 @@
     "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
-    "*": "prettier -w --ignore-unknown",
-    "*.{js,ts}": "eslint --fix"
+    "!(examples/**)*": "prettier -w --ignore-unknown",
+    "!(examples/**)*.{js,ts}": "eslint --fix"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
