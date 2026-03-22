@@ -9,7 +9,7 @@ describe('eslint/nuxt config', () => {
 
   it('reports no errors on a valid Vue component', async () => {
     const eslint = createESLint('nuxt.js')
-    const messages = await lintFixture(eslint, 'valid-component.vue')
+    const messages = await lintFixture(eslint, 'ValidComponent.vue')
     const errors = messages.filter(m => m.severity === 2)
     expect(errors).toHaveLength(0)
   })

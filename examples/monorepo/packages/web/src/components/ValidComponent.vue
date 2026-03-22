@@ -1,9 +1,9 @@
 <script setup lang="ts">
-interface ComponentProperties {
-  label: string
-}
+  interface ComponentProperties {
+    label: string
+  }
 
-const { label } = defineProps<ComponentProperties>()
+  const { label } = defineProps<ComponentProperties>()
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const { label } = defineProps<ComponentProperties>()
 </template>
 
 <style scoped lang="scss">
-.label {
-  font-weight: 600;
-}
+  .label {
+    font-weight: 600;
+  }
 </style>

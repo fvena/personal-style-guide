@@ -1,9 +1,9 @@
 <script setup lang="ts">
-interface ComponentProperties {
-  title: string
-}
+  interface ComponentProperties {
+    title: string
+  }
 
-const { title } = defineProps<ComponentProperties>()
+  const { title } = defineProps<ComponentProperties>()
 </script>
 
 <template>
@@ -14,9 +14,9 @@ const { title } = defineProps<ComponentProperties>()
 </template>
 
 <style scoped lang="scss">
-.card {
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-}
+  .card {
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
 </style>

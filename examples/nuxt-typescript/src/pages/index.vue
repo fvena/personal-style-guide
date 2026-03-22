@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const title = 'Home'
+  const title = 'Home'
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const title = 'Home'
 </template>
 
 <style scoped lang="scss">
-h1 {
-  font-size: 2rem;
-}
+  h1 {
+    font-size: 2rem;
+  }
 </style>

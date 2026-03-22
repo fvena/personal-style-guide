@@ -30,16 +30,16 @@ describe('eslint/vue config', () => {
     expect(errors.length).toBeGreaterThan(0)
   })
 
-  it('reports no errors on valid-component.vue', async () => {
+  it('reports no errors on ValidComponent.vue', async () => {
     const eslint = createESLint('vue.js')
-    const results = await eslint.lintFiles([path.join(root, 'fixtures/valid-component.vue')])
+    const results = await eslint.lintFiles([path.join(root, 'fixtures/ValidComponent.vue')])
     const errors = results.flatMap(r => r.messages.filter(m => m.severity === 2))
     expect(errors).toHaveLength(0)
   })
 
-  it('reports errors on invalid-component.vue', async () => {
+  it('reports errors on InvalidComponent.vue', async () => {
     const eslint = createESLint('vue.js')
-    const results = await eslint.lintFiles([path.join(root, 'fixtures/invalid-component.vue')])
+    const results = await eslint.lintFiles([path.join(root, 'fixtures/InvalidComponent.vue')])
     const errors = results.flatMap(r => r.messages.filter(m => m.severity === 2))
     expect(errors.length).toBeGreaterThan(0)
   })

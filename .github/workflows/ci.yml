@@ -124,14 +124,14 @@ jobs:
       - name: Lint valid files (should pass)
         if: matrix.example != 'monorepo'
         working-directory: examples/${{ matrix.example }}
-        run: npx eslint src/ --ignore-pattern '**/*invalid*'
+        run: npx eslint src/ --ignore-pattern '**/*[Ii]nvalid*'
 
       - name: Lint valid files (monorepo)
         if: matrix.example == 'monorepo'
         working-directory: examples/monorepo
         run: |
-          cd packages/api && npx eslint src/ --ignore-pattern '**/*invalid*'
-          cd ../../packages/web && npx eslint src/ --ignore-pattern '**/*invalid*'
+          cd packages/api && npx eslint src/ --ignore-pattern '**/*[Ii]nvalid*'
+          cd ../../packages/web && npx eslint src/ --ignore-pattern '**/*[Ii]nvalid*'
 
       - name: Typecheck
         if: matrix.example != 'node-javascript' && matrix.example != 'monorepo'

@@ -87,7 +87,7 @@ describe('Vue rule behavior — vue config', () => {
 
   it('valid SFC: no errors on a well-formed component', async () => {
     const eslint = createESLint('vue.js')
-    const messages = await lintFixture(eslint, 'valid-component.vue')
+    const messages = await lintFixture(eslint, 'ValidComponent.vue')
     const errors = messages.filter(m => m.severity === 2)
     expect(errors).toHaveLength(0)
   })

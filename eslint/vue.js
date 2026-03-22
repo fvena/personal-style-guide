@@ -140,6 +140,14 @@ export default defineConfigWithVueTs(
       'vue/define-props-destructuring': 'error'
     }
   },
+  // Vue files use PascalCase by convention — override unicorn's default kebab-case
+  {
+    name: 'fvena/vue/filename-case',
+    files: ['**/*.vue'],
+    rules: {
+      'unicorn/filename-case': ['error', { cases: { pascalCase: true } }]
+    }
+  },
   // Vue accessibility rules (WCAG compliance)
   ...pluginVueA11y.configs['flat/recommended'],
   {
