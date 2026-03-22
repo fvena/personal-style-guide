@@ -5,7 +5,7 @@
 ```bash
 git clone https://github.com/fvena/kata.git
 cd kata
-nvm use   # reads .nvmrc → Node 22.11.0
+nvm use   # reads .nvmrc
 npm ci
 ```
 
@@ -18,7 +18,11 @@ npm ci
 | `stylelint/`  | Shared Stylelint config (CSS/SCSS/Vue).                                                                                     |
 | `typescript/` | Base tsconfigs (`tsconfig.node.json`, `tsconfig.browser.json`).                                                             |
 | `markdown/`   | Markdownlint config.                                                                                                        |
-| `tests/`      | Vitest tests and fixture files to verify configs load and rules work.                                                       |
+| `cli/`        | Interactive CLI (`kata init`). Generators produce config files, prompts handle user interaction.                            |
+| `tests/`      | Vitest tests: behavioral config tests, CLI generator unit tests, and E2E generator integration tests.                       |
+| `examples/`   | Working example projects for every preset, tested in CI. Not published to npm.                                              |
+| `docs/`       | Architecture Decision Records, migration guides, and integration guides.                                                    |
+| `scripts/`    | Development scripts (benchmarks).                                                                                           |
 
 Consumers import via package exports: `@franvena/kata/eslint/node`, `@franvena/kata/prettier`, etc. Every config file must have a matching entry in the `exports` field of `package.json`.
 
@@ -54,7 +58,7 @@ docs: update README with inspector section
 chore: update package dependencies
 ```
 
-Scopes match directory names: `eslint`, `prettier`, `stylelint`, `typescript`, `markdown`.
+Scopes match directory names: `eslint`, `prettier`, `stylelint`, `typescript`, `markdown`, `cli`.
 
 ## Pull request expectations
 

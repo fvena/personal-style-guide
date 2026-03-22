@@ -15,7 +15,7 @@
     <img src="https://github.com/fvena/kata/workflows/CI%2FCD/badge.svg" alt="CI" />
   </a>
   <img src="https://img.shields.io/badge/license-MIT-0e7490" alt="License MIT" />
-  <img src="https://img.shields.io/badge/node-%3E%3D22.11.0-0e7490" alt="Node >=22.11.0" />
+  <img src="https://img.shields.io/badge/node-%3E%3D22.13.0-0e7490" alt="Node >=22.13.0" />
   <a href="https://www.npmjs.com/package/@franvena/kata">
     <img src="https://img.shields.io/badge/provenance-verified-0e7490" alt="npm provenance" />
   </a>
@@ -74,6 +74,14 @@ export default [...eslintNode]
 ```
 
 That's it. Run `npx eslint .` to see what kata finds in your code.
+
+Or use the interactive CLI to set up everything at once:
+
+```sh
+npx @franvena/kata init
+```
+
+It detects your stack, generates configs, and optionally sets up pre-commit hooks, commitlint, and CI workflows.
 
 Need Prettier, Stylelint, or Vue/Nuxt presets? See the [full setup](#getting-started) below.
 
@@ -278,7 +286,7 @@ import eslintPlaywright from '@franvena/kata/eslint/playwright'
 Install the required peer dependency:
 
 ```sh
-npm install --save-dev eslint-plugin-vitest
+npm install --save-dev @vitest/eslint-plugin
 ```
 
 Then configure:
@@ -505,15 +513,15 @@ ESLint v10 removed the legacy `.eslintrc` format. If your current config uses `.
 
 ## Compatibility
 
-| Tool       | Supported versions |
-| ---------- | ------------------ |
-| Node.js    | >=22.11.0          |
-| ESLint     | ^9.0.0             |
-| TypeScript | ^5.0.0             |
-| Vue        | ^3.4.0             |
-| Nuxt       | ^3.10.0            |
-| Prettier   | ^3.0.0             |
-| Stylelint  | ^17.0.0            |
+| Tool       | Supported versions  |
+| ---------- | ------------------- |
+| Node.js    | >=22.13.0           |
+| ESLint     | ^9.0.0 \|\| ^10.0.0 |
+| TypeScript | ^5.0.0              |
+| Vue        | ^3.4.0              |
+| Nuxt       | ^3.10.0             |
+| Prettier   | ^3.0.0              |
+| Stylelint  | ^17.0.0             |
 
 ---
 
@@ -592,16 +600,30 @@ These are the deliberate decisions behind this config — not just what the rule
 **Composable blocks as the public API** — Named exports (`baseIgnores`, `baseTypeScript`, etc.) instead of a single opaque object. Each preset is composed from these blocks — no hidden configuration. Consumers can audit the full rule set by reading the import chain, and build custom presets without forking.
 → [Full decision: ADR-007](./docs/decisions/007-composable-blocks-api.md)
 
+**Node.js 22 as the minimum** — Requires Node.js >=22.13.0 for stable ESM support, `import.meta.dirname`, and the native test runner.
+→ [Full decision: ADR-008](./docs/decisions/008-node-22-minimum.md)
+
+**ESLint + Prettier as the base** — Evaluated Biome and Oxlint as alternatives. Biome lacks Vue SFC support, SCSS linting, and type-aware rules. ESLint + Prettier remains the most complete option for Vue/Nuxt projects.
+→ [Full decision: ADR-009](./docs/decisions/009-eslint-prettier-base.md)
+
+**ESLint v10 feature adoption** — Evaluated defineConfig (already adopted), multithreading, bulk suppressions, and official CSS/HTML plugins. Stylelint remains necessary for SCSS and Vue scoped styles.
+→ [Full decision: ADR-010](./docs/decisions/010-eslint-v10-features.md)
+
 ---
 
 ## Scripts
+
+Recommended scripts for a typical project. The `kata init` CLI generates these automatically.
 
 ```json
 {
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:css": "stylelint 'src/**/*.{scss,css,vue}'",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
   }
 }
 ```
@@ -645,9 +667,8 @@ Every major version includes a migration guide documenting what changed, why, an
 
 ## What's next
 
-- **CLI `kata init`** — One command to set up configs, pre-commit hooks, commitlint, and CI workflows. Auto-detects your stack. Choose your level: standards only, local enforcement, or full CI protection.
-- **Migration guides** — Available now. See [Migrating to kata](#migrating-to-kata).
 - **Biome/Oxlint watch** — Biome doesn't support Vue SFCs, SCSS, or Markdown at production quality yet. When it does, kata will evaluate integration. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md).
+- **ESLint multithreaded linting** — ESLint v10 supports `--concurrency=auto` for 1.3x-3x speedups. kata configs are compatible. See [ADR-010](./docs/decisions/010-eslint-v10-features.md).
 
 ---
 
