@@ -55,7 +55,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['22', 'latest']
+        node-version: ['22', '24', 'latest']
 
     steps:
       - uses: actions/checkout@v4
@@ -66,6 +66,23 @@ jobs:
 
       - run: npm ci --ignore-scripts
       - run: npm test
+
+  package-quality:
+    name: Package Quality
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - run: npm ci --ignore-scripts
+      - run: npx publint
+      - run: npx knip
 
   examples:
     name: Examples (${{ matrix.example }})
@@ -135,7 +152,7 @@ jobs:
     name: Publish to NPM
     environment: npm
     runs-on: ubuntu-22.04
-    needs: [lint, typecheck, test]
+    needs: [lint, typecheck, test, package-quality]
     if: |
       github.event_name == 'push' &&
       startsWith(github.event.head_commit.message, 'chore(release):')

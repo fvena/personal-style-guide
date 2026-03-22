@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["eslint/*.js"],
+  "project": ["eslint/**/*.js", "prettier/**/*.js", "stylelint/**/*.js", "cli/**/*.js"],
+  "ignoreDependencies": [
+    "stylelint-config-recess-order",
+    "stylelint-config-recommended",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-recommended-vue"
+  ],
+  "ignoreBinaries": ["tsc"],
+  "exclude": ["optionalPeerDependencies"]
+}
