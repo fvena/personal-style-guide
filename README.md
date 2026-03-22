@@ -39,6 +39,7 @@
 - [TypeScript](#typescript)
 - [Markdown](#markdown)
 - [Customizing kata](#customizing-kata)
+- [Migrating to kata](#migrating-to-kata)
 - [Comparison with alternatives](#comparison-with-alternatives)
 - [Compatibility](#compatibility)
 - [Troubleshooting](#troubleshooting)
@@ -460,6 +461,23 @@ Run ESLint from the root with the `--config` flag or from each package directory
 
 ---
 
+## Migrating to kata
+
+- [From a manual ESLint + Prettier setup](./docs/migrations/from-manual-setup.md)
+- [From eslint-config-airbnb](./docs/migrations/from-eslint-config-airbnb.md)
+- [From @antfu/eslint-config](./docs/migrations/from-antfu-eslint-config.md)
+- [From @nuxt/eslint-config](./docs/migrations/from-nuxt-eslint-config.md)
+
+Integration guides:
+
+- [Using kata with create-vue](./docs/guides/with-create-vue.md)
+- [Using kata with Nuxt CLI](./docs/guides/with-nuxt-cli.md)
+- [Using kata in a monorepo](./docs/guides/monorepo.md)
+
+ESLint v10 removed the legacy `.eslintrc` format. If your current config uses `.eslintrc.js`, `.eslintrc.json`, or `.eslintrc.yml`, it will not work with ESLint v10. All migration guides above assume ESLint v10 flat config.
+
+---
+
 ## Comparison with alternatives
 
 |                             | kata       | @antfu/eslint-config | XO          | Biome              | Manual setup  |
@@ -610,7 +628,7 @@ Every major version includes a migration guide documenting what changed, why, an
 ## What's next
 
 - **CLI `kata init`** — One command to set up configs, pre-commit hooks, commitlint, and CI workflows. Auto-detects your stack. Choose your level: standards only, local enforcement, or full CI protection.
-- **Migration guides** — Step-by-step guides for teams coming from eslint-config-airbnb, eslint-config-standard, @antfu/eslint-config, or a manual setup.
+- **Migration guides** — Available now. See [Migrating to kata](#migrating-to-kata).
 - **Biome/Oxlint watch** — Biome doesn't support Vue SFCs, SCSS, or Markdown at production quality yet. When it does, kata will evaluate integration. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md).
 
 ---
