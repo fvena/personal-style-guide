@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.0.0](https://github-personal/fvena/kata/compare/v2.0.0...v3.0.0) (2026-03-22)
+
+### ⚠ BREAKING CHANGES
+
+- Stylelint config now uses stylelint-config-standard-scss
+  instead of stylelint-config-recommended + stylelint-config-recommended-scss.
+  ESLint peer dependency requires ^10.0.0 (drops ^9.0.0).
+  TypeScript peer dependency requires ^5.7.0 (drops ^5.0.0).
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+
+### Features
+
+- add oxlint as opt-in performance layer ([dfc6bc4](https://github-personal/fvena/kata/commit/dfc6bc4ad9f4b36f018ae4c9939e74f5f2e4203a))
+- enhance ESLint and TypeScript configurations across examples ([f245d2e](https://github-personal/fvena/kata/commit/f245d2e6ebab83a5c052c667ad6edd2909b23aa2))
+
+### Bug Fixes
+
+- add .prettierignore to exclude examples directory ([d7a6617](https://github-personal/fvena/kata/commit/d7a661717eb431c124aeb54cbe3d710bf0ba7999))
+- correct ESLint 10 migration bugs and replace incompatible Stylelint configs ([02c1b70](https://github-personal/fvena/kata/commit/02c1b704d27d5bd57d24f649d06502d677bb697d))
+
 ## [Unreleased]
 
 ### ⚠ BREAKING CHANGES
