@@ -110,9 +110,9 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.0",
-    "@commitlint/cli": "^20.4.3",
-    "@commitlint/config-conventional": "^20.4.3",
-    "@release-it/conventional-changelog": "^10.0.5",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@release-it/conventional-changelog": "^10.0.6",
     "@types/node": "^25.5.0",
     "@vitest/eslint-plugin": "^1.0.0",
     "eslint": "^10.0.0",
@@ -121,11 +121,11 @@
     "eslint-plugin-testing-library": "^7.16.0",
     "husky": "^9.1.7",
     "knip": "^6.0.0",
-    "lint-staged": "^16.3.2",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "publint": "^0.3.0",
     "release-it": "^19.2.4",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "peerDependencies": {
     "@vitest/eslint-plugin": "^1.0.0",
