@@ -65,3 +65,13 @@ Scopes match directory names: `eslint`, `prettier`, `stylelint`, `typescript`, `
 ## Release process
 
 Run `npm run release`. This uses release-it to bump the version, update the CHANGELOG, and push the tag. Publishing to npm happens automatically via GitHub Actions — do not publish manually.
+
+## Versioning contract
+
+Before merging any PR that changes lint behavior, classify the impact:
+
+- **New errors in user code** → requires major version bump
+- **New warnings in user code** → minor version bump is sufficient
+- **No change to user diagnostics** → patch version bump
+
+When in doubt, err on the side of a major bump. Users trust that `npm update` within a major version won't break their CI.

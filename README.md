@@ -16,6 +16,9 @@
   </a>
   <img src="https://img.shields.io/badge/license-MIT-0e7490" alt="License MIT" />
   <img src="https://img.shields.io/badge/node-%3E%3D22.11.0-0e7490" alt="Node >=22.11.0" />
+  <a href="https://www.npmjs.com/package/@franvena/kata">
+    <img src="https://img.shields.io/badge/provenance-verified-0e7490" alt="npm provenance" />
+  </a>
 </p>
 
 <br/>
@@ -433,7 +436,7 @@ These are the deliberate decisions behind this config — not just what the rule
 
 ## What's next
 
-- **Biome** doesn't support Vue SFCs yet — we're watching it closely. If full SFC support lands, we'll evaluate it as a replacement for ESLint + Prettier. See [ADR-001](./docs/decisions/001-flat-config.md) for the full context.
+- **Biome** doesn't support Vue SFCs yet — we're watching it closely. If full SFC support lands, we'll evaluate it as a replacement for ESLint + Prettier. See [ADR-009](./docs/decisions/009-eslint-prettier-base.md) for the full context.
 - CSS-in-JS support (`@vanilla-extract`, `panda-css`) if there's demand from the community
 
 ## Out of scope
@@ -447,11 +450,17 @@ These are the deliberate decisions behind this config — not just what the rule
 
 This project follows [Semantic Versioning](https://semver.org/). As a linting config, rule changes follow this contract:
 
-- **New rules that produce warnings** → minor version bump
-- **New rules that produce errors, or existing rules becoming stricter** → major version bump
-- **Bug fixes to existing rules** → patch version bump
+**Patch** (1.0.x): Bug fixes to existing rules. No new diagnostics in your code.
 
-Upgrade with confidence — breaking lint changes are always major versions.
+**Minor** (1.x.0): New rules that produce **warnings only**. New opt-in configs (e.g., a new `eslint/react` preset). Documentation improvements. Dependency updates that don't change lint behavior.
+
+**Major** (x.0.0): New rules that produce **errors**. Existing rules becoming stricter (warning → error, or new cases flagged). Adding or removing plugins from core presets. Dropping Node.js versions. Changes to the export map or public API.
+
+### Upgrade guarantee
+
+When you run `npm update @franvena/kata` within the same major version, your build will not break due to new lint errors. Warnings may appear — errors will not.
+
+Every major version includes a migration guide documenting what changed, why, and how to resolve new errors.
 
 ---
 
