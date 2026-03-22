@@ -42,7 +42,7 @@ export const baseJavascript = [
 
 /** @type {import('eslint').Linter.Config[]} */
 export const baseTypeScript = tseslint.config(
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
     name: 'fvena/base/typescript/parser',

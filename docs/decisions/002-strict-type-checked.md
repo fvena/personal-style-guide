@@ -1,7 +1,24 @@
-# ADR-002: Use `strictTypeChecked` over `recommended`
+# ADR-002: TypeScript-ESLint preset selection
 
-**Status:** Accepted
+**Status:** Superseded
 **Date:** 2024-12-15
+**Superseded:** 2026-03 — Default changed to `recommendedTypeChecked`. See rationale below.
+
+## Original decision
+
+Use `strictTypeChecked` as the TypeScript preset.
+
+## Revision (2026-03)
+
+The default has been changed to `recommendedTypeChecked` + `stylisticTypeChecked` for three reasons:
+
+1. **Semver instability.** `strictTypeChecked` is explicitly not semver-stable in typescript-eslint. Rules can be added or changed in minor versions. For a shared config that promises stable upgrades, this creates uncontrolled risk — a routine `npm update` of typescript-eslint could break user builds without kata publishing anything new.
+
+2. **Signal-to-noise ratio.** `recommendedTypeChecked` includes the highest-value type-aware rules (`no-floating-promises`, `no-unsafe-*`, `no-misused-promises`). The rules that `strictTypeChecked` adds (`no-unnecessary-condition`, `no-confusing-void-expression`, stricter `restrict-template-expressions`) are useful but generate more false positives in idiomatic TypeScript code.
+
+3. **Adoption friction.** The typescript-eslint documentation recommends `strictTypeChecked` only when "a nontrivial percentage of developers are highly proficient in TypeScript." For a shared config targeting teams of varying experience levels, the recommended preset is the better default.
+
+`strictTypeChecked` remains available as an explicit opt-in. See the README section "Customizing kata" for instructions.
 
 ## Context
 
