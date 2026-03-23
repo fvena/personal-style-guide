@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0](https://github-personal/fvena/kata/compare/v3.0.0...v3.1.0) (2026-03-23)
+
+### Features
+
+- update dependencies ([e5c21c5](https://github-personal/fvena/kata/commit/e5c21c5d41a9f11a48f5920eeedbb54799ee183a))
+
 ## [3.0.0](https://github-personal/fvena/kata/compare/v2.0.0...v3.0.0) (2026-03-22)
 
 ### ⚠ BREAKING CHANGES
