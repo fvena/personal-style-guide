@@ -67,6 +67,8 @@ If your stack includes Vue 3 or Nuxt 3, kata is the most complete opinionated se
 npm install --save-dev @franvena/kata eslint typescript
 ```
 
+> For Vue, Nuxt, or other presets, see [Getting Started](#getting-started) for the full install command.
+
 ```js
 // eslint.config.js
 import eslintNode from '@franvena/kata/eslint/node'
@@ -122,23 +124,23 @@ Kata is not about tabs vs. spaces. It catches bugs that compile, pass TypeScript
 
 ### Prerequisites
 
-Install the peer dependencies you need:
+Install kata and the peer dependencies for your stack:
 
 ```sh
-# ESLint only
-npm install --save-dev eslint typescript
+# Node.js / Browser (ESLint only)
+npm install --save-dev @franvena/kata eslint typescript
 
-# ESLint + Prettier
-npm install --save-dev eslint prettier typescript
+# Node.js / Browser (full stack)
+npm install --save-dev @franvena/kata eslint prettier stylelint typescript
 
-# Full stack
-npm install --save-dev eslint prettier stylelint typescript
-```
+# Vue 3
+npm install --save-dev @franvena/kata eslint prettier stylelint typescript \
+  eslint-plugin-vue @vue/eslint-config-typescript eslint-plugin-vuejs-accessibility
 
-### Installation
-
-```sh
-npm install --save-dev @franvena/kata
+# Nuxt 3
+npm install --save-dev @franvena/kata eslint prettier stylelint typescript \
+  eslint-plugin-vue @vue/eslint-config-typescript eslint-plugin-vuejs-accessibility \
+  @nuxt/eslint-config
 ```
 
 ---
@@ -257,12 +259,49 @@ export default [...eslintNode, ...baseOxlint]
 
 ### Vue 3
 
+Install the required peer dependencies:
+
+```sh
+npm install --save-dev eslint-plugin-vue @vue/eslint-config-typescript eslint-plugin-vuejs-accessibility
+```
+
+#### Standalone
+
 ```js
+// eslint.config.js
 import eslintVue from '@franvena/kata/eslint/vue'
 export default [...eslintVue]
 ```
 
-Enforces on top of the base config:
+#### With create-vue
+
+If you scaffolded your project with `create-vue`, kata extends the generated config — no need to replace it:
+
+```js
+// eslint.config.js — modify the file create-vue generated
+import eslintVue from '@franvena/kata/eslint/vue'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import skipFormatting from 'eslint-config-prettier/flat'
+import pluginVue from 'eslint-plugin-vue'
+import { globalIgnores } from 'eslint/config'
+
+export default defineConfigWithVueTs(
+  { name: 'app/files-to-lint', files: ['**/*.{vue,ts,mts,tsx}'] },
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  ...pluginVue.configs['flat/essential'],
+  vueTsConfigs.recommended,
+  // kata extends: strictTypeChecked, unicorn, perfectionist, a11y, and more
+  ...eslintVue
+)
+```
+
+Kata's config comes last, so its stricter rules override the defaults via ESLint's "last wins" semantics. Both use the same plugin references — no conflicts.
+
+> [Integration guide: Using kata with create-vue](./docs/guides/with-create-vue.md)
+
+#### What Vue 3 adds
+
+On top of the base config:
 
 - `<script setup>` only — no Options API
 - Block order: `<script>` → `<template>` → `<style>`
@@ -275,14 +314,23 @@ Enforces on top of the base config:
 
 ### Nuxt 3
 
+Install the required peer dependencies:
+
+```sh
+npm install --save-dev eslint-plugin-vue @vue/eslint-config-typescript eslint-plugin-vuejs-accessibility @nuxt/eslint-config
+```
+
 #### Standalone
 
 ```js
+// eslint.config.js
 import eslintNuxt from '@franvena/kata/eslint/nuxt'
 export default [...eslintNuxt]
 ```
 
 #### With `@nuxt/eslint` module
+
+Set `standalone: false` so Nuxt only provides its specific rules and kata handles the rest:
 
 ```ts
 // nuxt.config.ts
@@ -300,6 +348,8 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 export default withNuxt([...eslintNuxt])
 ```
 
+> [Integration guide: Using kata with Nuxt CLI](./docs/guides/with-nuxt-cli.md)
+
 ### Opt-in: Playwright
 
 Install the required peer dependency:
@@ -308,10 +358,11 @@ Install the required peer dependency:
 npm install --save-dev eslint-plugin-playwright
 ```
 
-Then configure:
-
 ```js
+import eslintNode from '@franvena/kata/eslint/node'
 import eslintPlaywright from '@franvena/kata/eslint/playwright'
+
+export default [...eslintNode, ...eslintPlaywright]
 ```
 
 ### Opt-in: Vitest
@@ -322,10 +373,11 @@ Install the required peer dependency:
 npm install --save-dev @vitest/eslint-plugin
 ```
 
-Then configure:
-
 ```js
+import eslintNode from '@franvena/kata/eslint/node'
 import eslintVitest from '@franvena/kata/eslint/vitest'
+
+export default [...eslintNode, ...eslintVitest]
 ```
 
 ### Opt-in: Testing Library
@@ -336,10 +388,11 @@ Install the required peer dependency:
 npm install --save-dev eslint-plugin-testing-library
 ```
 
-Then configure:
-
 ```js
 import eslintTestingLibrary from '@franvena/kata/eslint/testing-library'
+import eslintVue from '@franvena/kata/eslint/vue'
+
+export default [...eslintVue, ...eslintTestingLibrary]
 ```
 
 ### Opt-in: Turborepo
@@ -350,10 +403,11 @@ Install the required peer dependency:
 npm install --save-dev eslint-config-turbo
 ```
 
-Then configure:
-
 ```js
+import eslintNode from '@franvena/kata/eslint/node'
 import eslintTurbo from '@franvena/kata/eslint/turbo'
+
+export default [...eslintNode, ...eslintTurbo]
 ```
 
 ---
@@ -647,6 +701,9 @@ These are the deliberate decisions behind this config — not just what the rule
 
 **Oxlint as opt-in performance layer** — Oxlint runs 650+ ESLint rules in Rust. Exposed as `baseOxlint` composable block (not in default export) to prevent silent coverage loss. CLI handles opt-in configuration.
 → [Full decision: ADR-012](./docs/decisions/012-oxlint-precheck.md)
+
+**Vue and Nuxt plugins as optional peer dependencies** — Framework-specific packages (`eslint-plugin-vue`, `@vue/eslint-config-typescript`, `eslint-plugin-vuejs-accessibility`, `@nuxt/eslint-config`) are peer dependencies, not bundled dependencies. This ensures a single copy when used alongside project generators (create-vue, nuxi), preventing ESLint's `Cannot redefine plugin` error from version-mismatched duplicates. Kata extends generator configs rather than replacing them.
+→ [Full decision: ADR-014](./docs/decisions/014-vue-nuxt-peer-dependencies.md)
 
 ---
 

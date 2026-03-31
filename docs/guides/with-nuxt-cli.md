@@ -1,6 +1,6 @@
 # Using kata with Nuxt CLI
 
-`nuxi init` creates a Nuxt project with the `@nuxt/eslint` module. Kata works alongside it.
+`nuxi init` creates a Nuxt project. When you add the `@nuxt/eslint` module, it generates a base ESLint config. Kata extends it with 500+ additional rules: stricter TypeScript checking, Vue accessibility, modern JS best practices, code organization, and more.
 
 ## After running nuxi
 
@@ -13,12 +13,12 @@ npm install
 ## Add kata
 
 ```bash
-npm install -D @franvena/kata eslint prettier stylelint typescript
+npm install -D @franvena/kata @nuxt/eslint-config eslint-plugin-vue @vue/eslint-config-typescript eslint-plugin-vuejs-accessibility eslint prettier stylelint typescript
 ```
 
 ## Configure
 
-Set `standalone: false` so kata provides the rules:
+Set `standalone: false` so Nuxt only provides its specific rules and kata handles the rest:
 
 ```ts
 // nuxt.config.ts
@@ -27,6 +27,8 @@ export default defineNuxtConfig({
   eslint: { config: { standalone: false } }
 })
 ```
+
+Extend the generated config by adding kata after Nuxt's base:
 
 ```js
 // eslint.config.js

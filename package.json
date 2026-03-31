@@ -89,8 +89,6 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
     "@eslint/js": "^10.0.1",
     "@eslint/markdown": "^7.5.1",
-    "@nuxt/eslint-config": "^1.15.2",
-    "@vue/eslint-config-typescript": "^14.7.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^17.24.0",
     "eslint-plugin-oxlint": "^1.56.0",
@@ -98,8 +96,6 @@
     "eslint-plugin-regexp": "^3.1.0",
     "eslint-plugin-tsdoc": "^0.5.2",
     "eslint-plugin-unicorn": "^63.0.0",
-    "eslint-plugin-vue": "^10.8.0",
-    "eslint-plugin-vuejs-accessibility": "^2.5.0",
     "eslint-plugin-yml": "^3.3.1",
     "globals": "^17.4.0",
     "postcss-html": "^1.8.1",
@@ -112,13 +108,17 @@
     "@arethetypeswrong/cli": "^0.18.2",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
+    "@nuxt/eslint-config": "^1.15.2",
     "@release-it/conventional-changelog": "^10.0.6",
     "@types/node": "^25.5.0",
     "@vitest/eslint-plugin": "^1.6.13",
+    "@vue/eslint-config-typescript": "^14.7.0",
     "eslint": "^10.1.0",
     "eslint-config-turbo": "^2.8.20",
     "eslint-plugin-playwright": "^2.10.1",
     "eslint-plugin-testing-library": "^7.16.1",
+    "eslint-plugin-vue": "^10.8.0",
+    "eslint-plugin-vuejs-accessibility": "^2.5.0",
     "husky": "^9.1.7",
     "knip": "^6.0.2",
     "lint-staged": "^16.4.0",
@@ -128,18 +128,28 @@
     "vitest": "^4.1.0"
   },
   "peerDependencies": {
+    "@nuxt/eslint-config": "^1.15.0",
     "@vitest/eslint-plugin": "^1.0.0",
+    "@vue/eslint-config-typescript": "^14.7.0",
     "eslint": "^10.0.0",
     "eslint-config-turbo": "^2.8.13",
     "eslint-plugin-playwright": "^2.9.0",
     "eslint-plugin-testing-library": "^7.16.0",
+    "eslint-plugin-vue": "^10.8.0",
+    "eslint-plugin-vuejs-accessibility": "^2.5.0",
     "oxlint": "^1.0.0",
     "prettier": "^3.0.0",
     "stylelint": "^17.0.0",
     "typescript": "^5.7.0"
   },
   "peerDependenciesMeta": {
+    "@nuxt/eslint-config": {
+      "optional": true
+    },
     "@vitest/eslint-plugin": {
+      "optional": true
+    },
+    "@vue/eslint-config-typescript": {
       "optional": true
     },
     "eslint-config-turbo": {
@@ -149,6 +159,12 @@
       "optional": true
     },
     "eslint-plugin-testing-library": {
+      "optional": true
+    },
+    "eslint-plugin-vue": {
+      "optional": true
+    },
+    "eslint-plugin-vuejs-accessibility": {
       "optional": true
     },
     "oxlint": {
